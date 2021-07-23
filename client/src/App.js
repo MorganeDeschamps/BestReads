@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import LoadingComponent from './components/Loading';
 import Navbar from './components/Navbar/Navbar';
+import CreateBook from './pages/CreateBook';
 import HomePage from './pages/HomePage';
 import LogIn from './pages/LogIn';
 import ProtectedPage from './pages/ProtectedPage';
@@ -66,6 +67,12 @@ function App() {
 					path={'/auth/login'}
 					authenticate={authenticate}
 					component={LogIn}
+				/>
+				<NormalRoute
+					exact
+					path={'/book/create'}
+					authenticate={authenticate}
+					component={CreateBook}
 				/>
 				<ProtectedRoute
 					exact

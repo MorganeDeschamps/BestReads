@@ -13,8 +13,6 @@ const bookSchema = new Schema(
 		},
 		coverUrl: String,
         epubUrl: String,
-        
-
 	},
 	{
 		timestamps: true

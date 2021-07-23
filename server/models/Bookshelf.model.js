@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
-const userSchema = new Schema(
+const bookshelfSchema = new Schema(
 	{
 		username: {
 			type: String,
@@ -12,14 +12,13 @@ const userSchema = new Schema(
 			type: String,
 			required: true
 		},
-		password: String,
-		imageUrl: String
+		password: String
 	},
 	{
 		timestamps: true
 	}
 );
 
-const User = model('User', userSchema);
+const Bookshelf = model('Bookshelf', bookshelfSchema);
 
-module.exports = User;
+module.exports = Bookshelf;

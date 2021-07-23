@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { signup } from '../services/auth';
+import { signup, handleUpload} from '../services/auth';
 import './auth.css';
 import * as CONSTS from '../utils/consts';
 import * as PATHS from '../utils/paths';
@@ -10,7 +10,8 @@ function Signup(props) {
 	const initialState = {
 		username: '',
 		email: '',
-		password: ''
+		password: '',
+		imageUrl: ""
 	};
 
 	const [formData, setFormData] = useState(initialState);
@@ -23,18 +24,25 @@ function Signup(props) {
 		});
 	};
 
+	  
+	const handleFileUpload = (event) => {
+	
+		const uploadData = new FormData();
+		uploadData.append('imageUrl', event.target.files[0]);
+		
+		handleUpload(uploadData)
+		  .then(response => {
+			setFormData({ ...formData, "imageUrl": response.data.secure_url });
+		  })
+		  .catch(err => console.log('Error while uploading the file: ', err));
+	};
+	 
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		const credentials = {
-			username: formData.username,
-			password: formData.password,
-			email: formData.email
-		};
-
-		signup(credentials).then((res) => {
+		signup(formData).then((res) => {
 			// successful signup
-			console.log(res);
 			if (!res.status) {
 				console.log('error');
 			}
@@ -81,6 +89,10 @@ function Signup(props) {
 					required
 					minLength='8'
 				/>
+
+
+				<label htmlFor='input-image'>Profile picture</label>
+				<input type="file" onChange={handleFileUpload} />
 
 				<button className='button__submit' type='submit'>
 					Submit

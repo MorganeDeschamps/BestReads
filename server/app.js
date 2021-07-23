@@ -19,6 +19,16 @@ require('./config')(app);
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
+const bookRoutes = require('./routes/book.routes');
+app.use('/api/book', bookRoutes);
+
+const bookshelfRoutes = require('./routes/bookshelf.routes');
+app.use('/api/bookshelf', bookshelfRoutes);
+
+const uploadRoutes = require('./routes/upload.routes');
+app.use('/api/upload', uploadRoutes);
+
+
 const indexRoutes = require('./routes/index');
 app.use('/api', indexRoutes);
 

@@ -11,6 +11,9 @@ const saltRounds = 10;
 const User = require('../models/User.model');
 const Session = require('../models/Session.model');
 
+//Cloudinary
+const fileUploader = require('../config/cloudinary.config');
+
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require('../middleware/isLoggedOut');
 const isLoggedIn = require('../middleware/isLoggedIn');
@@ -34,8 +37,24 @@ router.get('/session', (req, res) => {
 		});
 });
 
+
+// POST '/api/upload' => Route that will receive an image, send it to Cloudinary via the fileUploader and return the image URL
+router.post('/upload', fileUploader.single('imageUrl'), (req, res, next) => {
+	// console.log('file is: ', req.file)
+   
+	if (!req.file) {
+	  next(new Error('No file uploaded!'));
+	  return;
+	}
+	// get the URL of the uploaded file and send it as a response.
+	// 'secure_url' can be any name, just make sure you remember to use the same when accessing it on the frontend
+   
+	res.json({ secure_url: req.file.path });
+  });
+   
+
 router.post('/signup', isLoggedOut, (req, res) => {
-	const { username, password, email } = req.body;
+	const { username, password, email, imageUrl } = req.body;
 
 	if (!username) {
 		return res
@@ -77,7 +96,8 @@ router.post('/signup', isLoggedOut, (req, res) => {
 				return User.create({
 					username,
 					password: hashedPassword,
-					email
+					email,
+					imageUrl
 				});
 			})
 			.then((user) => {

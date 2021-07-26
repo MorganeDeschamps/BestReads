@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
-const bookSchema = new Schema(
+const ebookSchema = new Schema(
 	{
 		title: {
 			type: String,
@@ -12,13 +12,14 @@ const bookSchema = new Schema(
 			required: true
 		},
 		coverUrl: String,
-        epubUrl: String,
+        ebookUrl: String,
+		owner: { type: Schema.Types.ObjectId, ref: "User" }
 	},
 	{
 		timestamps: true
 	}
 );
 
-const Book = model('Book', bookSchema);
+const Ebook = model('Ebook', ebookSchema);
 
-module.exports = Book;
+module.exports = Ebook;

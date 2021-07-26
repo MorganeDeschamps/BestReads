@@ -1,40 +1,49 @@
-// ℹ️ Gets access to environment variables/settings
-// https://www.npmjs.com/package/dotenv
 require('dotenv/config');
+require('./config/db.config');
 
-// ℹ️ Connects to the database
-require('./db');
 
-// Handles http requests (express is node js framework)
-// https://www.npmjs.com/package/express
 const express = require('express');
-
 const app = express();
+require('./config/index.config')(app);
 
-// ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
-require('./config')(app);
+
 
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controlled from the routes/index.js
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth.routes');
 app.use('/api/auth', authRoutes);
 
-const bookRoutes = require('./routes/book.routes');
-app.use('/api/book', bookRoutes);
+const reviewRoutes = require('./routes/reviews.routes');
+app.use('/api/review', reviewRoutes);
 
-const bookshelfRoutes = require('./routes/bookshelf.routes');
-app.use('/api/bookshelf', bookshelfRoutes);
-
-const uploadRoutes = require('./routes/upload.routes');
-app.use('/api/upload', uploadRoutes);
+const ebookRoutes = require('./routes/ebook.routes');
+app.use('/api/ebook', ebookRoutes);
 
 
-const indexRoutes = require('./routes/index');
+
+//PUBLIC BOOKSHELF/SHELVES
+const publicBookshelfRoutes = require('./routes/publicBookshelf.routes');
+app.use('/api/public-bookshelf', publicBookshelfRoutes);
+
+const publicShelvesRoutes = require('./routes/publicShelves.routes');
+app.use('/api/public-shelves', publicShelvesRoutes)
+
+
+//PRIVATE BOOKSHELF/SHELVES 
+const privateBookshelfRoutes = require('./routes/privateBookshelf.routes');
+app.use('/api/private-bookshelf', privateBookshelfRoutes);
+
+const privateShelvesRoutes = require('./routes/privateShelves.routes');
+app.use('/api/private-shelves', privateShelvesRoutes)
+
+
+
+const indexRoutes = require('./routes/index.routes');
 app.use('/api', indexRoutes);
 
 app.use((req, res) => res.sendFile(__dirname + '/public/index.html'));
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
-require('./error-handling')(app);
+require('./error-handling/index.errors')(app);
 
 module.exports = app;

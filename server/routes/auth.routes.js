@@ -53,6 +53,7 @@ router.post('/upload', fileUploader.single('imageUrl'), (req, res, next) => {
   });
    
 
+  
 router.post('/signup', isLoggedOut, (req, res) => {
 	const { username, password, email, imageUrl } = req.body;
 
@@ -169,6 +170,46 @@ router.post('/login', isLoggedOut, (req, res, next) => {
 			// return res.status(500).render("login", { errorMessage: err.message });
 		});
 });
+
+
+// SEE USER PROFILE DETAILS
+
+router.get('/profile/:userId', (req, res) => {
+	const {userId} = req.params
+	User.findById(userId)
+	.populate('publicBookshelf')
+	.populate('privateBookshelf')
+	.populate('reviews')
+	.then(profile => res.json(profile))
+	.catch(err => res.json(err))
+});
+
+
+// EDIT USER PROFILE
+
+router.get("/profile/:userId/edit", (req, res) => {
+	res.json("this is my editEbook page. ")
+  })
+  
+  
+  router.put("/profile/:userId/edit", (req, res) => {
+	const { userId } = req.params;
+	const { username, email, imageUrl} = req.body
+  
+	if (!mongoose.Types.ObjectId.isValid(userId)) {
+	  res.status(400).json({ message: 'Specified User Profile does not exist' });
+	  return;
+	}
+   
+	User.findByIdAndUpdate(userId, { username, email, imageUrl }, {new: true})
+	.then(editedUser => res.json(editedUser))
+	.catch(err => res.json(err));
+  
+})
+
+
+  
+// LOGOUT USER
 
 router.delete('/logout', isLoggedIn, (req, res) => {
 	Session.findByIdAndDelete(req.headers.authorization)

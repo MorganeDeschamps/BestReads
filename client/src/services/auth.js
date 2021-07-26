@@ -39,12 +39,6 @@ export function getLoggedIn() {
 		.catch(internalServerError);
 }
 
-export function handleUpload(file) {
-	return authService
-	  .post('/upload', file)
-	  .then(successStatus)
-	  .catch(internalServerError);
-  };
 
 export function signup(credentials) {
 	return authService

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { signup, handleUpload} from '../services/auth';
+import { signup } from '../services/auth';
 import './auth.css';
 import * as CONSTS from '../utils/consts';
 import * as PATHS from '../utils/paths';
 
 function Signup(props) {
-	const { authenticate } = props;
+	//const { authenticate } = props;
 
 	const initialState = {
 		username: '',
@@ -24,19 +24,6 @@ function Signup(props) {
 		});
 	};
 
-	  
-	const handleFileUpload = (event) => {
-	
-		const uploadData = new FormData();
-		uploadData.append('imageUrl', event.target.files[0]);
-		
-		handleUpload(uploadData)
-		  .then(response => {
-			setFormData({ ...formData, "imageUrl": response.data.secure_url });
-		  })
-		  .catch(err => console.log('Error while uploading the file: ', err));
-	};
-	 
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -89,10 +76,6 @@ function Signup(props) {
 					required
 					minLength='8'
 				/>
-
-
-				<label htmlFor='input-image'>Profile picture</label>
-				<input type="file" onChange={handleFileUpload} />
 
 				<button className='button__submit' type='submit'>
 					Submit

@@ -39,7 +39,8 @@ router.get("/create", (req, res) => {
 
 
 router.post("/create", (req, res) => {
-  let {name, staticShelf, owner} = req.body
+  let {name, owner} = req.body
+  let staticShelf = "staticShelf"
 
   PrivateBookshelf.create({
     name, 

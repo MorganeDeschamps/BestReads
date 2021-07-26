@@ -69,7 +69,7 @@ function App() {
 				/>
 				<NormalRoute
 					exact
-					path={'/book/create'}
+					path={'/ebook/create'}
 					authenticate={authenticate}
 					component={CreateBook}
 				/>

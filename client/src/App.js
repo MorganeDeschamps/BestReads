@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
-import LoadingComponent from './components/Loading';
 import Navbar from './components/Navbar/Navbar';
 import CreateBook from './pages/CreateBook';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/Home.page';
 import LogIn from './pages/LogIn';
 import ProtectedPage from './pages/ProtectedPage';
-import Signup from './pages/Signup';
+import Search from './pages/search/Search.page';
+import Signup from './pages/authPages/Signup';
 import NormalRoute from './routing-components/NormalRoute';
 import ProtectedRoute from './routing-components/ProtectedRoute';
 import { getLoggedIn, logout } from './services/auth';
@@ -55,7 +55,6 @@ function App() {
 			<Navbar handleLogout={handleLogout} user={user} />
 
 			<Switch>
-				<NormalRoute exact path={'/'} component={HomePage} />
 				<NormalRoute
 					exact
 					path={'/auth/signup'}
@@ -74,12 +73,20 @@ function App() {
 					authenticate={authenticate}
 					component={CreateBook}
 				/>
+				<NormalRoute
+					exact
+					path={'/search'}
+					authenticate={authenticate}
+					component={Search}
+				/>
 				<ProtectedRoute
 					exact
 					path={'/protected'}
 					component={ProtectedPage}
 					user={user}
 				/>
+
+				<NormalRoute exact path={'/'} component={HomePage} />
 			</Switch>
 		</div>
 	);

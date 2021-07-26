@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import LoadingComponent from './components/Loading';
 import Navbar from './components/Navbar/Navbar';
-import CreateBook from './pages/CreateBook';
+import CreateEbook from './pages/CreateEbook';
 import HomePage from './pages/HomePage';
 import LogIn from './pages/LogIn';
 import ProtectedPage from './pages/ProtectedPage';
@@ -11,6 +11,7 @@ import NormalRoute from './routing-components/NormalRoute';
 import ProtectedRoute from './routing-components/ProtectedRoute';
 import { getLoggedIn, logout } from './services/auth';
 import * as CONSTS from './utils/consts';
+import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -56,30 +57,11 @@ function App() {
 
 			<Switch>
 				<NormalRoute exact path={'/'} component={HomePage} />
-				<NormalRoute
-					exact
-					path={'/auth/signup'}
-					authenticate={authenticate}
-					component={Signup}
-				/>
-				<NormalRoute
-					exact
-					path={'/auth/login'}
-					authenticate={authenticate}
-					component={LogIn}
-				/>
-				<NormalRoute
-					exact
-					path={'/book/create'}
-					authenticate={authenticate}
-					component={CreateBook}
-				/>
-				<ProtectedRoute
-					exact
-					path={'/protected'}
-					component={ProtectedPage}
-					user={user}
-				/>
+				<NormalRoute exact path={'/auth/signup'} authenticate={authenticate} component={Signup}/>
+				<NormalRoute exact path={'/auth/login'} authenticate={authenticate} component={LogIn}/>
+				<NormalRoute exact path={'/ebook/create'} authenticate={authenticate} component={CreateEbook} />
+				<NormalRoute exact path={'/private-shelves/create'} authenticate={authenticate} component = {NewDynamicShelf} />
+				<ProtectedRoute exact path={'/protected'} component={ProtectedPage} user={user} />
 			</Switch>
 		</div>
 	);

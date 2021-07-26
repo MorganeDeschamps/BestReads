@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
-import LoadingComponent from './components/Loading';
 import Navbar from './components/Navbar/Navbar';
-import CreateEbook from './pages/CreateEbook';
-import HomePage from './pages/HomePage';
-import LogIn from './pages/LogIn';
+import CreateBook from './pages/ebooks/CreateEbook.page';
+import HomePage from './pages/Home.page';
+import LogIn from './pages/authPages/LogIn.page';
 import ProtectedPage from './pages/ProtectedPage';
-import Signup from './pages/Signup';
+import Search from './pages/search/Search.page';
+import Signup from './pages/authPages/Signup';
 import NormalRoute from './routing-components/NormalRoute';
 import ProtectedRoute from './routing-components/ProtectedRoute';
 import { getLoggedIn, logout } from './services/auth';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { login } from '../services/auth';
-import './authPages/Signup';
-import * as CONSTS from '../utils/consts';
+import { login } from '../../services/auth';
+import './Signup';
+import * as CONSTS from '../../utils/consts';
 
 function LogIn(props) {
 	const { authenticate } = props;

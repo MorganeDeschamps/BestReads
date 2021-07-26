@@ -1,4 +1,4 @@
-import * as apiSearches from "../../Services/api.services"
+import * as apiSearches from "../../services/api.services"
 import { useEffect, useState } from 'react';
 
 
@@ -18,7 +18,7 @@ function Search() {
 
     function handleSubmit(event) {
         event.preventDefault()
-        apiSearches.find(searchState)
+        apiSearches.mainSearch(searchState)
     }
 
 

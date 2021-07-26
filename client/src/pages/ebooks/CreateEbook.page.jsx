@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './auth.css';
 import * as CONSTS from '../../utils/consts';
 import * as PATHS from '../../utils/paths';
 

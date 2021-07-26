@@ -40,11 +40,10 @@ router.get("/create", (req, res) => {
 
 router.post("/create", (req, res) => {
   let {name, owner} = req.body
-  let staticShelf = "staticShelf"
 
   PrivateBookshelf.create({
     name, 
-    staticShelf, 
+    staticShelf: [], 
     owner
   })
   .then(createdBookshelf => {

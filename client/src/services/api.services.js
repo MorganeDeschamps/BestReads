@@ -25,14 +25,29 @@ function buildUrl(searchOptions) {
 }
 
 
+function internalServerError(err) {
+	return {
+		status: false,
+		errorMessage: 'Error while querying the API. Please check your server'
+	};
+}
+
+function successStatus(res) {
+	return {
+		//status: true,
+		data: res.data
+	};
+}
+
+
 export function mainSearch(search) {
     const asArray = Object.entries(search);
     const notEmpty = asArray.filter(([key, value]) => value !== "");
     const backToObj = Object.fromEntries(notEmpty);
 
-    axios.get(buildUrl(backToObj))
-    .then(result => console.log(result))
-    .catch(err => console.log(err))
+    return axios.get(buildUrl(backToObj))
+    .then(successStatus)
+    .catch(internalServerError)
 
 }
 
@@ -44,8 +59,8 @@ export function getAuthorDetails(key) {
     const url = `/authors/${key}.json`
 
     return urlbase.get(url)
-    .then(result => {return result.data})
-    .catch(err => console.log(err))
+    .then(successStatus)
+    .catch(internalServerError)
 }
 
 
@@ -54,6 +69,6 @@ export function getWorks(key) {
     const url = `/authors/${key}/works.json`
 
     return urlbase.get(url)
-    .then(result => {return result.data})
-    .catch(err => console.log(err))
+    .then(successStatus)
+    .catch(internalServerError)
 }

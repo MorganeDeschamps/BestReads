@@ -39,14 +39,14 @@ router.get("/:bookshelfId", (req, res) => {
   });
   
   router.post("/create", (req, res) => {
-    const {name, currentlyReading, wantToRead, read, owner} = req.body
+    const {name, owner} = req.body
   
   
     PublicBookshelf.create({
         name,
-        currentlyReading,
-        wantToRead,
-        read,
+        currentlyReading: [],
+        wantToRead: [],
+        read: [],
         owner
     })
     .then(createdBookshelf => {

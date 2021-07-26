@@ -63,3 +63,4 @@ export function editPrivateShelf(shelfId, form) {
 		.then(successStatus)
 		.catch(internalServerError);
 }
+

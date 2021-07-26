@@ -57,3 +57,13 @@ export function logout() {
 		.then(successStatus)
 		.catch(internalServerError);
 }
+
+
+/* ************ BOOKSHELF, need to create new file *********/
+
+export function displayUserBookshelves(userId) {
+	return authService
+		.get(`/profile/${userId}`)
+		.then(successStatus)
+		.catch(internalServerError);
+}

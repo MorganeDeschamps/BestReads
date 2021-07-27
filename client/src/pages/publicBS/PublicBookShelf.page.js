@@ -1,4 +1,4 @@
-/* import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import CurrentlyReading from "../Components/PublicShelves/CurrentlyReading"
 import WantToRead from '../Components/PublicShelves/WantToRead'
@@ -17,17 +17,21 @@ export default function PublicBookShelf(props) {
         bookshelfMethods.getPublicBookshelf(bookshelfId)
         .then(bookshelf => setState(bookshelf))
         .catch(err => console.log(err))
-    }) */
+    })
+
+    if(
+    )
+
+    // map through book arrays that are there and show what is inside 
+
+    function moveBook() {
+        bookshelfMethods()
+    }
 
 
-/*     function moveBook() {
-        bookshelfMethods.
-    } */
-
-
-   /*  return (
-   	 */
-        {/* <div className="list-books">
+    return (
+   	 
+         <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
           </div>
@@ -43,8 +47,8 @@ export default function PublicBookShelf(props) {
               <Read changeShelf={changeShelf} books={books} />
             </div>
 
-          </div> */}
-/* 
+          </div>
+
           <div className="open-search">
             <Link to="/search">Add a book</Link>
           </div>
@@ -53,5 +57,5 @@ export default function PublicBookShelf(props) {
 
      )
 
-} */
+}
 

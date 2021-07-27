@@ -61,7 +61,7 @@ export function logout() {
 
 /* ************ BOOKSHELF, need to create new file *********/
 
-export function displayUserBookshelves(userId) {
+export function displayUserPage(userId) {
 	return authService
 		.get(`/profile/${userId}`)
 		.then(successStatus)

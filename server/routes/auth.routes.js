@@ -17,6 +17,7 @@ const PublicBookShelf = require('../models/PublicBookshelf.model')
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require('../middleware/isLoggedOut');
 const isLoggedIn = require('../middleware/isLoggedIn');
+const { PublicBookshelf } = require('../models/PublicBookshelf.model');
 
 router.get('/session', (req, res) => {
 	// we dont want to throw an error, and just maintain the user as null
@@ -87,17 +88,38 @@ router.post('/signup', isLoggedOut, (req, res) => {
 				})
 				.then(createdBookshelf => {
 					console.log(createdBookshelf)
-				  User.findByIdAndUpdate(owner, {$addToSet: {privateBookshelf: createdBookshelf._id}}, {new:true}) // create private bookshelf, then another then block to update the user again
-				  // chaining promises - try with postman
+				  User.findByIdAndUpdate(owner, {$addToSet: {privateBookshelf: createdBookshelf._id}}, {new:true}) 
+
+
 				  .then(user => {
+					let name = user.username
+					let owner = user._id
+					let currentlyReading = "currentlyReading "
+					let wantToRead = "wantToRead"
+					let read = "read"
+
+					PublicBookshelf.create({
+						name,
+						currentlyReading,
+						wantToRead,
+						read,
+						owner
+					})
+
+					.then(createdPublicBookshelf => {
+						User.findByIdAndUpdate(owner, {$addToSet: {publicBookshelf: createdPublicBookshelf._id}}, {new: true})
+
+						.then(user => {
 					
-					Session.create({
-						user: user._id,
-						createdAt: Date.now()
-					}).then((session) => {
-						res.status(201).json({ user, accessToken: session._id });
-					});
-					
+							Session.create({
+								user: user._id,
+								createdAt: Date.now()
+							}).then((session) => {
+								res.status(201).json({ user, accessToken: session._id });
+							});
+							
+						  })
+					})
 				  })
 				})
 			})
@@ -116,6 +138,8 @@ router.post('/signup', isLoggedOut, (req, res) => {
 			});
 	});
 });
+
+
 
 router.post('/login', isLoggedOut, (req, res, next) => {
 	const { username, password } = req.body;

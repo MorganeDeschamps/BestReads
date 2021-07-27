@@ -1,3 +1,43 @@
+import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom'
+import {displayUserPage} from '../services/auth'
+import CreatePrivateShelf from './Components/PrivateShelves/DynamicShelf';
+import books from '../../public/bookImg'
+import { PublicBookshelf } from '../pages/publicBS/PublicBookShelf.page';
+import { PrivateBookshelf } from '../pages/privateBS/PrivateBookshelf.page';
+
+
+function UserBookShelves(props){
+    const {userId} = props;
+    
+    const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
+    
+    const [userBookshelfState, setUserBookshelfState] = useState(initalState)
+
+
+    useEffect(()=>{
+        displayUserPage(userId)
+        .then ((userBookshelves)=> setUserBookshelfState(userBookshelves))
+        .catch(err => console.log(err))
+    }, []);
+
+       return (
+            <div>
+                <h4>Private Bookshelf</h4>
+                <PublicBookshelf />
+                <PrivateBookshelf />
+                <CreatePrivateShelf />
+
+      {/*           create logic for private shelves and logic for public shelves and call in here 
+      pass public and private bookshelves as props*/}
+
+                </div>
+                )
+};
+
+export default UserBookShelves;
+
+
 
 
 
@@ -121,3 +161,6 @@ funtion publicBookshelfStatus(){
     )}
 
 } */
+
+
+// option to change background?

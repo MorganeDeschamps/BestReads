@@ -7,7 +7,11 @@ const publicShelfSchema = new Schema(
 	{
 		name: String,
 		books: [String],
-		publicBookshelf: { type: Schema.Types.ObjectId, ref: "PublicBookshelf" }
+		publicBookshelf: { 
+			type: Schema.Types.ObjectId, 
+			ref: "PublicBookshelf" ,
+			default: () => ({})
+		}
 	}
 )
 const PublicShelf = model('PublicShelf', publicShelfSchema)
@@ -21,7 +25,10 @@ const publicBookshelfSchema = new Schema(
 		currentlyReading: [String],
 		wantToRead: [String],
 		read: [String,],
-		dynamicShelves: [{ type: Schema.Types.ObjectId, ref: "PublicShelf"}],
+		dynamicShelves: { 
+			type: publicShelfSchema,
+			default: () => ({})
+		},
 		owner: { type: Schema.Types.ObjectId, ref: "User" }
 	},
 	{

@@ -30,35 +30,7 @@ router.get("/:bookshelfId", (req, res) => {
       .catch(err => res.json(err));
 });
   
-  
-  
-  //CREATE NEW PUBLIC BOOKSHELF
 
-  router.get("/create", (req, res) => {
-    res.json("this is my createBookShelf page. ")
-  });
-  
-  router.post("/create", (req, res) => {
-    const {name, owner} = req.body
-  
-  
-    PublicBookshelf.create({
-        name,
-        currentlyReading: [],
-        wantToRead: [],
-        read: [],
-        owner
-    })
-    .then(createdBookshelf => {
-      User.findByIdAndUpdate(owner, {$addToSet: {publicBookshelf: createdBookshelf._id}}, {new:true})
-      .then(user => {
-        console.log(user)
-        res.json(createdBookshelf)
-      })
-    })
-  });
-  
-  
   
   //EDIT PUBLIC BOOKSHELF
   

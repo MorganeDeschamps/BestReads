@@ -14,6 +14,7 @@ import * as CONSTS from './utils/consts';
 import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
 import UserProfile from './pages/UserProfile.page';
 import Test from './components/Test';
+import {displayUserPage} from "./services/auth"
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
 				console.log('RES IN CASE OF FAILURE', res);
 				setUser(null);
 			} else {
-				setUser(res.data.user);
+				displayUserPage(res.data.user._id).then(res => setUser(res.data))
 			}
 		});
 	}, []);
@@ -69,6 +70,8 @@ function App() {
 	const authenticate = (user) => {
 		setUser(user);
 	};
+
+	console.log("user: ", user)
 
 	return (
 		<div className='App'>
@@ -113,13 +116,6 @@ function App() {
 					component={CreateEbook}
 					user={user}
 				/>
-
-				<NormalRoute exact path={'/'} component={HomePage} />
-				<NormalRoute exact path={'/auth/signup'} authenticate={authenticate} component={Signup}/>
-				<NormalRoute exact path={'/auth/login'} authenticate={authenticate} component={LogIn}/>
-				<NormalRoute exact path={'/ebook/create'} authenticate={authenticate} component={CreateEbook} />
-				<NormalRoute exact path={'/private-shelves/create'} authenticate={authenticate} component = {NewDynamicShelf} />
-				<ProtectedRoute exact path={'/protected'} component={ProtectedPage} user={user} /> {/* // this means protected route has access to user prop */}
 			</Switch>
 		</div>
 	);

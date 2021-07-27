@@ -3,7 +3,7 @@ import { signup } from '../../services/auth';
 import './auth.css';
 import * as CONSTS from '../../utils/consts';
 import * as PATHS from '../../utils/paths';
-import {createBookshelves} from "../../services/bookshelves.services"
+
 
 function Signup(props) {
 	//const { authenticate } = props;
@@ -40,8 +40,6 @@ function Signup(props) {
 			props.history.push(PATHS.HOMEPAGE);
 			}
 		});
-
-		//createBookshelves(userId).then().catch()
 
 	};
 

@@ -9,7 +9,7 @@ import * as bookshelfMethods from '../Services/bookshelves.services'
 
 export default function PublicBookShelf(props) {
 
-    const { bookshelfId } = props
+    const { bookshelfId, changeShelf, books } = props
 
     const [bookshelfState, setState] = useState({})
 

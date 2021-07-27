@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom'
 import {displayUserPage} from '../services/auth'
-import CreatePrivateShelf from './Components/PrivateShelves/DynamicShelf';
-import books from '../../public/bookImg'
-import { PublicBookshelf } from '../pages/publicBS/PublicBookShelf.page';
-import { PrivateBookshelf } from '../pages/privateBS/PrivateBookshelf.page';
+//import CreatePrivateShelf from './Components/PrivateShelves/DynamicShelf';
+//import books from '../../public/bookImg'
+//import { PublicBookshelf } from '../pages/publicBS/PublicBookShelf.page';
+//import { PrivateBookshelf } from '../pages/privateBS/PrivateBookshelf.page';
 
 
 function UserBookShelves(props){
@@ -24,9 +24,9 @@ function UserBookShelves(props){
        return (
             <div>
                 <h4>Private Bookshelf</h4>
-                <PublicBookshelf />
+      {/*           <PublicBookshelf />
                 <PrivateBookshelf />
-                <CreatePrivateShelf />
+                <CreatePrivateShelf /> */}
 
       {/*           create logic for private shelves and logic for public shelves and call in here 
       pass public and private bookshelves as props*/}

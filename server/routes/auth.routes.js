@@ -165,6 +165,18 @@ router.get('/profile/:userId', (req, res) => {
 	User.findById(userId)
 	.populate('publicBookshelf')
 	.populate('privateBookshelf')
+	.populate({
+		path: 'publicBookshelf',
+		populate: { path: 'dynamicShelves' }
+	})
+	.populate({
+		path: 'privateBookshelf',
+		populate: { path: 'staticShelf' }
+	})
+	.populate({
+		path: 'privateBookshelf',
+		populate: { path: 'dynamicShelves' }
+	})
 	.populate('reviews')
 	.then(profile => res.json(profile))
 	.catch(err => res.json(err))
@@ -178,7 +190,7 @@ router.get("/profile/:userId/edit", (req, res) => {
   })
   
   
-  router.put("/profile/:userId/edit", (req, res) => {
+router.put("/profile/:userId/edit", (req, res) => {
 	const { userId } = req.params;
 	const { username, email, imageUrl} = req.body
   

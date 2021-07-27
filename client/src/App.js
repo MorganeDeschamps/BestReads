@@ -15,9 +15,25 @@ import UserProfile from './pages/UserProfile.page';
 import Test from './components/Test';
 
 function App() {
-	const [user, setUser] = useState(null);
+/* 
+ 	let token = localStorage.getItem(CONSTS.ACCESS_TOKEN) || null
+	let testUser;
 
-	useEffect(() => {
+	if(token) {
+		getLoggedIn(token).then((res) => {
+		console.log(res);
+		if (!res.data) {
+			console.log('RES IN CASE OF FAILURE', res);
+			setUser(null);
+		} else {
+			testUser = res.data.user;
+		}
+	});} */
+
+	const [user, setUser] = useState(null);
+ 
+
+  	useEffect(() => {
 		const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 		if (!accessToken) {
 			setUser(null);
@@ -32,7 +48,7 @@ function App() {
 			}
 		});
 	}, []);
-
+  
 	const handleLogout = () => {
 		const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 		if (!accessToken) {
@@ -61,12 +77,14 @@ function App() {
 					exact
 					path={'/auth/signup'}
 					user={user}
+					authenticate={authenticate}
 					component={Signup}
 				/>
 				<NormalRoute
 					exact
 					path={'/auth/login'}
 					user={user}
+					authenticate={authenticate}
 					component={LogIn}
 				/>
 				<NormalRoute

@@ -23,9 +23,34 @@ function whatShelf(shelf) {
 }
 
 function publicPrivate(arg) {
-    if(arg === "public") {return {bookShelf: PublicBookshelf, shelf: PublicShelf, books: books}}
-    else {return {bookShelf: PrivateBookshelf, shelf: PrivateShelf, books: ebooks}}
+    if(arg === "public") {return {bookShelf: PublicBookshelf, shelf: PublicShelf, booksArr: books}}
+    else {return {bookShelf: PrivateBookshelf, shelf: PrivateShelf, booksArr: ebooks}}
 }
+
+
+
+function addToDynamic(book, shelfTo, publicOrPrivate) {
+    const {shelf, booksArr} = publicPrivate(publicOrPrivate)
+
+    return shelf.findByIdAndUpdate(shelfTo, { [booksArr]: book}, {new: true})
+    .then(editedShelf => res.json({editedShelf}))
+    .catch(err => console.log(err))
+
+}
+
+
+
+function addToStatic(book, shelfTo, bookshelfId, publicOrPrivate) {
+    const {bookShelf} = publicPrivate(publicOrPrivate)
+
+    return bookShelf.findByIdAndUpdate(bookshelfId, {[shelfTo]: book}, {new: true})
+    .populate('dynamicShelves')
+    .then(editedBookshelf => res.json({editedBookshelf}))
+    .catch(err => console.log(err))
+    
+}
+
+
 
 
 function staticToStatic(par) {
@@ -48,12 +73,12 @@ function staticToStatic(par) {
 function staticToDynamic(par, publicOrPrivate) {
 
     const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = par
-    const {bookShelf, shelf, books} = publicPrivate(publicOrPrivate)
+    const {bookShelf, shelf, booksArr} = publicPrivate(publicOrPrivate)
 
     return bookShelf.findByIdAndUpdate(bookshelfId, {[shelfFrom]: booksFrom}, {new: true})
     .populate('dynamicShelves')
     .then(editedBookshelf => {
-        shelf.findByIdAndUpdate(shelfTo, { [books]: booksTo}, {new: true})
+        shelf.findByIdAndUpdate(shelfTo, { [booksArr]: booksTo}, {new: true})
         .then(editedShelf => res.json({editedBookshelf, editedShelf}))
     })
     .catch(err => console.log(err))
@@ -64,9 +89,9 @@ function staticToDynamic(par, publicOrPrivate) {
 function dynamicToStatic(par, publicOrPrivate) {
 
     const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = par
-    const {bookShelf, shelf, books} = publicPrivate(publicOrPrivate)
+    const {bookShelf, shelf, booksArr} = publicPrivate(publicOrPrivate)
 
-    return shelf.findByIdAndUpdate(shelfFrom, { [books]: booksFrom}, {new: true})
+    return shelf.findByIdAndUpdate(shelfFrom, { [booksArr]: booksFrom}, {new: true})
     .then(editedShelf => {
         bookShelf.findByIdAndUpdate(bookshelfId, {[shelfTo]: booksTo}, {new: true})
         .populate('dynamicShelves')
@@ -80,11 +105,11 @@ function dynamicToStatic(par, publicOrPrivate) {
 function dynamicToDynamic(par, publicOrPrivate) {
 
     const {shelfFrom, shelfTo, booksFrom, booksTo} = par
-    const {shelf, books} = publicPrivate(publicOrPrivate)
+    const {shelf, booksArr} = publicPrivate(publicOrPrivate)
 
-    return shelf.findByIdAndUpdate(shelfFrom, { [books]: booksFrom}, {new: true})
+    return shelf.findByIdAndUpdate(shelfFrom, { [booksArr]: booksFrom}, {new: true})
     .then(editedShelfA => {
-        shelf.findByIdAndUpdate(shelfTo, { [books]: booksTo}, {new: true})
+        shelf.findByIdAndUpdate(shelfTo, { [booksArr]: booksTo}, {new: true})
         .populate('dynamicShelves')
         .then(editedShelfB => res.json({editedShelfA, editedShelfB}))
     })
@@ -100,5 +125,7 @@ module.exports = {
     staticToStatic: staticToStatic,
     staticToDynamic: staticToDynamic,
     dynamicToStatic: dynamicToStatic,
-    dynamicToDynamic: dynamicToDynamic
+    dynamicToDynamic: dynamicToDynamic,
+    addToDynamic: addToDynamic,
+    addToStatic: addToStatic
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PublicBookshelfModel, { PublicBookshelf } from '../../../../server/models/PublicBookshelf.model';
 
 import {getOneBook} from "../services/api.services"
 
@@ -17,6 +18,11 @@ router.put("/moveBook", (req, res) => {
     let result;
   
 
+
+//router.put("/addBook", (req, res) => {
+//const {bookshelfId, shelf, ebook} = req.body
+
+
 */
 
 
@@ -26,35 +32,22 @@ function BookEbook(props) {
 	//props will pass either a book id (olid) or ebook id (DB id)
 	const [bookData, setBookData] = useState({})
 	const [eBookData, setEbookData] = useState({})
-/* 
-	if(props.book) {
-		getOneBook(props.book)
-		.then(res => {
-			title,
-			covers[0]
-		})
-		.catch(err => console.log(err))
-	}
 
     //const {cover, title, author} = props
     //const { book, changeShelf, shelfID } = props
 
 
+	const {book} = props
+
 
     function checkThumbnailExists(book) {
-		if (cover) {
+		if (book.cover) {
 			return (
 				<div className="book-cover" key={book.imageLinks.thumbnail} style={{ backgroundImage: `url(${book.imageLinks.thumbnail})`}} alt="book cover"></div>
 			)
 		} else {
             return ( 
-                <div class="SRPCoverBlank" style="display: block;">
-                    <div class="innerBorder">
-                        <div class="BookTitle">{title} 
-                        <div class="Author">{author}</div>
-                        </div>
-                    </div>
-                </div>
+				<div className="book-cover" style={{ backgroundImage: `url(${"../../images/default-book.jpeg"})`}} alt="book cover"></div>
             )
         }
 	}
@@ -77,7 +70,7 @@ function BookEbook(props) {
 	        <div className="book-title" key={book.title}>{book.title}</div>
 	        <div className="book-authors" key={book.authors}>{book.authors && book.authors.join(', ')}</div>
         </div>
-	); */
+	); 
 };
 
 export default BookEbook;

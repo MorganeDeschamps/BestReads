@@ -33,6 +33,17 @@ const privateService = axios.create({
 
 //PUBLIC
 
+export function saveToPublic(info) {
+	publicService.get(`/addBook`, info)
+	.then(successStatus)
+	.catch(internalServerError)
+}
+
+export function movePublic(info) {
+	publicService.get(`/moveBook`, info)
+	.then(successStatus)
+	.catch(internalServerError)
+}
 
 
 
@@ -86,5 +97,19 @@ export function editPrivateShelf(shelfId, form) {
 		.put(`/${shelfId}/edit`, form)
 		.then(successStatus)
 		.catch(internalServerError);
+}
+
+
+
+export function saveToPrivate(info) {
+	privateService.get(`/addBook`, info)
+	.then(successStatus)
+	.catch(internalServerError)
+}
+
+export function movePrivate(info) {
+	privateService.get(`/moveBook`, info)
+	.then(successStatus)
+	.catch(internalServerError)
 }
 

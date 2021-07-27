@@ -8,6 +8,8 @@ const User = require('../models/User.model')
 const {staticToDynamic} = require("../middleware/movingHelpers")
 const {dynamicToStatic} = require("../middleware/movingHelpers")
 const {dynamicToDynamic} = require("../middleware/movingHelpers")
+const {addToDynamic} = require("../middleware/movingHelpers")
+const {addToStatic} = require("../middleware/movingHelpers")
 
 
 //PATH /api/private-shelves
@@ -33,6 +35,26 @@ router.post("/create", (req, res) => {
     })
 
 });
+
+
+
+//ADD EBOOK TO SHELF
+
+router.put("/addBook", (req, res) => {
+  const {bookshelfId, shelf, ebook} = req.body
+  let result;
+
+  if (whatShelf(shelf) === "static") {
+    result = addToStatic((ebook, shelf, bookshelfId, "private"))
+  } else if (whatShelf(shelf) === "dynamic") {
+    result = addToDynamic((ebook, shelf, "private"))
+  } else {
+    result = res.status(400).json({ message: 'The shelf does not exist' });
+  }
+
+  return result 
+  
+})
 
 
 

@@ -44,23 +44,44 @@ function UserBookShelves(props){
     // potentially needs a function  to make this work = if private shelf and either shelf empty do this, if full load and map through, else if public do this etc.
     // may need to call functions to get the indivuidal bookshelves i.e. from the bookshelves services page
 
+    function privateBookshelfStatus() {
+        const {staticShelf, dynamicShelves} = req.body.privateBookshelf
 
-    if (userBookshelfState.privateBookshelf.staticShelf.length === 0) {
-        return (
-            <div>
-                <p>Your Bookshelf is Empty</p>
-                <img src={books} alt="booksImg" />
-                <button><Link to="/ebooks/create">Add an ebook</Link></button>
+        if (staticShelf.length === 0) {
+            return (
+                <div>
+                    <p>Your Bookshelf is Empty</p>
+                    <img src={books} alt="booksImg" />
+                    <button><Link to="/ebooks/create">Add an ebook</Link></button>
+                </div>
 
+                /* this could then needs to have another condition if it's full OR if dynamic shelves exist */
 
-            </div>
-
-        )
-
-     
+            )}
     }
 
-    else {
+    funtion publicBookshelfStatus(){
+        const {currentlyReading, wantToRead, read, dynamicShelves} = req.body.publicBookshelf
+       
+        if (currentlyReading.length === 0 || wantToRead.length === 0 || read.length === 0) {
+
+            return (
+                <div>
+                    <p>Your Bookshelf is Empty</p> {/* need to return dynamically for specific bookshelf */}
+                    <img src={books} alt="booksImg" />
+                    <button><Link to="/ebooks/create">Add an ebook</Link></button>
+                </div>
+        )}
+
+    }
+
+
+// if any public or private bookshelves exist, get data and map through it
+// if dynamic bookshelf exists, get data and map through
+
+
+
+    {
         return (
             <div>
                 <h4>Private Bookshelf</h4>
@@ -82,9 +103,6 @@ function UserBookShelves(props){
 };
 
 export default UserBookShelves;
-
-
-
 
 
 

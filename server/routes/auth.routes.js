@@ -22,6 +22,11 @@ const isLoggedOut = require('../middleware/isLoggedOut');
 const isLoggedIn = require('../middleware/isLoggedIn');
 
 
+
+
+//user.privateBookshelf = dofguheiguhe
+//user.save()
+
 router.get('/session', (req, res) => {
 	// we dont want to throw an error, and just maintain the user as null
 	if (!req.headers.authorization || req.headers.authorization === 'null') {
@@ -78,8 +83,8 @@ router.post('/signup', isLoggedOut, (req, res) => {
 				});
 			})
 
-			.then((user) => {return privateBS(user.username, user._id)})
-			.then((user) => {return publicBS(user.username, user._id)})
+			.then((user) => {return privateBS(user.username, user._id, user)})
+			.then((user) => {return publicBS(user.username, user._id, user)})
 			.then(user => {
 				Session.create({
 					user: user._id,

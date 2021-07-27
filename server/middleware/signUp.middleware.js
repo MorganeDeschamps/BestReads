@@ -5,37 +5,31 @@ const {PublicBookshelf} = require('../models/PublicBookshelf.model');
 const User = require('../models/User.model')
 
 
-function publicBS(name, owner) {
+function publicBS(name, owner, user) {
 
     return PublicBookshelf.create({
         name,
         owner
     })
-    .then(createdBookshelf => {
-        return User.findByIdAndUpdate(owner, {$addToSet: {publicBookshelf: createdBookshelf._id}}, {new:true})
-        .then(user => {
-            console.log(user)
-            return user
-        })
-    }).then(user => {return user})
+    .then(bookshelf => {
+        user.publicBookshelf = bookshelf
+        return user.save()
+    }).catch(err => console.log(err))
 
 }
       
       
-function privateBS(name, owner) {
+function privateBS(name, owner, user) {
 
     return PrivateBookshelf.create({
       name, 
       staticShelf: [], 
       owner
     })
-    .then(createdBookshelf => {
-      return User.findByIdAndUpdate(owner, {$addToSet: {privateBookshelf: createdBookshelf._id}}, {new:true})
-      .then(user => {
-        console.log(user);
-        return user
-      })
-    }).then(user => {return user})
+    .then(bookshelf => {
+        user.privateBookshelf = bookshelf
+        return user.save()
+    }).catch(err => console.log(err))
 }
   
 

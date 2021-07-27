@@ -21,19 +21,21 @@ export default function PublicBookShelf(props) {
 
     // map through book arrays that are there and show what is inside, give the option to add books and search
 
-    function moveBook() {
+/*     function moveBook() {
         bookshelfMethods()
-    }
-
+    } */
 
     return (
    	 
          <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
+            
+            
+          
           </div>
 
-          <div className="list-books-content">
+{/*         <div className="list-books-content">
             <div>
               <CurrentlyReading changeShelf={changeShelf} books={books} />
             </div>
@@ -44,7 +46,7 @@ export default function PublicBookShelf(props) {
               <Read changeShelf={changeShelf} books={books} />
             </div>
 
-          </div>
+          </div> */}
 
           <div className="open-search">
             <Link to="/search">Add a book</Link>

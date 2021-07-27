@@ -46,7 +46,7 @@ function CreateNewReview(props) {
 			</form>
 
 		</div>
-	);
-} */
+	);*/
+} 
 
 export default CreateNewReview;

@@ -3,7 +3,7 @@ import React from 'react'
 
 function getUrl(result) {
     if(result.event === "success") {
-        console.log(result.info.secure_url)
+        console.log("this is the getUrl fn: ", result.info.secure_url)
     }
 }
 
@@ -24,7 +24,7 @@ export function widgetCover(event){
     cloudName: "best-reads", 
     uploadPreset: "bestReads-bookCovers",
     cropping: true
-    }, (error, result) => {getUrl(result)}).open()
+    }, (error, result) => {console.log("test from inside widget ", result); getUrl(result)}).open()
 }
 
 

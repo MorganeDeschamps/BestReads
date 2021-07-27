@@ -3,7 +3,7 @@ import * as CONSTS from '../../utils/consts';
 import * as PATHS from '../../utils/paths';
 
 import {createEbook} from "../../services/ebook.services"
-import {widgetCover, widgetEbooks} from "../../services/widget.services"
+import {widgetEbooks} from "../../services/widget.services"
 
 function CreateEbook(props) {
     //form needs { title, author, coverUrl, ebookUrl, owner, bookshelfId, shelf} 
@@ -12,13 +12,46 @@ function CreateEbook(props) {
 		author: "",
 		coverUrl: "",
         ebookUrl: "", 
-		owner: "", 
+		owner: props.user._id, 
 		bookshelfId: "", 
 		shelf:""
 	};
 
 	const [formData, setFormData] = useState(initialState);
 	const [test, setTest] = useState("")
+
+	function getCoverUrl(result) {
+		if(result.event === "success") {
+			setFormData({...formData, coverUrl: result.info.secure_url})
+		}
+	}
+
+	function getEbookUrl(result) {
+		if(result.event === "success") {
+			setFormData({...formData, ebookUrl: result.info.secure_url})
+		}
+	}
+
+
+	function widgetCover(event){ 
+
+		window.cloudinary.createUploadWidget({ 
+		cloudName: "best-reads", 
+		uploadPreset: "bestReads-bookCovers",
+		cropping: true
+		}, (error, result) => {getCoverUrl(result)}).open()
+	}
+
+ 	function widgetEbooks(event) {
+
+    window.cloudinary.createUploadWidget({ 
+    cloudName: "best-reads", 
+    uploadPreset: "bestReads-ebooks" 
+    }, (error, result) => {getEbookUrl(result)}).open()
+}
+
+	
+	
 
 	function handleChange(event) {
 		const {name, value} = event.target
@@ -29,6 +62,7 @@ function CreateEbook(props) {
 		event.preventDefault()
 		createEbook(formData)
 	}
+
 
 	return (
 		<div>

@@ -13,10 +13,27 @@ import { getLoggedIn, logout } from './services/auth';
 import * as CONSTS from './utils/consts';
 import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
 
-function App() {
-	const [user, setUser] = useState(null);
 
-	useEffect(() => {
+function App() {
+/* 
+ 	let token = localStorage.getItem(CONSTS.ACCESS_TOKEN) || null
+	let testUser;
+
+	if(token) {
+		getLoggedIn(token).then((res) => {
+		console.log(res);
+		if (!res.data) {
+			console.log('RES IN CASE OF FAILURE', res);
+			setUser(null);
+		} else {
+			testUser = res.data.user;
+		}
+	});} */
+
+	const [user, setUser] = useState(null);
+ 
+
+  	useEffect(() => {
 		const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 		if (!accessToken) {
 			setUser(null);
@@ -31,7 +48,7 @@ function App() {
 			}
 		});
 	}, []);
-
+  
 	const handleLogout = () => {
 		const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 		if (!accessToken) {
@@ -56,6 +73,45 @@ function App() {
 			<Navbar handleLogout={handleLogout} user={user} />
 
 			<Switch>
+				<NormalRoute
+					exact
+					path={'/auth/signup'}
+					user={user}
+					authenticate={authenticate}
+					component={Signup}
+				/>
+				<NormalRoute
+					exact
+					path={'/auth/login'}
+					user={user}
+					authenticate={authenticate}
+					component={LogIn}
+				/>
+				<NormalRoute
+					exact
+					path={'/test'}
+					user={user}
+					component={Test}
+				/>
+				<ProtectedRoute
+					exact
+					path={'/search'}
+					component={Search}
+					user={user}
+				/>
+				<ProtectedRoute
+					exact
+					path={'/user'}
+					component={UserProfile}
+					user={user}
+				/>
+				<ProtectedRoute
+					exact
+					path={'/ebook/create'}
+					component={CreateBook}
+					user={user}
+				/>
+
 				<NormalRoute exact path={'/'} component={HomePage} />
 				<NormalRoute exact path={'/auth/signup'} authenticate={authenticate} component={Signup}/>
 				<NormalRoute exact path={'/auth/login'} authenticate={authenticate} component={LogIn}/>

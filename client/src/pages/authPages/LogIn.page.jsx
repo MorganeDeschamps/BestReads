@@ -5,6 +5,7 @@ import * as CONSTS from '../../utils/consts';
 
 function LogIn(props) {
 	const { authenticate } = props;
+	if(props.user && props.user._id) { props.history.push("/")} 
 
 	const initialState = {
 		username: '',
@@ -30,12 +31,13 @@ function LogIn(props) {
 		};
 
 		login(credentials).then((res) => {
-			if (!res.status) {
-				console.log('error');
-			}
+			if (!res.data) {
+				console.log('error', res);
+			} else {
 			localStorage.setItem(CONSTS.ACCESS_TOKEN, res.data.accessToken);
 			authenticate(res.data.user);
 			props.history.push('/');
+			}
 		});
 	};
 

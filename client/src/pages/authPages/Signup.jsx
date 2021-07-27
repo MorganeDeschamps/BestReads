@@ -31,12 +31,14 @@ function Signup(props) {
 
 		signup(formData).then((res) => {
 			// successful signup
-			if (!res.status) {
+			if (!res.data) {
 				console.log('error');
 			}
+			else {
 			localStorage.setItem(CONSTS.ACCESS_TOKEN, res.data.accessToken);
 			props.authenticate(res.data.user);
 			props.history.push(PATHS.HOMEPAGE);
+			}
 		});
 
 		//createBookshelves(userId).then().catch()

@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom'
 import {displayUserPage} from '../services/auth'
-import CreatePrivateShelf from './Components/PrivateShelves/DynamicShelf';
-import books from '../../public/bookImg'
-import { PublicBookshelf } from '../pages/publicBS/PublicBookShelf.page';
-import { PrivateBookshelf } from '../pages/privateBS/PrivateBookshelf.page';
+import CreatePrivateShelf from '../components/PrivateShelves/NewDynamicShelf';
+import PublicBookshelf from '../pages/publicBS/PublicBookShelf.page';
+import PrivateBookshelf from '../pages/privateBS/PrivateBookshelf.page';
 
 
 function UserBookShelves(props){
-    const {userId} = props;
+    const {user} = props;
     
     const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
     
@@ -16,17 +15,19 @@ function UserBookShelves(props){
 
 
     useEffect(()=>{
-        displayUserPage(userId)
-        .then ((userBookshelves)=> setUserBookshelfState(userBookshelves))
+        displayUserPage({userId: user._id})
+        .then ((userBookshelves)=> setUserBookshelfState(userBookshelves.data))
+        
         .catch(err => console.log(err))
     }, []);
-
        return (
             <div>
+                <h2>My Bookshelves</h2>
                 <h4>Private Bookshelf</h4>
-                <PublicBookshelf />
-                <PrivateBookshelf />
-                <CreatePrivateShelf />
+                <PrivateBookshelf privateShelf= {userBookshelfState.privateBookshelf}/>
+                <CreatePrivateShelf appendToShelf = {userBookshelfState.privateBookshelf}/>
+                <PublicBookshelf publicShelf={userBookshelfState.publicBookshelf}/>
+
 
       {/*           create logic for private shelves and logic for public shelves and call in here 
       pass public and private bookshelves as props*/}

@@ -6,6 +6,8 @@ import * as shelfMethods from '../../services/shelves.services'
 // CREATE NEW DYNAMIC SHELF
 
 function CreatePrivateShelf(props) {
+	const {appendToShelf} = props
+	console.log(appendToShelf)
     
 	const initialFormState = {
 		name: "",
@@ -36,7 +38,7 @@ function CreatePrivateShelf(props) {
 		<div>
 			<h1>Create Shelf: </h1>
 			<form onSubmit={handleSubmit} className='new-shelf-form'>
-				<label>Shelf Name</label>
+				<label>Name: </label>
 				<input type='text'name='name' placeholder='Name your new shelf' value={formState.name} onChange={handleChange} required />
 				<button className='button__submit' type='submit'>
 					Submit

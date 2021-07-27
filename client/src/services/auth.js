@@ -63,7 +63,7 @@ export function logout() {
 
 export function displayUserPage(userId) {
 	return authService
-		.get(`/profile/${userId}`)
+		.post(`/profile/user`, userId)
 		.then(successStatus)
 		.catch(internalServerError);
 }

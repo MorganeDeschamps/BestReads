@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = (props) => {
+	const {user} = props
+
 	return (
 		<nav>
 			<Link to={'/'} className='nav__projectName'>
@@ -18,7 +20,7 @@ const Navbar = (props) => {
 						<Link to={'/ebook/create'} className='authLink'>
 							Create an eBook
 						</Link>
-						<Link to={'/user'} className='authLink'>
+						<Link to={`/auth/profile/user`} className='authLink'>
 							User page
 						</Link>
 

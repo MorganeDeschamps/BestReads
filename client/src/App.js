@@ -67,12 +67,15 @@ function App() {
 	};
 
 	const authenticate = (user) => {
+		console.log(user)
 		setUser(user);
 	};
 
 	return (
 		<div className='App'>
-			<Navbar handleLogout={handleLogout} user={user} />
+			<Navbar handleLogout={handleLogout} 
+			component ={Navbar}
+			user={user} />
 
 			<Switch>
 				<NormalRoute
@@ -103,7 +106,7 @@ function App() {
 				/>
 				<ProtectedRoute
 					exact
-					path={'/user'}
+					path={`/auth/profile/user`}
 					component={UserProfile}
 					user={user}
 				/>

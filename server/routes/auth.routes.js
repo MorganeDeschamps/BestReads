@@ -160,8 +160,9 @@ router.post('/login', isLoggedOut, (req, res, next) => {
 
 // SEE USER PROFILE DETAILS
 
-router.get('/profile/:userId', (req, res) => {
-	const {userId} = req.params
+router.post('/profile/user', (req, res) => {
+	const {userId} = req.body
+	console.log(userId)
 	User.findById(userId)
 	.populate('publicBookshelf')
 	.populate('privateBookshelf')

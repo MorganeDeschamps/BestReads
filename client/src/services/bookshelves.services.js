@@ -31,3 +31,14 @@ export function createBookshelves(userId) {
     .catch(internalServerError)
 
 }
+
+
+export function getBookshelfById(bookshelfId) {
+	service.get(`/public-bookshelf/${bookshelfId}`)
+	.then(successStatus)
+	.catch(internalServerError);
+
+	service.get(`/private-bookshelf/${bookshelfId}`)
+	.then(successStatus)
+	.catch(internalServerError);
+}

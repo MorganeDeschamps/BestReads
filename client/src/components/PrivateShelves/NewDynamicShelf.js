@@ -7,7 +7,8 @@ import * as shelfMethods from '../../services/shelves.services'
 
 function CreatePrivateShelf(props) {
 	const {appendToShelf} = props
-	console.log(appendToShelf)
+	console.log("without props. :" , appendToShelf)
+	console.log("with props. :" , props.appendToShelf)
     
 	const initialFormState = {
 		name: "",
@@ -28,7 +29,7 @@ function CreatePrivateShelf(props) {
         const {name, ebooks} = formState
         return (
             shelfMethods.newPrivateShelf(formState)
-            .then(shelf => setFormState(shelf))
+            .then(shelf => {console.log("test: ", shelf) ; setFormState(initialFormState)})
             .catch(err => console.log(err))
         )
 	}
@@ -39,7 +40,7 @@ function CreatePrivateShelf(props) {
 			<h1>Create Shelf: </h1>
 			<form onSubmit={handleSubmit} className='new-shelf-form'>
 				<label>Name: </label>
-				<input type='text'name='name' placeholder='Name your new shelf' value={formState.name} onChange={handleChange} required />
+				<input type='text' name='name' placeholder='Name your new shelf' value={formState.name} onChange={handleChange} required />
 				<button className='button__submit' type='submit'>
 					Submit
 				</button>

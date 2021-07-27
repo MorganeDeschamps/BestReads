@@ -42,12 +42,11 @@ function App() {
 			setUser(null);
 		}
 		getLoggedIn(accessToken).then((res) => {
-			console.log(res);
 			if (!res.data) {
 				console.log('RES IN CASE OF FAILURE', res);
 				setUser(null);
 			} else {
-				displayUserPage(res.data.user._id).then(res => setUser(res.data))
+				setUser(res.data.user)
 			}
 		});
 	}, []);
@@ -67,11 +66,11 @@ function App() {
 		});
 	};
 
-	const authenticate = (user) => {
+ 	const authenticate = (user) => {
 		console.log(user)
 		setUser(user);
 	};
-
+ 
 	console.log("user: ", user)
 
 	return (

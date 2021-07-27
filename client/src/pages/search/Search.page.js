@@ -18,15 +18,31 @@ function Search() {
 
 
 
+    function filter(results) {
+      return results.map((eachWork) => {
+      let result = {
+          author: eachWork.author_name,
+          title: eachWork.title,
+          olLink: `https://openlibrary.org${eachWork.key}`
+      }
+
+      if (eachWork.cover_edition_key) result.cover = `https://covers.openlibrary.org/b/olid/${eachWork.cover_edition_key}-M.jpg`;
+
+      return result 
+
+      }) 
+    }
+
+
     function handleSubmit(event) {
         console.log("test")
         event.preventDefault()
         apiSearches.mainSearch(searchState)
-        .then(res => setResults(res.data.docs))
+        .then(res => setResults(filter(res.data.docs)))
         .catch(err => console.log(err))
     }
 
-    useEffect(() => console.log("results: ", results), [results])
+    //useEffect(() => console.log("results: ", results), [results])
 
 
   return (

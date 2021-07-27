@@ -16,11 +16,6 @@ function PrivateBookShelf(props) {
     }, [])
 
 
-
-/*     function moveBook() {
-        bookshelfMethods()
-    } */
-
     return (
    	 
          <div className="list-books">

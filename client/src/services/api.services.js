@@ -4,7 +4,7 @@ let URITemplate = require('urijs/src/URITemplate');
 
 
 
-export const main = new URITemplate(`https://openlibrary.org/search.json{?q*}`)
+export const main = new URITemplate(`https://openlibrary.org/search.json{?q*}&limit=50`)
 export const subSearch = new URITemplate(`https://openlibrary.org/search/{subSearch}.json{?q*}`)
 //works for authors and subjects
 
@@ -50,9 +50,6 @@ export function mainSearch(search) {
     .catch(internalServerError)
 
 }
-
-
-
 
 
 export function getAuthorDetails(key) {

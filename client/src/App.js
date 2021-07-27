@@ -61,7 +61,7 @@ function App() {
 				<NormalRoute exact path={'/auth/login'} authenticate={authenticate} component={LogIn}/>
 				<NormalRoute exact path={'/ebook/create'} authenticate={authenticate} component={CreateEbook} />
 				<NormalRoute exact path={'/private-shelves/create'} authenticate={authenticate} component = {NewDynamicShelf} />
-				<ProtectedRoute exact path={'/protected'} component={ProtectedPage} user={user} />
+				<ProtectedRoute exact path={'/protected'} component={ProtectedPage} user={user} /> {/* // this means protected route has access to user prop */}
 			</Switch>
 		</div>
 	);

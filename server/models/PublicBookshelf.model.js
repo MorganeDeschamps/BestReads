@@ -18,9 +18,9 @@ const PublicShelf = model('PublicShelf', publicShelfSchema)
 const publicBookshelfSchema = new Schema(
 	{
 		name: String,
-		currentlyReading: [String],
-		wantToRead: [String],
-		read: [String,],
+		currentlyReading: {type: Array, default: []},
+		wantToRead: {type: Array, default: []},
+		read: {type: Array, default: []},
 		dynamicShelves: [{ type: Schema.Types.ObjectId, ref: "PublicShelf", default: []}],
 		owner: { type: Schema.Types.ObjectId, ref: "User" }
 	},

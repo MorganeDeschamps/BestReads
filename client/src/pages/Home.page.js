@@ -3,6 +3,7 @@ import "../App.css";
 
 function HomePage() {
   return (
+    // component for user profile - make sure call props
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

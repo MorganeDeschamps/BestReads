@@ -6,7 +6,7 @@ const { Schema, model } = require('mongoose');
 const publicShelfSchema = new Schema(
 	{
 		name: String,
-		books: [{ type: Schema.Types.ObjectId, ref: "Ebook", default: []}],
+		books: [String],
 		publicBookshelf: { type: Schema.Types.ObjectId, ref: "PublicBookshelf" }
 	}
 )

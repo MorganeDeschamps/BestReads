@@ -1,5 +1,6 @@
 import * as apiSearches from "../../services/api.services"
 import { useEffect, useState } from 'react';
+import SearchResults from "./SearchResults.page";
 
 
 function Search() {
@@ -8,6 +9,7 @@ function Search() {
     const [searchState, setSearch] = useState(emptySearch)
     const [toggle, setToggle] = useState(false)
 
+    const [results, setResults] = useState([])
 
     function handleChange(event) {
         const {name, value} = event.target
@@ -17,9 +19,14 @@ function Search() {
 
 
     function handleSubmit(event) {
+        console.log("test")
         event.preventDefault()
         apiSearches.mainSearch(searchState)
+        .then(res => setResults(res.data.docs))
+        .catch(err => console.log(err))
     }
+
+    useEffect(() => console.log("results: ", results), [results])
 
 
   return (
@@ -37,8 +44,9 @@ function Search() {
       <br />
 
 
-      {(toggle) && <div>
-          <form onSubmit={handleSubmit}>
+      {(toggle) && 
+        <div>
+          <form onSubmit={e => {handleSubmit(e) ; setToggle(!toggle)}}>
             <label htmlFor="title">Title: </label><br />
             <input type="text" onChange={handleChange} name="title" value={searchState.title} /><br /><br />
             <label htmlFor="title">Author: </label><br />
@@ -55,7 +63,12 @@ function Search() {
             <input type="text" onChange={handleChange} name="publisher" value={searchState.publisher} /><br /><br />
             <button type="submit">Search</button>
           </form>
-      </div> }
+        </div> 
+      }
+
+      {(results && results.length > 1) && 
+        <SearchResults results={results}/>
+      }
 
       </div>
   );

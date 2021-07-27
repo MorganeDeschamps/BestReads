@@ -6,15 +6,22 @@ const Navbar = (props) => {
 	return (
 		<nav>
 			<Link to={'/'} className='nav__projectName'>
-				Your app name
+				BestReads
 			</Link>
 
 			<div className='nav__authLinks'>
 				{props.user ? (
 					<>
-						<Link to={'/protected'} className='authLink'>
-							Protected Page
+						<Link to={'/search'} className='authLink'>
+							Search book
 						</Link>
+						<Link to={'/ebook/create'} className='authLink'>
+							Create an eBook
+						</Link>
+						<Link to={'/user'} className='authLink'>
+							User page
+						</Link>
+
 						<button className='nav-logoutbtn' onClick={props.handleLogout}>
 							Logout
 						</button>

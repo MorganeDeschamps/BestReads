@@ -39,12 +39,36 @@ const privateService = axios.create({
 
 
 // PRIVATE
+export function getAllPrivateShelves(bookshelfId) {
+	return axios
+	.get(`${process.env.REACT_APP_SERVER_URL}/private-bookshelf/${bookshelfId}`)
+	.then(successStatus)
+	.catch(internalServerError)
+}
+
+export function getListOfShelves(bsId) {
+	let result;
+	getAllPrivateShelves(bsId)
+	.then(result => {
+		console.log("PrivateBookshelf: ", result.data)
+		let dynamicShelves = result.data.dynamicShelves;
+		let staticShelf = result.data.staticShelves;
+
+		if (dynamicShelves.length === 0 ) {result = staticShelf}
+		else { result = [...dynamicShelves, staticShelf]}
+
+	}).catch(err => console.log(err))
+
+	console.log("result: ", result)
+	return result;
+}
+
+
 export function getPrivateShelf(shelfId) {
 	return privateService
 	.get(`/${shelfId}`)
 	.then(successStatus)
 	.catch(internalServerError)
-
 }
 
 

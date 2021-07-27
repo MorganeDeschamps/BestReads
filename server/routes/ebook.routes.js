@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const mongoose = require('mongoose');
 const {PrivateShelf, PrivateBookshelf} = require("../models/PrivateBookshelf.model")
-const {PublicShelf} = require("../models/PublicBookshelf.model")
+const {PublicShelf, PublicBookshelf} = require("../models/PublicBookshelf.model")
 const Ebook = require("../models/Ebook.model");
 
 
@@ -21,7 +21,7 @@ router.get('/', (req, res)=>{
 //CREATE EBOOK ALL SHELVES
 router.post("/create", (req, res) => {
   const { title, author, coverUrl, ebookUrl, owner} = req.body
-  const bookshelfId = req.body.bookshelfId
+  const bookshelf = req.body.bookshelf
   const shelf = req.body.shelf
 
   Ebook.create({
@@ -33,22 +33,26 @@ router.post("/create", (req, res) => {
   })
   .then(createdEbook => {
 
-     if(shelf === "static") {
-      PrivateBookshelf.findByIdAndUpdate(bookshelfId, {$addToSet: {staticShelf: createdEbook._id}}, {new:true})
-      .then(bookshelf => res.json(bookshelf))
-      .catch(err => console.log(err))
+    if(shelf === "staticShelf") {
+     PrivateBookshelf.findByIdAndUpdate(bookshelf._id, {$addToSet: {staticShelf: createdEbook._id}}, {new:true})
+     .then(bookshelf => res.json(bookshelf))
+     .catch(err => console.log(err))
     }
 
-     else{
-      PrivateShelf.findByIdAndUpdate(shelf, {$addToSet: {ebooks: createdEbook._id}}, {new:true})
-      .then(shelf => res.json(shelf))
-      .catch(err => console.log(err))
+    else{
+     PrivateShelf.findByIdAndUpdate(shelf._id, {$addToSet: {ebooks: createdEbook._id}}, {new:true})
+     .then(shelf => res.json(shelf))
+     .catch(err => console.log(err))
     } 
-   
+  
   }).catch(err => console.log(err))
 
 })
 
+
+
+//.then(result => console.log("result in server: ", result))
+//.catch(err => console.log(err))
 
 
 

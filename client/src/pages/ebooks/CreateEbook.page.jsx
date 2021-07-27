@@ -1,37 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import * as CONSTS from '../../utils/consts';
 import * as PATHS from '../../utils/paths';
 
 import {createEbook} from "../../services/ebook.services"
 import {widgetEbooks} from "../../services/widget.services"
+import axios from 'axios';
+
 
 function CreateEbook(props) {
     //form needs { title, author, coverUrl, ebookUrl, owner, bookshelfId, shelf} 
+	const user = props.user
+
 	const initialState = {
 		title: "",
 		author: "",
 		coverUrl: "",
         ebookUrl: "", 
-		owner: props.user._id, 
-		bookshelfId: "", 
-		shelf:""
+		owner: user._id,
+		bookshelf: user.privateBookshelf, 
+		shelf: "staticShelf"
 	};
 
 	const [formData, setFormData] = useState(initialState);
-	const [test, setTest] = useState("")
+	console.log("test: ", formData)
 
+	//COVER IMAGE WIDGET
 	function getCoverUrl(result) {
 		if(result.event === "success") {
 			setFormData({...formData, coverUrl: result.info.secure_url})
 		}
 	}
-
-	function getEbookUrl(result) {
-		if(result.event === "success") {
-			setFormData({...formData, ebookUrl: result.info.secure_url})
-		}
-	}
-
 
 	function widgetCover(event){ 
 
@@ -42,15 +44,34 @@ function CreateEbook(props) {
 		}, (error, result) => {getCoverUrl(result)}).open()
 	}
 
+
+
+	//EBOOK FILE WIDGET
+	function getEbookUrl(result) {
+		if(result.event === "success") {
+			setFormData({...formData, ebookUrl: result.info.secure_url})
+		}
+	}
+
  	function widgetEbooks(event) {
 
     window.cloudinary.createUploadWidget({ 
     cloudName: "best-reads", 
     uploadPreset: "bestReads-ebooks" 
     }, (error, result) => {getEbookUrl(result)}).open()
-}
 
-	
+	}
+
+	const notify = () =>  {
+		toast.success("Success Notification !", {
+        position: toast.POSITION.TOP_CENTER
+      });
+	}
+
+	function success() {
+		setFormData(initialState)
+		notify()
+	}
 	
 
 	function handleChange(event) {
@@ -60,12 +81,13 @@ function CreateEbook(props) {
 
 	function handleSubmit(event) {
 		event.preventDefault()
-		createEbook(formData)
+		createEbook(formData).then(res => res.status === true ? success() : console.log("aaah") )
 	}
 
 
 	return (
 		<div>
+			<ToastContainer/>
 			<h1>Create book: </h1>
 			<form onSubmit={handleSubmit} className='new-book-form'>
 				<label htmlFor='input-title'>Title</label><br />
@@ -94,15 +116,31 @@ function CreateEbook(props) {
 				<input type="button" className="cloudinary-button" onClick={widgetCover} value="Add a cover"/>
 
 				<br /><br />
-				<label htmlFor='input-ebook'>Ebook</label><br />
+				<label htmlFor='input-ebook'>Ebook file</label><br />
 				<input type="button" className="cloudinary-button" onClick={widgetEbooks} value="Add an ebook file"/>
 
+				<br /><br />
+				{(user.privateBookshelf.dynamicShelves.length > 0) && 
+				<>
+				<label htmlFor="input-bookshelf">Add to: </label>
+
+				<input list="bookshelves" onChange={handleChange}/>
+				<datalist id="bookshelves">
+					<option name="shelf" value="staticShelf">---Shelf---</option>
+					<option name="shelf" value="staticShelf" label="Main shelf"></option>
+    				{user.privateBookshelf.dynamicShelves.map((eachShelf) => <option name="shelf" value={eachShelf} label={eachShelf.name}/>
+					)}
+  				</datalist>
+				</>
+				}
+ 
 				<br /><br />
 				<button className='button__submit' type='submit'>
 					Submit
 				</button>
 			</form>
 
+				<button onClick={notify}> Click! </button>
 
 		</div>
 	);

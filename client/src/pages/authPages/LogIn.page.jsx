@@ -3,6 +3,7 @@ import { login } from '../../services/auth';
 import './Signup';
 import * as CONSTS from '../../utils/consts';
 
+
 function LogIn(props) {
 	const { authenticate } = props;
 	if(props.user && props.user._id) { props.history.push("/")} 

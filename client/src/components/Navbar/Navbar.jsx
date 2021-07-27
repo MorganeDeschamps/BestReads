@@ -31,8 +31,11 @@ const Navbar = (props) => {
 						<Link to={'/auth/signup'} className='authLink'>
 							Signup
 						</Link>
-						<Link to={'auth/login'} className='authLink'>
+						<Link to={'/auth/login'} className='authLink'>
 							Log In
+						</Link>
+						<Link to={'/ebook/create'} className='authLink'>
+							Create Ebook
 						</Link>
 					</>
 				)}

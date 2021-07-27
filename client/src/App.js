@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import CreateBook from './pages/ebooks/CreateEbook.page';
+import CreateEbook from './pages/ebooks/CreateEbook.page';
 import HomePage from './pages/Home.page';
 import LogIn from './pages/authPages/LogIn.page';
 import ProtectedPage from './pages/ProtectedPage';
@@ -11,8 +11,10 @@ import NormalRoute from './routing-components/NormalRoute';
 import ProtectedRoute from './routing-components/ProtectedRoute';
 import { getLoggedIn, logout } from './services/auth';
 import * as CONSTS from './utils/consts';
+import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
 import UserProfile from './pages/UserProfile.page';
 import Test from './components/Test';
+
 
 function App() {
 /* 
@@ -108,11 +110,16 @@ function App() {
 				<ProtectedRoute
 					exact
 					path={'/ebook/create'}
-					component={CreateBook}
+					component={CreateEbook}
 					user={user}
 				/>
 
 				<NormalRoute exact path={'/'} component={HomePage} />
+				<NormalRoute exact path={'/auth/signup'} authenticate={authenticate} component={Signup}/>
+				<NormalRoute exact path={'/auth/login'} authenticate={authenticate} component={LogIn}/>
+				<NormalRoute exact path={'/ebook/create'} authenticate={authenticate} component={CreateEbook} />
+				<NormalRoute exact path={'/private-shelves/create'} authenticate={authenticate} component = {NewDynamicShelf} />
+				<ProtectedRoute exact path={'/protected'} component={ProtectedPage} user={user} /> {/* // this means protected route has access to user prop */}
 			</Switch>
 		</div>
 	);

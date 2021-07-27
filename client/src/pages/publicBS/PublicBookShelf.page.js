@@ -19,15 +19,16 @@ export default function PublicBookShelf(props) {
         .catch(err => console.log(err))
     })
 
+    // map through book arrays that are there and show what is inside, give the option to add books and search
 
     function moveBook() {
-        bookshelfMethods.
+        bookshelfMethods()
     }
 
 
     return (
-   	
-        <div className="list-books">
+   	 
+         <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
           </div>

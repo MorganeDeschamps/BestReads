@@ -10,12 +10,16 @@ const saltRounds = 10;
 // Require the User model in order to interact with the database
 const User = require('../models/User.model');
 const Session = require('../models/Session.model');
+const {PrivateBookshelf} = require('../models/PrivateBookshelf.model')
+const { PublicBookshelf } = require('../models/PublicBookshelf.model');
+
 
 const {publicBS} = require("../middleware/signUp.middleware")
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require('../middleware/isLoggedOut');
 const isLoggedIn = require('../middleware/isLoggedIn');
+
 
 router.get('/session', (req, res) => {
 	// we dont want to throw an error, and just maintain the user as null
@@ -52,18 +56,6 @@ router.post('/signup', isLoggedOut, (req, res) => {
 		});
 	}
 
-	//   ! This use case is using a regular expression to control for special characters and min length
-	/*
-  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-
-  if (!regex.test(password)) {
-    return res.status(400).json( {
-      errorMessage:
-        "Password needs to have at least 8 chars and must contain at least one number, one lowercase and one uppercase letter.",
-    });
-  }
-  */
-
 	// Search the database for a user with the username submitted in the form
 	User.findOne({ username }).then((found) => {
 		// If the user is found, send the message username is taken
@@ -76,20 +68,61 @@ router.post('/signup', isLoggedOut, (req, res) => {
 			.genSalt(saltRounds)
 			.then((salt) => bcrypt.hash(password, salt))
 			.then((hashedPassword) => {
-				// Create a user and save it in the database
+				// Create a user and save them in the database
+
 				return User.create({
 					username,
 					password: hashedPassword,
 					email
 				});
 			})
+
 			.then((user) => {
-				Session.create({
-					user: user._id,
-					createdAt: Date.now()
-				}).then((session) => {
-					res.status(201).json({ user, accessToken: session._id });
-				});
+				let name = user.username
+				let owner = user._id
+				let staticShelf = "staticShelf"
+			  
+				PrivateBookshelf.create({
+				  name, 
+				  staticShelf, 
+				  owner
+				})
+				.then(createdBookshelf => {
+					console.log(createdBookshelf)
+				  User.findByIdAndUpdate(owner, {$addToSet: {privateBookshelf: createdBookshelf._id}}, {new:true}) 
+
+
+				  .then(user => {
+					let name = user.username
+					let owner = user._id
+					let currentlyReading = "currentlyReading "
+					let wantToRead = "wantToRead"
+					let read = "read"
+
+					PublicBookshelf.create({
+						name,
+						currentlyReading,
+						wantToRead,
+						read,
+						owner
+					})
+
+					.then(createdPublicBookshelf => {
+						User.findByIdAndUpdate(owner, {$addToSet: {publicBookshelf: createdPublicBookshelf._id}}, {new: true})
+
+						.then(user => {
+					
+							Session.create({
+								user: user._id,
+								createdAt: Date.now()
+							}).then((session) => {
+								res.status(201).json({ user, accessToken: session._id });
+							});
+							
+						  })
+					})
+				  })
+				})
 			})
 			.catch((error) => {
 				console.log('oh, no!');
@@ -106,6 +139,8 @@ router.post('/signup', isLoggedOut, (req, res) => {
 			});
 	});
 });
+
+
 
 router.post('/login', isLoggedOut, (req, res, next) => {
 	const { username, password } = req.body;

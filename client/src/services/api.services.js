@@ -72,3 +72,13 @@ export function getWorks(key) {
     .then(successStatus)
     .catch(internalServerError)
 }
+
+
+export function getOneBook(olib) {
+    const url = `/books/${olib}.json`
+
+    urlbase.get(url)
+    .then(res => res.json())
+    .catch(err => console.log("Error getting a book from: ", url))
+    
+}

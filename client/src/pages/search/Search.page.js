@@ -19,11 +19,15 @@ function Search() {
 
 
     function handleSubmit(event) {
+        console.log("test")
         event.preventDefault()
         apiSearches.mainSearch(searchState)
         .then(res => setResults(res.data.docs))
         .catch(err => console.log(err))
     }
+
+    useEffect(() => console.log("results: ", results), [results])
+
 
   return (
     <div className="search-page">

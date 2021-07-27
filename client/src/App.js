@@ -11,6 +11,8 @@ import NormalRoute from './routing-components/NormalRoute';
 import ProtectedRoute from './routing-components/ProtectedRoute';
 import { getLoggedIn, logout } from './services/auth';
 import * as CONSTS from './utils/consts';
+import UserProfile from './pages/UserProfile.page';
+import Test from './components/Test';
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -58,31 +60,37 @@ function App() {
 				<NormalRoute
 					exact
 					path={'/auth/signup'}
-					authenticate={authenticate}
+					user={user}
 					component={Signup}
 				/>
 				<NormalRoute
 					exact
 					path={'/auth/login'}
-					authenticate={authenticate}
+					user={user}
 					component={LogIn}
 				/>
 				<NormalRoute
 					exact
-					path={'/ebook/create'}
-					authenticate={authenticate}
-					component={CreateBook}
-				/>
-				<NormalRoute
-					exact
-					path={'/search'}
-					authenticate={authenticate}
-					component={Search}
+					path={'/test'}
+					user={user}
+					component={Test}
 				/>
 				<ProtectedRoute
 					exact
-					path={'/protected'}
-					component={ProtectedPage}
+					path={'/search'}
+					component={Search}
+					user={user}
+				/>
+				<ProtectedRoute
+					exact
+					path={'/user'}
+					component={UserProfile}
+					user={user}
+				/>
+				<ProtectedRoute
+					exact
+					path={'/ebook/create'}
+					component={CreateBook}
 					user={user}
 				/>
 

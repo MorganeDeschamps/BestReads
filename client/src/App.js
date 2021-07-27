@@ -12,6 +12,8 @@ import ProtectedRoute from './routing-components/ProtectedRoute';
 import { getLoggedIn, logout } from './services/auth';
 import * as CONSTS from './utils/consts';
 import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
+import UserProfile from './pages/UserProfile.page';
+import Test from './components/Test';
 
 
 function App() {
@@ -108,7 +110,7 @@ function App() {
 				<ProtectedRoute
 					exact
 					path={'/ebook/create'}
-					component={CreateBook}
+					component={CreateEbook}
 					user={user}
 				/>
 

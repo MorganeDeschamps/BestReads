@@ -10,14 +10,15 @@ const saltRounds = 10;
 // Require the User model in order to interact with the database
 const User = require('../models/User.model');
 const Session = require('../models/Session.model');
-const PrivateBookshelf = require('../models/PrivateBookshelf.model')
-const PublicBookShelf = require('../models/PublicBookshelf.model')
+const {PrivateBookshelf} = require('../models/PrivateBookshelf.model')
+const { PublicBookshelf } = require('../models/PublicBookshelf.model');
+
 
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require('../middleware/isLoggedOut');
 const isLoggedIn = require('../middleware/isLoggedIn');
-const { PublicBookshelf } = require('../models/PublicBookshelf.model');
+
 
 router.get('/session', (req, res) => {
 	// we dont want to throw an error, and just maintain the user as null

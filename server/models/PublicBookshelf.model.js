@@ -21,7 +21,7 @@ const publicBookshelfSchema = new Schema(
 		currentlyReading: {type: Array, default: []},
 		wantToRead: {type: Array, default: []},
 		read: {type: Array, default: []},
-		dynamicShelves: [{ type: Schema.Types.ObjectId, ref: "PublicShelf", default: []}],
+		dynamicShelves: [{ type: Schema.Types.ObjectId, ref: "PublicShelf"}],
 		owner: { type: Schema.Types.ObjectId, ref: "User" }
 	},
 	{

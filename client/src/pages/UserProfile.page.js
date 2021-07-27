@@ -26,15 +26,15 @@ ELSE call the data from the backend - should have been added to the backend when
 // if dynamic bookshelf exists, get data and map through
 
 
-import React, {useEffect, useState} from 'react';
+/* import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom'
 import {displayUserBookshelves} from '../services/auth'
 import CreatePrivateShelf from './Components/PrivateShelves/DynamicShelf';
 import books from '../../public/bookImg'
 
-
+ */
 //GET
-
+/* 
 function UserBookShelves(props){
     const {userId} = props;
     
@@ -50,22 +50,22 @@ function UserBookShelves(props){
         .catch(err => console.log(err))
     }, []);
 
+ */
 
-
-        return (
+/*         return (
             <div>
                 <h4>Private Bookshelf</h4>
-                <CreatePrivateShelf />
+                <CreatePrivateShelf /> */
 
       {/*           create logic for private shelves and logic for public shelves and call in here 
       pass public and private bookshelves as props*/}
-                <h2>Searched Books</h2>
+/*                 <h2>Searched Books</h2>
                 {listBooks.map(oneBook =>{
                 return(
                     <div key={oneBook.title}>
-                        <h4>{oneBook.title}</h4>
+                        <h4>{oneBook.title}</h4> */
 {/*                         <Link to={`/books/${bookArray.data.docs._id}`}>{bookArray.data.docs.name}</Link> */}
-                    </div>
+/*                     </div>
                 )
             })}
         </div>
@@ -73,7 +73,7 @@ function UserBookShelves(props){
 
 };
 
-export default UserBookShelves;
+export default UserBookShelves; */
 
 
 

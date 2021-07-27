@@ -1,29 +1,44 @@
 const mongoose = require('mongoose');
-const {PublicBookshelf} = require("../models/PublicBookshelf.model")
+const {PrivateBookshelf} = require('../models/PrivateBookshelf.model')
+const {PublicBookshelf} = require('../models/PublicBookshelf.model');
+
 const User = require('../models/User.model')
 
 
 function publicBS(name, owner) {
 
-        PublicBookshelf.create({
-            name,
-            currentlyReading: [],
-            wantToRead: [],
-            read: [],
-            owner
-        })
-        .then(createdBookshelf => {
-          User.findByIdAndUpdate(owner, {$addToSet: {publicBookshelf: createdBookshelf._id}}, {new:true})
-          .then(user => {
+    return PublicBookshelf.create({
+        name,
+        owner
+    })
+    .then(createdBookshelf => {
+        return User.findByIdAndUpdate(owner, {$addToSet: {publicBookshelf: createdBookshelf._id}}, {new:true})
+        .then(user => {
             console.log(user)
-            res.json(createdBookshelf)
-          })
+            return user
         })
-        
+    }).then(user => {return user})
+
 }
       
       
+function privateBS(name, owner) {
+
+    return PrivateBookshelf.create({
+      name, 
+      staticShelf: [], 
+      owner
+    })
+    .then(createdBookshelf => {
+      return User.findByIdAndUpdate(owner, {$addToSet: {privateBookshelf: createdBookshelf._id}}, {new:true})
+      .then(user => {
+        console.log(user);
+        return user
+      })
+    }).then(user => {return user})
+}
+  
 
 
 
-module.exports = {publicBS: publicBS};
+module.exports = {publicBS: publicBS, privateBS: privateBS};

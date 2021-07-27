@@ -38,23 +38,6 @@ router.get("/create", (req, res) => {
 });
 
 
-router.post("/create", (req, res) => {
-  let {name, owner} = req.body
-
-  PrivateBookshelf.create({
-    name, 
-    staticShelf: [], 
-    owner
-  })
-  .then(createdBookshelf => {
-    User.findByIdAndUpdate(owner, {$addToSet: {privateBookshelf: createdBookshelf._id}}, {new:true})
-    .then(user => {
-      console.log(user)
-      res.json(createdBookshelf)
-    })
-  })
-});
-
 
 //EDIT PRIVATE BOOKSHELF
 

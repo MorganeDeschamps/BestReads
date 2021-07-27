@@ -15,6 +15,7 @@ const { PublicBookshelf } = require('../models/PublicBookshelf.model');
 
 
 const {publicBS} = require("../middleware/signUp.middleware")
+const {privateBS} = require("../middleware/signUp.middleware")
 
 // Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require('../middleware/isLoggedOut');
@@ -77,52 +78,15 @@ router.post('/signup', isLoggedOut, (req, res) => {
 				});
 			})
 
-			.then((user) => {
-				let name = user.username
-				let owner = user._id
-				let staticShelf = "staticShelf"
-			  
-				PrivateBookshelf.create({
-				  name, 
-				  staticShelf, 
-				  owner
-				})
-				.then(createdBookshelf => {
-					console.log(createdBookshelf)
-				  User.findByIdAndUpdate(owner, {$addToSet: {privateBookshelf: createdBookshelf._id}}, {new:true}) 
-
-
-				  .then(user => {
-					let name = user.username
-					let owner = user._id
-					let currentlyReading = "currentlyReading "
-					let wantToRead = "wantToRead"
-					let read = "read"
-
-					PublicBookshelf.create({
-						name,
-						currentlyReading,
-						wantToRead,
-						read,
-						owner
-					})
-
-					.then(createdPublicBookshelf => {
-						User.findByIdAndUpdate(owner, {$addToSet: {publicBookshelf: createdPublicBookshelf._id}}, {new: true})
-
-						.then(user => {
-					
-							Session.create({
-								user: user._id,
-								createdAt: Date.now()
-							}).then((session) => {
-								res.status(201).json({ user, accessToken: session._id });
-							});
-							
-						  })
-					})
-				  })
-				})
+			.then((user) => {return privateBS(user.username, user._id)})
+			.then((user) => {return publicBS(user.username, user._id)})
+			.then(user => {
+				Session.create({
+					user: user._id,
+					createdAt: Date.now()
+				}).then((session) => {
+					res.status(201).json({ user, accessToken: session._id });
+				});
 			})
 			.catch((error) => {
 				console.log('oh, no!');

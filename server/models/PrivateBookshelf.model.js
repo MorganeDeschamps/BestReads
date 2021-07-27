@@ -18,7 +18,7 @@ const PrivateShelf = model('PrivateShelf', privateShelfSchema)
 const privateBookshelfSchema = new Schema(
 	{
 		name: String,
-		staticShelf: [{ type: Schema.Types.ObjectId, ref: "Ebook", default: [] }],
+		staticShelf: [{ type: Schema.Types.ObjectId, ref: "Ebook"}],
 		dynamicShelves: [{ type: Schema.Types.ObjectId, ref: "PrivateShelf", default: [] }],
 		owner: { type: Schema.Types.ObjectId, ref: "User" }
 	},

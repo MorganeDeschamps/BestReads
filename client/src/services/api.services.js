@@ -52,9 +52,6 @@ export function mainSearch(search) {
 }
 
 
-
-
-
 export function getAuthorDetails(key) {
     const url = `/authors/${key}.json`
 

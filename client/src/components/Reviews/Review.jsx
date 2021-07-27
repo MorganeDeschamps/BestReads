@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 
 // CREATE NEW REVIEW
 
-function CreateNewReview(props) {
-	const {bookId} = props // this needs to be linked to the book details page and get the id through props there
+function NewReview(props) {
+	const {bookId} = props // this needs to be linked to the book details page and get the id through props there - ? also pass the userId through here?
 
     
 	const initialFormState = {
@@ -26,6 +26,7 @@ function CreateNewReview(props) {
 
 	function handleSubmit(event) {
 		event.preventDefault()
+		/* createReview(bookId) */
 
 	}
 
@@ -56,4 +57,4 @@ function CreateNewReview(props) {
 	);*/
 } 
 
-export default CreateNewReview;
+export default NewReview;

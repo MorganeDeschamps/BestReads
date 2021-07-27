@@ -34,10 +34,6 @@ const privateService = axios.create({
 //PUBLIC
 
 
-
-
-
-
 // PRIVATE
 export function getAllPrivateShelves(bookshelfId) {
 	return axios

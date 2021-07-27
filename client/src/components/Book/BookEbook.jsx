@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import {getOneBook} from "../services/api.services"
 
-function Book(props) {
 
-    const {cover, title, author} = props
-    const { book, changeShelf, shelfID } = props
+function BookEbook(props) {
+
+	//props will pass either a book id (olid) or ebook id (DB id)
+	const [bookData, setBookData] = useState({})
+	const [eBookData, setEbookData] = useState({})
+
+	if(props.book) {
+		getOneBook(props.book)
+		.then(res => setBookData(res))
+		.catch(err => console.log(err))
+	}
+
+    //const {cover, title, author} = props
+    //const { book, changeShelf, shelfID } = props
+
+
 
     function checkThumbnailExists(book) {
 		if (cover) {
@@ -46,4 +60,4 @@ function Book(props) {
 	);
 };
 
-export default Book;
+export default BookEbook;

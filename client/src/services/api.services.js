@@ -75,10 +75,10 @@ export function getWorks(key) {
 
 
 export function getOneBook(olib) {
-    const url = `/books/${olib}.json`
+    const url = `https://openlibrary.org/books/${olib}.json`
 
-    urlbase.get(url)
-    .then(res => res.json())
-    .catch(err => console.log("Error getting a book from: ", url))
-    
+    return axios.get(url)
+    .then(res => {return res.data})
+    .catch(err => console.log("Error getting a book from: ", url, " ---Error: ", err))
+
 }

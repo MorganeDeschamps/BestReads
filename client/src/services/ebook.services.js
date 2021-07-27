@@ -22,7 +22,7 @@ const service = axios.create({
 
 //body needs { title, author, coverUrl, ebookUrl, owner, bookshelfId, shelf} 
 export function createEbook(ebookDetails) {
-    service.post("/create", ebookDetails)
+    return service.post("/create", ebookDetails)
     .then(successStatus)
     .catch(internalServerError)
 }

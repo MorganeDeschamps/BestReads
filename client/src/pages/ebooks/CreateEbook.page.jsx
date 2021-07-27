@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import * as CONSTS from '../../utils/consts';
 import * as PATHS from '../../utils/paths';
 
@@ -58,7 +62,16 @@ function CreateEbook(props) {
 
 	}
 
-	
+	const notify = () =>  {
+		toast.success("Success Notification !", {
+        position: toast.POSITION.TOP_CENTER
+      });
+	}
+
+	function success() {
+		setFormData(initialState)
+		notify()
+	}
 	
 
 	function handleChange(event) {
@@ -68,12 +81,13 @@ function CreateEbook(props) {
 
 	function handleSubmit(event) {
 		event.preventDefault()
-		createEbook(formData)
+		createEbook(formData).then(res => res.status === true ? success() : console.log("aaah") )
 	}
 
 
 	return (
 		<div>
+			<ToastContainer/>
 			<h1>Create book: </h1>
 			<form onSubmit={handleSubmit} className='new-book-form'>
 				<label htmlFor='input-title'>Title</label><br />
@@ -126,6 +140,7 @@ function CreateEbook(props) {
 				</button>
 			</form>
 
+				<button onClick={notify}> Click! </button>
 
 		</div>
 	);

@@ -9,6 +9,7 @@ import {createReview} from '../../services/review.services'
 function NewReview(props) {
 	const {book} = props
 	console.log('this is the book', book)
+	// this is coming back as undefined
 
     
 	const initialFormState = {

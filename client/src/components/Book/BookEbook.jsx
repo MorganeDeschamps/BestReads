@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import {getOneBook} from "../services/api.services"
+import {getOneBook} from "../../services/api.services"
 
 
 

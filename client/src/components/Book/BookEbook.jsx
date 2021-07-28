@@ -1,60 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import {getOneBook} from "../../services/api.services"
-
-
-
-/*
-PUBLIC
-router.put("/moveBook", (req, res) => {
-  const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
-  let result;
-
-PRIVATE
-router.put("/moveBook", (req, res) => {
-    const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
-    let result;
-  
-
-*/
-
+import {saveToPublic} from "../../services/shelves.services"
+import Default from "../../images/default.jpeg"
 
 
 function BookEbook(props) {
 
-	//props will pass either a book id (olid) or ebook id (DB id)
-	const [bookData, setBookData] = useState({})
-	const [eBookData, setEbookData] = useState({})
-/* 
-	if(props.book) {
-		getOneBook(props.book)
-		.then(res => {
-			title,
-			covers[0]
-		})
-		.catch(err => console.log(err))
+	const [userState, setUserState] = useState({})
+	const [bookState, setBookState] = useState({})
+	useEffect(() => {setUserState(props.user)}, [])
+	useEffect(() => {setBookState(props.book)}, [])
+
+	const {book} = props
+	const {user} = props
+
+	const bookshelfId = user.publicBookshelf._id
+	console.log("bookshelf is: ", bookshelfId)
+	const shelves = user.publicBookshelves ? user.publicBookshelves.dynamicShelves : []
+
+	function style(cover) {
+		return {
+		backgroundImage: `url(${cover})`,
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center",
+		backgroundSize: "cover"
+		}
 	}
-
-    //const {cover, title, author} = props
-    //const { book, changeShelf, shelfID } = props
-
 
 
     function checkThumbnailExists(book) {
-		if (cover) {
+		if (book.cover) {
 			return (
-				<div className="book-cover" key={book.imageLinks.thumbnail} style={{ backgroundImage: `url(${book.imageLinks.thumbnail})`}} alt="book cover"></div>
+				<div className="book-cover" key={book.cover} style={style(book.cover)} alt="book cover"></div>
 			)
 		} else {
             return ( 
-                <div class="SRPCoverBlank" style="display: block;">
-                    <div class="innerBorder">
-                        <div class="BookTitle">{title} 
-                        <div class="Author">{author}</div>
-                        </div>
-                    </div>
-                </div>
+				<div className="book-cover" style={style(Default)} alt="book cover"></div>
             )
         }
 	}
@@ -65,19 +46,19 @@ function BookEbook(props) {
 	        <div className="book-top">
 	              { checkThumbnailExists(book) }
 	            <div className="book-shelf-changer">
-	                <select onChange={(event) => changeShelf(book, event.target.value)} defaultValue={book.shelf}>
-	                  <option value="none" disabled>Move to...</option>
+	                <select onChange={(event) => saveToPublic(bookshelfId, event.target.value, book)}>
+	                  <option selected disabled>Add to...</option>
+					  <option value="wantToRead">Want to Read</option>
 	                  <option value="currentlyReading">Currently Reading</option>
-	                  <option value="wantToRead">Want to Read</option>
 	                  <option value="read">Read</option>
-	                  <option value="none">None</option>
+	                  {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
 	                </select>
 	            </div>
 	        </div>
 	        <div className="book-title" key={book.title}>{book.title}</div>
-	        <div className="book-authors" key={book.authors}>{book.authors && book.authors.join(', ')}</div>
+	        <div className="book-author" key={book.author}>{book.author}</div>
         </div>
-	); */
+	); 
 };
 
 export default BookEbook;

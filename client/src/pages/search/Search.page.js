@@ -1,13 +1,15 @@
 import * as apiSearches from "../../services/api.services"
 import { useEffect, useState } from 'react';
 import SearchResults from "./SearchResults.page";
+import Loading from "../../components/Loading/index"
 
 
-function Search() {
+function Search(props) {
 
     const emptySearch = {q:"", title:"", author:"", subject:"", place:"", person:"", language:"", publisher:""}
     const [searchState, setSearch] = useState(emptySearch)
     const [toggle, setToggle] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [results, setResults] = useState([])
 
@@ -18,11 +20,12 @@ function Search() {
 
 
 
-    function filter(results) {
-      return results.map((eachWork) => {
+    function filter(resultsFromApi) {
+      return resultsFromApi.map((eachWork) => {
       let result = {
           author: eachWork.author_name,
           title: eachWork.title,
+          _id: eachWork.key.replace("/works/", ""),
           olLink: `https://openlibrary.org${eachWork.key}`
       }
 
@@ -37,8 +40,9 @@ function Search() {
     function handleSubmit(event) {
         console.log("test")
         event.preventDefault()
+        setLoading(true)
         apiSearches.mainSearch(searchState)
-        .then(res => setResults(filter(res.data.docs)))
+        .then(res => {setResults(filter(res.data.docs)) ; setLoading(false)})
         .catch(err => console.log(err))
     }
 
@@ -82,9 +86,12 @@ function Search() {
         </div> 
       }
 
-      {(results && results.length > 1) && 
-        <SearchResults results={results}/>
+{/*       {(results && results.length > 1) && 
+        <SearchResults results={results} user={props.user}/>
       }
+ */}
+
+        {loading ? <Loading /> : <SearchResults results={results} user={props.user}/> }
 
       </div>
   );

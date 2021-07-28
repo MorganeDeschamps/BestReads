@@ -6,7 +6,7 @@ const { Schema, model } = require('mongoose');
 const publicShelfSchema = new Schema(
 	{
 		name: String,
-		books: [String],
+		books: [Object],
 		publicBookshelf: { type: Schema.Types.ObjectId, ref: "PublicBookshelf" }
 	}
 )
@@ -18,9 +18,9 @@ const PublicShelf = model('PublicShelf', publicShelfSchema)
 const publicBookshelfSchema = new Schema(
 	{
 		name: String,
-		currentlyReading: {type: Array, default: []},
-		wantToRead: {type: Array, default: []},
-		read: {type: Array, default: []},
+		currentlyReading: [Object],
+		wantToRead: [Object],
+		read: [Object],
 		dynamicShelves: [{ type: Schema.Types.ObjectId, ref: "PublicShelf",  default: []}],
 		owner: { type: Schema.Types.ObjectId, ref: "User" }
 	},

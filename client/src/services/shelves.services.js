@@ -11,6 +11,7 @@ function internalServerError(err) {
 }
 
 function successStatus(res) {
+	console.log("shelves services success!", res)
 	return {
 		status: true,
 		data: res.data
@@ -33,9 +34,23 @@ const privateService = axios.create({
 
 //PUBLIC
 
-export function getPublicShelf(shelfId) {
-	return publicService
-	.get(`/${shelfId}`)
+export function saveToPublic(bookshelfId, shelf, book) {
+	const info = {bookshelfId: bookshelfId, shelf: shelf, book: book}
+
+	if (shelf === "currentlyReading" || shelf === "wantToRead" || shelf === "read") {
+		publicService.put(`/static/addBook`, info)
+		.then(successStatus)
+		.catch(internalServerError)
+	} else {
+		publicService.put(`/dynamic/addBook`, info)
+		.then(successStatus)
+		.catch(internalServerError)
+	}
+	
+}
+
+export function movePublic(info) {
+	publicService.put(`/moveBook`, info)
 	.then(successStatus)
 	.catch(internalServerError)
 }
@@ -108,4 +123,10 @@ export function editPrivateShelf(shelfId, form) {
 		.catch(internalServerError);
 }
 
+
+export function movePrivate(info) {
+	privateService.put(`/moveBook`, info)
+	.then(successStatus)
+	.catch(internalServerError)
+}
 

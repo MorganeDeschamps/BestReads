@@ -14,7 +14,7 @@ const authRoutes = require('./routes/auth.routes');
 app.use('/api/auth', authRoutes);
 
 const reviewRoutes = require('./routes/reviews.routes');
-app.use('/api/review', reviewRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 const ebookRoutes = require('./routes/ebook.routes');
 app.use('/api/ebook', ebookRoutes);

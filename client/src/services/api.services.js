@@ -71,8 +71,8 @@ export function getWorks(key) {
 }
 
 
-export function getOneBook(olib) {
-    const url = `https://openlibrary.org/books/${olib}.json`
+export function getOneBook(olid) {
+    const url = `https://openlibrary.org/books/${olid}.json`
 
     return axios.get(url)
     .then(res => {return res.data})

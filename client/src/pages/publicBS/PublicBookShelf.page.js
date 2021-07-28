@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as bookshelfMethods from '../../services/bookshelves.services'
+import * as paths from "../../utils/paths"
 
 function PublicBookShelf(props) {
+
+    //const url = paths.HOMEPAGE
 
     const { publicShelf } = props
     console.log(publicShelf)
 
 
-    const [bookshelfState, setState] = useState({})
+    const [bookshelfState, setState] = useState(publicShelf)
 
     useEffect(() => {
         setState(publicShelf)
-    }, [])
+    }, [publicShelf])
 
-    // map through book arrays that are there and show what is inside, give the option to add books and search
-
-/*     function moveBook() {
-        bookshelfMethods()
-    } */
 
     return (
    	 
@@ -32,8 +30,8 @@ function PublicBookShelf(props) {
               return(
                 <div key={eachBook._id}>
                   <img src={eachBook.coverUrl} alt="BookImg" />
-                  
-                  <Link to={`/`}>{eachBook.title}</Link>
+                  <Link to={`/details/${eachBook._id}`}>{eachBook.title}</Link>
+                  <a href={eachBook.olLink} target="_blank" rel="noreferrer">Go to Open Library</a>
                   <div className="open-search">
                   <Link to="/search">Add a book</Link>
                   </div>
@@ -65,22 +63,27 @@ function PublicBookShelf(props) {
                 </div>
               )
             })}
+
+            {bookshelfState.dynamicShelves && bookshelfState.dynamicShelves.length > 0 && bookshelfState.dynamicShelves.map(shelf => {
+              return(
+                <div key={shelf._id}>
+                  <h3>{shelf.name}</h3>
+                  {shelf.books && shelf.books.map(eachBook => {
+                  return(
+                    <div key={eachBook._id}>
+                      <img src={eachBook.coverUrl} alt="BookImg" />
+                      <Link to={`/`}>{eachBook.title}</Link>
+                    </div>
+                )
+            })}
+                </div>
+              )
+            })}
+
+
          {/*    <button className = "info-button" onClick = {showForm}>Add a new shelf</button> */}
 
           </div>
-
-{/*         <div className="list-books-content">
-            <div>
-              <CurrentlyReading changeShelf={changeShelf} books={books} />
-            </div>
-            <div>
-              <WantToRead changeShelf={changeShelf} books={books} />
-            </div>
-            <div>
-              <Read changeShelf={changeShelf} books={books} />
-            </div>
-
-          </div> */}
 
         </div>
 

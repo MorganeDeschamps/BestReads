@@ -1,29 +1,57 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom'
-import {displayUserPage} from '../services/auth'
+import { getLoggedIn, logout } from '../services/auth';
+import * as CONSTS from '../utils/consts';
 import CreatePrivateShelf from '../components/PrivateShelves/NewDynamicShelf';
+import CreatePublicShelf from '../components/PublicShelves/NewDynamicPubShelf';
 import PublicBookshelf from '../pages/publicBS/PublicBookShelf.page';
 import PrivateBookshelf from '../pages/privateBS/PrivateBookshelf.page';
 
 
 function UserBookShelves(props){
-    const {user} = props;
+    const {user, setUser} = props;
     
-    //const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
+    const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
 
-    const username = user.username
+    /* const username = user.username
     const publicBookshelf = user.publicBookshelf
     const privateBookshelf = user.privateBookshelf
-    const reviews = user.reviews
+    const reviews = user.reviews */
+    const [username, setUsername] = useState(user.username)
+    const [publicBookshelf, setPublicBookshelf] = useState(user.publicBookshelf)
+    const [privateBookshelf, setPrivateBookshelf] = useState(user.privateBookshelf)
+    const [reviews, setReviews] = useState(user.reviews)
 
+    useEffect(() => {
+        setUsername(user.username)
+        setPublicBookshelf(user.publicBookshelf)
+        setPrivateBookshelf(user.privateBookshelf)
+        setReviews(user.reviews)
+    }, [props])
+
+    function updateUser() {
+        const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+		if (!accessToken) {
+		}
+		getLoggedIn(accessToken).then((res) => {
+			if (!res.data) {
+				console.log('RES IN CASE OF FAILURE', res);
+			} else {
+				//setUser(res.data.user)
+                setPrivateBookshelf(res.data.user.privateBookshelf)
+                setPublicBookshelf(res.data.user.publicBookshelf)
+			}
+		});
+    }
 
     return (
             <div>
                 <h2>My Bookshelves</h2>
                 <h4>Private Bookshelf</h4>
                 <PrivateBookshelf privateShelf={privateBookshelf}/>
-                <CreatePrivateShelf appendToShelf={privateBookshelf} />
+                <CreatePrivateShelf appendToShelf={privateBookshelf} updateUser={updateUser} />
                 <PublicBookshelf publicShelf={publicBookshelf}/>
+                <CreatePublicShelf appendToPubShelf={publicBookshelf} updateUser={updateUser} />
 
 
       {/*           create logic for private shelves and logic for public shelves and call in here 

@@ -21,3 +21,20 @@ const service = axios.create({
 	baseURL: `${process.env.REACT_APP_SERVER_URL}/review`
 });
 
+
+export function createReview(userId, bookId) {
+
+    service.post(`/${bookId}/new-review`, {name:"", owner: userId, bookId: bookId})
+    .then(successStatus)
+    .catch(internalServerError)
+
+}
+
+
+export function allReviews(bookId) {
+
+    service.get(`/${bookId}/reviews`)
+    .then(successStatus)
+    .catch(internalServerError)
+
+}

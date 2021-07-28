@@ -46,19 +46,42 @@ function BookEbook(props) {
 		<Link to={`/reader/${book._id}`} class="link-tag" style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%"}}></Link>
 		)
 	}
- 
 
+	function coverFlip(book) {
 
-    function checkThumbnailExists(book) {
-		if (book.coverUrl) { return (<div className="book-cover" key={book.coverUrl} style={style(book.coverUrl)} alt="book cover">{eBookReader(book)}</div>)} 
-		else {return (<div className="book-cover" style={style(Default)} alt="book cover">{eBookReader(book)}</div>)}
+		if(book.ebookUrl) {return (
+			<div class="flip-card">
+  				<div class="flip-card-inner">
+					<div className="book-cover flip-card-front" key={book.coverUrl} style={book.coverUrl ? style(book.coverUrl) : style(Default)} 		alt="book cover"></div>
+    				<div class="flip-card-back">
+						{eBookReader(book)}
+    				</div>
+  				</div>
+			</div>
+		)}
+		else { return (
+			<div className="book-cover" style={book.coverUrl ? style(book.coverUrl) : style(Default)} alt="book cover"></div>
+		)}
+
 	}
 
+/* 
+    function checkThumbnailExists(book) {
+		if (book.coverUrl) { return (
+		<div className="book-cover" key={book.coverUrl} style={style(book.coverUrl)} alt="book cover">
+		{eBookReader(book)}
+		</div>)} 
+		else {return (
+		<div className="book-cover" style={style(Default)} alt="book cover">
+		{eBookReader(book)}
+		</div>)}
+	}
+ */
 
 	return (
         <div key={book._id}  className="book">
 	        <div className="book-top">
-	              { checkThumbnailExists(book) }
+	              { coverFlip(book) }
 	            <div className="book-shelf-changer">
 	                <select onChange={(event) => action(props.bsType, event.target.value, {shelfFrom: props.shelf, shelfTo: event.target.value, bookId: book._id}).then(res => res.status === true ? updateUser() : console.log(res))}>
 					<optgroup label="Move to:"></optgroup>

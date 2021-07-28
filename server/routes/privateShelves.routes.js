@@ -39,6 +39,24 @@ router.post("/create", (req, res) => {
 
 
 //ADD EBOOK TO SHELF
+router.put("/static/addBook", (req, res) => {
+  const {bookshelfId, shelf, ebook} = req.body
+  
+  PrivateBookshelf.findByIdAndUpdate(bookshelfId, {$addToSet: {[shelf]: ebook}}, {new:true})
+  .then(bookshelf => res.json(bookshelf))
+  .catch(err => console.log(err))
+
+})
+
+router.put("/dynamic/addBook", (req, res) => {
+  const {bookshelfId, shelf, ebook} = req.body
+
+  PrivateShelf.findByIdAndUpdate(shelf, {$addToSet: {ebooks: ebook}}, {new:true})
+  .then(shelf => res.json(shelf))
+  .catch(err => console.log(err))
+
+})
+
 
 router.put("/addBook", (req, res) => {
   const {bookshelfId, shelf, ebook} = req.body

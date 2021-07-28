@@ -43,22 +43,23 @@ router.post("/create", (req, res) => {
 
 //ADD EBOOK TO SHELF
 
-router.put("/addBook", (req, res) => {
-  const {bookshelfId, shelf, ebook} = req.body
-  let result;
-
-  if (whatShelf(shelf) === "static") {
-    result = addToStatic((ebook, shelf, bookshelfId, "private"))
-  } else if (whatShelf(shelf) === "dynamic") {
-    result = addToDynamic((ebook, shelf, "private"))
-  } else {
-    result = res.status(400).json({ message: 'The shelf does not exist' });
-  }
-
-  return result 
+router.put("/static/addBook", (req, res) => {
+  const {bookshelfId, shelf, book} = req.body
   
+  PublicBookshelf.findByIdAndUpdate(bookshelfId, {$addToSet: {[shelf]: book}}, {new:true})
+  .then(bookshelf => res.json(bookshelf))
+  .catch(err => console.log(err))
+
 })
 
+router.put("/dynamic/addBook", (req, res) => {
+  const {bookshelfId, shelf, book} = req.body
+
+  PublicShelf.findByIdAndUpdate(shelf, {$addToSet: {books: book}}, {new:true})
+  .then(shelf => res.json(shelf))
+  .catch(err => console.log(err))
+
+})
 
 
 

@@ -1,32 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {saveToPublic} from "../../services/shelves.services"
-
-
-/*
-PUBLIC
-router.put("/moveBook", (req, res) => {
-  const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
-  let result;
-
-PRIVATE
-router.put("/moveBook", (req, res) => {
-    const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
-    let result;
-  
-
-
-//router.put("/addBook", (req, res) => {
-//const {bookshelfId, shelf, ebook} = req.body
-
-
-  	author: eachWork.author_name,
-	title: eachWork.title,
-    olLink: `https://openlibrary.org${eachWork.key}`
-	cover: url
-
-*/
-
+import Default from "../../images/default.jpeg"
 
 
 function BookEbook(props) {
@@ -34,23 +9,33 @@ function BookEbook(props) {
 	const [userState, setUserState] = useState({})
 	const [bookState, setBookState] = useState({})
 	useEffect(() => {setUserState(props.user)}, [])
-	useEffect(() => {setBookState(props.book)}, [userState])
+	useEffect(() => {setBookState(props.book)}, [])
 
 	const {book} = props
 	const {user} = props
 
 	const bookshelfId = user.publicBookshelf._id
+	console.log("bookshelf is: ", bookshelfId)
 	const shelves = user.publicBookshelves ? user.publicBookshelves.dynamicShelves : []
+
+	function style(cover) {
+		return {
+		backgroundImage: `url(${cover})`,
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center",
+		backgroundSize: "cover"
+		}
+	}
 
 
     function checkThumbnailExists(book) {
 		if (book.cover) {
 			return (
-				<div className="book-cover" key={book.cover} style={{ backgroundImage: `url(${book.cover})`}} alt="book cover"></div>
+				<div className="book-cover" key={book.cover} style={style(book.cover)} alt="book cover"></div>
 			)
 		} else {
             return ( 
-				<div className="book-cover" style={{ backgroundImage: `url(${"../../images/default-book.jpeg"})`}} alt="book cover"></div>
+				<div className="book-cover" style={style(Default)} alt="book cover"></div>
             )
         }
 	}
@@ -61,10 +46,10 @@ function BookEbook(props) {
 	        <div className="book-top">
 	              { checkThumbnailExists(book) }
 	            <div className="book-shelf-changer">
-	                <select onChange={(event) => saveToPublic(bookshelfId, event.target.value, book)} defaultValue="wantToRead">
-	                  <option value="none" disabled>Add to...</option>
+	                <select onChange={(event) => saveToPublic(bookshelfId, event.target.value, book)}>
+	                  <option selected disabled>Add to...</option>
+					  <option value="wantToRead">Want to Read</option>
 	                  <option value="currentlyReading">Currently Reading</option>
-	                  <option value="wantToRead">Want to Read</option>
 	                  <option value="read">Read</option>
 	                  {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
 	                </select>

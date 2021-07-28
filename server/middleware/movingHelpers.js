@@ -23,32 +23,10 @@ function whatShelf(shelf) {
 }
 
 function publicPrivate(arg) {
-    if(arg === "public") {return {bookShelf: PublicBookshelf, shelf: PublicShelf, booksArr: books}}
-    else {return {bookShelf: PrivateBookshelf, shelf: PrivateShelf, booksArr: ebooks}}
+    if(arg === "public") {return {bookShelf: PublicBookshelf, shelf: PublicShelf, booksArr: "books"}}
+    else {return {bookShelf: PrivateBookshelf, shelf: PrivateShelf, booksArr: "ebooks"}}
 }
 
-
-
-function addToDynamic(book, shelfTo, publicOrPrivate) {
-    const {shelf, booksArr} = publicPrivate(publicOrPrivate)
-
-    return shelf.findByIdAndUpdate(shelfTo, { [booksArr]: book}, {new: true})
-    .then(editedShelf => res.json({editedShelf}))
-    .catch(err => console.log(err))
-
-}
-
-
-
-function addToStatic(book, shelfTo, bookshelfId, publicOrPrivate) {
-    const {bookShelf} = publicPrivate(publicOrPrivate)
-
-    return bookShelf.findByIdAndUpdate(bookshelfId, {[shelfTo]: book}, {new: true})
-    .populate('dynamicShelves')
-    .then(editedBookshelf => res.json({editedBookshelf}))
-    .catch(err => console.log(err))
-    
-}
 
 
 

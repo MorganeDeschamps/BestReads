@@ -32,21 +32,30 @@ function BookDetails(props){
     // same as creating a bookshelf, update the state in here
 
        return (
-            <div>
+            <div className="single-book">
                 <h2>Book details</h2>
                 <h4>{bookState.title}</h4>
                 <h6>{bookState.author}</h6>
                 <img src={bookState.coverUrl} alt="BookImg" />
                 <Link to='/ol link should be here'></Link>
                 <NewReview book= {olid}/>
-
-
-
-      {/*           create logic for private shelves and logic for public shelves and call in here 
-      pass public and private bookshelves as props*/}
+                <h4>All Reviews:</h4>
+                <div>
+                    {reviewState.comment && reviewState.comment.map(eachComment => {
+                        console.log('this is the current book', eachComment)
+                        return(
+                        <div key={eachComment._id}>
+                            <img src={eachComment.coverUrl} alt="BookImg" />
+                            <h2>{eachComment.title}</h2>
+                            <Link to={`/`}>{eachComment.title}</Link>
+                        </div>
+                        )
+                    })}
 
                 </div>
-                )
+        
+            </div>
+        )
 };
 
 export default BookDetails;

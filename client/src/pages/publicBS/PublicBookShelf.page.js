@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as bookshelfMethods from '../../services/bookshelves.services'
+import * as paths from "../../utils/paths"
 
 function PublicBookShelf(props) {
+
+    //const url = paths.HOMEPAGE
 
     const { publicShelf } = props
     console.log(publicShelf)
@@ -27,8 +30,8 @@ function PublicBookShelf(props) {
               return(
                 <div key={eachBook._id}>
                   <img src={eachBook.coverUrl} alt="BookImg" />
-                  
-                  <Link to={`/`}>{eachBook.title}</Link>
+                  <Link to={`/details/${eachBook._id}`}>{eachBook.title}</Link>
+                  <a href={eachBook.olLink} target="_blank" rel="noreferrer">Go to Open Library</a>
                   <div className="open-search">
                   <Link to="/search">Add a book</Link>
                   </div>

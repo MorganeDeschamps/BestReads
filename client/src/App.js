@@ -15,6 +15,7 @@ import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
 import UserProfile from './pages/UserProfile.page';
 import Test from './components/Test';
 import {displayUserPage} from "./services/auth"
+import BookDetails from './components/Book/BookDetails'
 
 
 function App() {
@@ -99,6 +100,12 @@ function App() {
 					path={'/test'}
 					user={user}
 					component={Test}
+				/>
+				<NormalRoute
+					exact
+					path={'/details/:bookId'}
+					user={user}
+					component={BookDetails}
 				/>
 				<ProtectedRoute
 					exact

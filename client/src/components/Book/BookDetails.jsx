@@ -30,11 +30,14 @@ function BookDetails(props){
 
     // map the array of reviews 
     // same as creating a bookshelf, update the state in here
-    
+
        return (
             <div>
                 <h2>Book details</h2>
-                <h4>userBookshelfState</h4>
+                <h4>{bookState.title}</h4>
+                <h6>{bookState.author}</h6>
+                <img src={bookState.coverUrl} alt="BookImg" />
+                <Link to='/ol link should be here'></Link>
                 <NewReview book= {olid}/>
 
 

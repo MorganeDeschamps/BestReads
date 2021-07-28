@@ -10,6 +10,7 @@ function internalServerError(err) {
 }
 
 function successStatus(res) {
+	console.log("success: ", res)
 	return {
 		status: true,
 		data: res.data

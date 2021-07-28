@@ -4,6 +4,23 @@ import { Link } from 'react-router-dom';
 import {getOneBook} from "../services/api.services"
 
 
+
+/*
+PUBLIC
+router.put("/moveBook", (req, res) => {
+  const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
+  let result;
+
+PRIVATE
+router.put("/moveBook", (req, res) => {
+    const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
+    let result;
+  
+
+*/
+
+
+
 function BookEbook(props) {
 
 	//props will pass either a book id (olid) or ebook id (DB id)

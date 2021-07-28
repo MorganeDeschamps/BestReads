@@ -9,24 +9,21 @@ import PrivateBookshelf from '../pages/privateBS/PrivateBookshelf.page';
 function UserBookShelves(props){
     const {user} = props;
     
-    const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
-    
-    const [userBookshelfState, setUserBookshelfState] = useState(initalState)
+    //const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
+
+    const username = user.username
+    const publicBookshelf = user.publicBookshelf
+    const privateBookshelf = user.privateBookshelf
+    const reviews = user.reviews
 
 
-    useEffect(()=>{
-        displayUserPage({userId: user._id})
-        .then ((userBookshelves)=> setUserBookshelfState(userBookshelves.data))
-        
-        .catch(err => console.log(err))
-    }, []);
-       return (
+    return (
             <div>
                 <h2>My Bookshelves</h2>
                 <h4>Private Bookshelf</h4>
-                <PrivateBookshelf privateShelf= {userBookshelfState.privateBookshelf}/>
-                <CreatePrivateShelf appendToShelf = {userBookshelfState.privateBookshelf}/>
-                <PublicBookshelf publicShelf={userBookshelfState.publicBookshelf}/>
+                <PrivateBookshelf privateShelf={privateBookshelf}/>
+                <CreatePrivateShelf appendToShelf={privateBookshelf} />
+                <PublicBookshelf publicShelf={publicBookshelf}/>
 
 
       {/*           create logic for private shelves and logic for public shelves and call in here 

@@ -27,8 +27,11 @@ function CreatePrivateShelf(props) {
 
 	function handleSubmit(event) {
         event.preventDefault()
-		setFormState(newShelf)
-		console.log(newShelf)
+		return (
+			setFormState(newShelf)
+			.then(shelf => {console.log("test: ", shelf) ; setFormState(initialFormState)})
+            .catch(err => console.log(err))
+		)
 	/* 	.then(shelf => setFormState(initialFormState))
 		.catch(err => console.log(err)) */
         

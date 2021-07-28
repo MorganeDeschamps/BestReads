@@ -38,6 +38,18 @@ router.get('/session', (req, res) => {
 	console.log(typeof req.header.authorization);
 	Session.findById(accessToken)
 		.populate('user')
+		.populate({
+			path: 'user',
+			populate: { path: 'publicBookshelf' , populate: { path: 'dynamicShelves' }}
+		})
+		.populate({
+			path: 'user',
+			populate: { path:'privateBookshelf', populate: { path: 'staticShelf' }, populate: { path: 'dynamicShelves' }}
+		})
+		.populate({
+			path: 'user',
+			populate: { path: 'reviews'}
+		})
 		.then((session) => {
 			if (!session) {
 				return res.status(404).json({ errorMessage: 'Session does not exist' });

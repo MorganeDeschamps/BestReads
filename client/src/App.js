@@ -14,6 +14,7 @@ import UserProfile from './pages/UserProfile.page';
 import Test from './components/Test';
 import {displayUserPage} from "./services/auth"
 import BookDetails from './components/Book/BookDetails'
+import Reader from './pages/ebooks/Read.page';
 
 
 function App() {
@@ -97,7 +98,7 @@ function App() {
 					exact
 					path={'/test'}
 					user={user}
-					component={Test}
+					component={Reader}
 				/>
 				<NormalRoute
 					exact

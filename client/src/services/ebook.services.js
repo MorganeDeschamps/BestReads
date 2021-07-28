@@ -27,14 +27,20 @@ export function createEbook(ebookDetails) {
     .catch(internalServerError)
 }
 
+export function getEbookDetails(ebookId) {
+    return service.get(`/getBook/${ebookId}`)
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
 export function editEbook(id, form) {
-    return service.put(`/${id}/edit`, form)
+    return service.put(`/edit/${id}`, form)
     .then(successStatus)
     .catch(internalServerError)
 }
 
 export function deleteEbook(id) {
-    return service.delete(`/${id}/delete`)
+    return service.delete(`/delete/${id}`)
     .then(successStatus)
     .catch(internalServerError)
 }

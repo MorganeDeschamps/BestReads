@@ -37,21 +37,20 @@ router.post("/create", (req, res) => {
 
 
 //GET ONE EBOOK BY ID
-router.get("/:ebookId", (req, res) => {
+router.get("/getBook/:ebookId", (req, res) => {
   const {ebookId} = req.params
 
 
   Ebook.findById(ebookId)
   .populate('owner')
-  .then(EbookResult => res.json(EbookResult))
+  .then(result => res.json(result))
   .catch(err => res.json(err))
 
 })
 
 
-
 //EDIT EBOOK
-router.put("/:ebookId/edit", (req, res) => {
+router.put("/edit/:ebookId", (req, res) => {
   const { ebookId} = req.params;
   const { title, author, coverUrl, ebookUrl, owner } = req.body
 
@@ -69,7 +68,7 @@ router.put("/:ebookId/edit", (req, res) => {
 
 
 //DELETE Ebook
-router.delete("/:ebookId/delete", (req, res) => {
+router.delete("/delete/:ebookId", (req, res) => {
   const {ebookId} = req.params
   if (!mongoose.Types.ObjectId.isValid(ebookId)) {
     res.status(400).json({ message: 'Specified Ebook does not exist' });

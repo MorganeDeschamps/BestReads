@@ -5,6 +5,7 @@ import { movePrivate, movePublic } from '../../services/shelves.services';
 import { editEbook } from '../../services/ebook.services';
 import { deleteEbook } from '../../services/ebook.services';
 import { deleteBook } from '../../services/shelves.services';
+import { Link } from 'react-router-dom';
 
 //actions private: movePrivate, delete, edit
 //actions public: movePublic, delete
@@ -40,12 +41,20 @@ function BookEbook(props) {
 		}
 	}
 
-
-    function checkThumbnailExists(book) {
-		if (book.coverUrl) { return (<div className="book-cover" key={book.coverUrl} style={style(book.coverUrl)} alt="book cover"></div>)} 
-		else {return (<div className="book-cover" style={style(Default)} alt="book cover"></div>)}
+	function eBookReader(book) {
+		if(book.ebookUrl) return (
+		<Link to={`/reader/${book._id}`} class="link-tag" style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%"}}></Link>
+		)
 	}
  
+
+
+    function checkThumbnailExists(book) {
+		if (book.coverUrl) { return (<div className="book-cover" key={book.coverUrl} style={style(book.coverUrl)} alt="book cover">{eBookReader(book)}</div>)} 
+		else {return (<div className="book-cover" style={style(Default)} alt="book cover">{eBookReader(book)}</div>)}
+	}
+
+
 	return (
         <div key={book._id}  className="book">
 	        <div className="book-top">

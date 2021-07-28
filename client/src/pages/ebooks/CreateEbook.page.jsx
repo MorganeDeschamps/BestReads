@@ -7,6 +7,7 @@ import {createEbook} from "../../services/ebook.services"
 function CreateEbook(props) {
 	//form needs  { title, author, coverUrl, ebookUrl, owner, shelfId}
 	const user = props.user
+	const shelf = user.privateBookshelf.shelves.find(shelf => shelf.name === "Main shelf")
 
 	const initialState = {
 		title: "",
@@ -14,7 +15,7 @@ function CreateEbook(props) {
 		coverUrl: "",
         ebookUrl: "", 
 		owner: user._id,
-		shelf: ""
+		shelf: shelf._id
 	};
 
 	const [formData, setFormData] = useState(initialState);

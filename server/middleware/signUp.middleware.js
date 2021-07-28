@@ -4,11 +4,9 @@ const {PublicBookshelf, PublicShelf} = require('../models/PublicBookshelf.model'
 
 
 function publicBS(name, owner, user) {
+    let nameBS = `${name}'s public bookshelf`
 
-    return PublicBookshelf.create({
-        name,
-        owner
-    })
+    return PublicBookshelf.create({"name": nameBS, "owner": owner})
     .then(bookshelf => {
         const {bookshelfId} = bookshelf._id
 
@@ -35,11 +33,9 @@ function publicBS(name, owner, user) {
       
       
 function privateBS(name, owner, user) {
+    let nameBS = `${name}'s private bookshelf`
 
-    return PrivateBookshelf.create({
-      name, 
-      owner
-    })
+    return PrivateBookshelf.create({"name": nameBS, "owner": owner})
     .then(bookshelf => {
         const {bookshelfId} = bookshelf._id
         const main = {name: "Main shelf", publicBookshelf: bookshelfId}

@@ -8,7 +8,7 @@ const Ebook = require("../models/Ebook.model");
 //CREATE EBOOK ALL SHELVES
 router.post("/create", (req, res) => {
   const { title, author, coverUrl, ebookUrl, owner} = req.body
-  const shelfId = req.body.shelfId
+  const shelfId = req.body.shelf
 
   Ebook.create({
     title,
@@ -37,7 +37,6 @@ router.post("/create", (req, res) => {
 
 
 //GET ONE EBOOK BY ID
-
 router.get("/:ebookId", (req, res) => {
   const {ebookId} = req.params
 
@@ -52,11 +51,6 @@ router.get("/:ebookId", (req, res) => {
 
 
 //EDIT EBOOK
-router.get("/:ebookId/edit", (req, res) => {
-  res.json("this is my editEbook page. ")
-})
-
-
 router.put("/:ebookId/edit", (req, res) => {
   const { ebookId} = req.params;
   const { title, author, coverUrl, ebookUrl, owner } = req.body

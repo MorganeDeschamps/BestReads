@@ -17,12 +17,34 @@ function PublicBookShelf(props) {
         setState(publicShelf)
     }, [publicShelf])
 
+    console.log("bookshelfState: ", bookshelfState)
+
 
     return (
    	 
          <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
+
+
+
+            {bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
+              return(
+                <div key={shelf._id}>
+                  <h3>{shelf.name}</h3>
+                  {shelf.books && shelf.books.map(eachBook => {
+                  return(
+                    <div key={eachBook._id}>
+                      <img src={eachBook.coverUrl} alt="BookImg" />
+                      <Link to={`/`}>{eachBook.title}</Link>
+                    </div>
+                )
+            })}
+                </div>
+              )
+            })}
+
+{/* 
 
 
             <h4>Currently Reading</h4>
@@ -56,7 +78,7 @@ function PublicBookShelf(props) {
                 <div key={eachBook._id}>
                   <img src={eachBook.coverUrl} alt="BookImg" />
                   <Link to={`/`}>{eachBook.title}</Link>
-                  {/* option to review, drop down review */}
+                  {/* option to review, drop down review 
                   <div className="open-search">
                   <Link to="/search">Add a book</Link>
                   </div>
@@ -80,7 +102,7 @@ function PublicBookShelf(props) {
               )
             })}
 
-
+ */}
          {/*    <button className = "info-button" onClick = {showForm}>Add a new shelf</button> */}
 
           </div>

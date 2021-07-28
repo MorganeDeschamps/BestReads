@@ -29,7 +29,7 @@ function CreatePublicShelf(props) {
         event.preventDefault()
 		//setFormState(newShelf)
 		return newPublicShelf(formState)
-		.then(shelf => {appendToPubShelf.dynamicShelves = {...appendToPubShelf.dynamicShelves, shelf}; updateUser()})
+		.then(shelf => {appendToPubShelf.shelves = {...appendToPubShelf.shelves, shelf}; updateUser()})
 		.catch(err => console.log(err))
         
 	}

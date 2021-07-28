@@ -14,9 +14,9 @@ function BookEbook(props) {
 	const {book} = props
 	const {user} = props
 
-	const bookshelfId = user.publicBookshelf._id
-	console.log("bookshelf is: ", bookshelfId)
-	const shelves = user.publicBookshelves ? user.publicBookshelves.dynamicShelves : []
+	//const bookshelfId = user.publicBookshelf._id
+	//console.log("bookshelf is: ", bookshelfId)
+	const shelves = user.publicBookshelf.shelves
 
 	function style(cover) {
 		return {
@@ -46,11 +46,8 @@ function BookEbook(props) {
 	        <div className="book-top">
 	              { checkThumbnailExists(book) }
 	            <div className="book-shelf-changer">
-	                <select onChange={(event) => saveToPublic(bookshelfId, event.target.value, book)}>
+	                <select onChange={(event) => saveToPublic(event.target.value, book)}>
 	                  <option selected disabled>Add to...</option>
-					  <option value="wantToRead">Want to Read</option>
-	                  <option value="currentlyReading">Currently Reading</option>
-	                  <option value="read">Read</option>
 	                  {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
 	                </select>
 	            </div>

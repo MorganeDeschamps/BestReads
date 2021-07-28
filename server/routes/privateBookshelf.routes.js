@@ -5,11 +5,6 @@ const User = require('../models/User.model')
 
 
 
-//BOOKSHELF MAIN
-
-router.get("/", (req, res) => {
-  res.json("BookShelf main - All good in here");
-});
 
 // GET PRIVATE BOOKSHELF BY ID
 
@@ -23,8 +18,7 @@ router.get("/:bookshelfId", (req, res) => {
  
   PrivateBookshelf.findById(bookshelfId)
     .populate('owner')
-    .populate('staticShelf')
-    .populate('dynamicShelves')
+    .populate('shelves')
     .then(privateBookshelf => res.json(privateBookshelf))
     .catch(err => res.json(err));
 });
@@ -41,25 +35,17 @@ router.get("/create", (req, res) => {
 
 //EDIT PRIVATE BOOKSHELF
 
-router.get("/:bookshelfId/edit", (req, res) => {
-  res.json("this is my private editBookshelf page. ")
-})
-
-
 router.put("/:bookshelfId/edit", (req, res) => {
   const { bookshelfId } = req.params;
-  const {name, dynamicShelves} = req.body
+  const {name} = req.body
 
   if (!mongoose.Types.ObjectId.isValid(bookshelfId)) {
     res.status(400).json({ message: 'Specified bookshelf does not exist' });
     return;
   }
  
-  PrivateBookshelf.findByIdAndUpdate(bookshelfId, {
-      name,
-      dynamicShelves
-    }, {new: true})
-    .populate("dynamicShelves")
+  PrivateBookshelf.findByIdAndUpdate(bookshelfId, {"name": name}, {new: true})
+    .populate("shelves")
     .then((editedBookshelf) => res.json(editedBookshelf))
     .catch(error => res.json(error));
 

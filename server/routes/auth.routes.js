@@ -10,9 +10,6 @@ const saltRounds = 10;
 // Require the User model in order to interact with the database
 const User = require('../models/User.model');
 const Session = require('../models/Session.model');
-const {PrivateBookshelf} = require('../models/PrivateBookshelf.model')
-const { PublicBookshelf } = require('../models/PublicBookshelf.model');
-
 
 const {publicBS} = require("../middleware/signUp.middleware")
 const {privateBS} = require("../middleware/signUp.middleware")
@@ -40,11 +37,11 @@ router.get('/session', (req, res) => {
 		.populate('user')
 		.populate({
 			path: 'user',
-			populate: { path: 'publicBookshelf' , populate: { path: 'dynamicShelves' }}
+			populate: { path: 'publicBookshelf' , populate: { path: 'shelves' }}
 		})
 		.populate({
 			path: 'user',
-			populate: { path:'privateBookshelf', populate: { path: 'staticShelf' }, populate: { path: 'dynamicShelves' }}
+			populate: { path:'privateBookshelf', populate: { path: 'shelves' , populate: { path: "ebooks" }}}
 		})
 		.populate({
 			path: 'user',
@@ -180,7 +177,7 @@ router.post('/profile/user', (req, res) => {
 	.populate('privateBookshelf')
 	.populate({
 		path: 'publicBookshelf',
-		populate: { path: 'dynamicShelves' }
+		populate: { path: 'shelves' }
 	})
 	.populate({
 		path: 'privateBookshelf',

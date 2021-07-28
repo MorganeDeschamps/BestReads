@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom'
 import { getLoggedIn, logout } from '../services/auth';
 import * as CONSTS from '../utils/consts';
 import CreatePrivateShelf from '../components/PrivateShelves/NewDynamicShelf';

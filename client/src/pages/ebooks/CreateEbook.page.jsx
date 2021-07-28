@@ -126,7 +126,7 @@ function CreateEbook(props) {
 
 				<input list="bookshelves" onChange={handleChange}/>
 				<datalist id="bookshelves">
-					<option name="shelf" value="staticShelf">---Shelf---</option>
+					<option name="shelf" disabled>---Shelf---</option>
 					<option name="shelf" value="staticShelf" label="Main shelf"></option>
     				{user.privateBookshelf.dynamicShelves.map((eachShelf) => <option name="shelf" value={eachShelf} label={eachShelf.name}/>
 					)}

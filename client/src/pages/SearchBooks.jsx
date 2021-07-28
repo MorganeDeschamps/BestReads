@@ -4,7 +4,7 @@ import * as apiSearches from "../Services/api.services"
 
 
 
-function SearchBooks(){
+function SearchBooks(props){
     const [listBooks, setListBooks] = useState([])
     const [loading, setLoading] = useState(false);
 

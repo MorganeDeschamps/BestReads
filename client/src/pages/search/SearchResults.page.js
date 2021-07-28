@@ -39,7 +39,7 @@ export default function SearchResults(props) {
 	        <div className="bookshelf-books">
 	            <ol className="books-grid">
                     {results.map(eachDoc => 
-                        <BookEbook key={eachDoc.id} book={eachDoc} changeShelf="" />
+                        <BookEbook key={eachDoc.id} book={eachDoc} user={props.user}/>
                     )}
                 </ol>
 	        </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import SearchResults from "./SearchResults.page";
 
 
-function Search() {
+function Search(props) {
 
     const emptySearch = {q:"", title:"", author:"", subject:"", place:"", person:"", language:"", publisher:""}
     const [searchState, setSearch] = useState(emptySearch)
@@ -18,11 +18,12 @@ function Search() {
 
 
 
-    function filter(results) {
-      return results.map((eachWork) => {
+    function filter(resultsFromApi) {
+      return resultsFromApi.map((eachWork) => {
       let result = {
           author: eachWork.author_name,
           title: eachWork.title,
+          _id: eachWork.key.replace("/works/", ""),
           olLink: `https://openlibrary.org${eachWork.key}`
       }
 
@@ -83,7 +84,7 @@ function Search() {
       }
 
       {(results && results.length > 1) && 
-        <SearchResults results={results}/>
+        <SearchResults results={results} user={props.user}/>
       }
 
       </div>

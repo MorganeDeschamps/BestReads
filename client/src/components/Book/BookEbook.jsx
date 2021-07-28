@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import PublicBookshelfModel, { PublicBookshelf } from '../../../../server/models/PublicBookshelf.model';
-
-import {getOneBook} from "../services/api.services"
-
+import {saveToPublic} from "../../services/shelves.services"
 
 
 /*
@@ -23,27 +20,33 @@ router.put("/moveBook", (req, res) => {
 //const {bookshelfId, shelf, ebook} = req.body
 
 
+  	author: eachWork.author_name,
+	title: eachWork.title,
+    olLink: `https://openlibrary.org${eachWork.key}`
+	cover: url
+
 */
 
 
 
 function BookEbook(props) {
 
-	//props will pass either a book id (olid) or ebook id (DB id)
-	const [bookData, setBookData] = useState({})
-	const [eBookData, setEbookData] = useState({})
-
-    //const {cover, title, author} = props
-    //const { book, changeShelf, shelfID } = props
-
+	const [userState, setUserState] = useState({})
+	const [bookState, setBookState] = useState({})
+	useEffect(() => {setUserState(props.user)}, [])
+	useEffect(() => {setBookState(props.book)}, [userState])
 
 	const {book} = props
+	const {user} = props
+
+	const bookshelfId = user.publicBookshelf._id
+	const shelves = user.publicBookshelves ? user.publicBookshelves.dynamicShelves : []
 
 
     function checkThumbnailExists(book) {
 		if (book.cover) {
 			return (
-				<div className="book-cover" key={book.imageLinks.thumbnail} style={{ backgroundImage: `url(${book.imageLinks.thumbnail})`}} alt="book cover"></div>
+				<div className="book-cover" key={book.cover} style={{ backgroundImage: `url(${book.cover})`}} alt="book cover"></div>
 			)
 		} else {
             return ( 
@@ -58,17 +61,17 @@ function BookEbook(props) {
 	        <div className="book-top">
 	              { checkThumbnailExists(book) }
 	            <div className="book-shelf-changer">
-	                <select onChange={(event) => changeShelf(book, event.target.value)} defaultValue={book.shelf}>
-	                  <option value="none" disabled>Move to...</option>
+	                <select onChange={(event) => saveToPublic(bookshelfId, event.target.value, book)} defaultValue="wantToRead">
+	                  <option value="none" disabled>Add to...</option>
 	                  <option value="currentlyReading">Currently Reading</option>
 	                  <option value="wantToRead">Want to Read</option>
 	                  <option value="read">Read</option>
-	                  <option value="none">None</option>
+	                  {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
 	                </select>
 	            </div>
 	        </div>
 	        <div className="book-title" key={book.title}>{book.title}</div>
-	        <div className="book-authors" key={book.authors}>{book.authors && book.authors.join(', ')}</div>
+	        <div className="book-author" key={book.author}>{book.author}</div>
         </div>
 	); 
 };

@@ -29,7 +29,7 @@ function Search(props) {
           olLink: `https://openlibrary.org${eachWork.key}`
       }
 
-      if (eachWork.cover_edition_key) result.cover = `https://covers.openlibrary.org/b/olid/${eachWork.cover_edition_key}-M.jpg`;
+      if (eachWork.cover_edition_key) result.coverUrl = `https://covers.openlibrary.org/b/olid/${eachWork.cover_edition_key}-M.jpg`;
 
       return result 
 

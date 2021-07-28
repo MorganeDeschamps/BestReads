@@ -34,6 +34,8 @@ const privateService = axios.create({
 
 //PUBLIC
 
+
+
 export function saveToPublic(shelf, book) {
 	const info = {shelf: shelf, book: book}
 
@@ -51,6 +53,13 @@ export function movePublic(info) {
 
 
 }
+
+export function deleteBook(shelfId, bookId) {
+	return publicService.put("/deleteBook", {shelfId, bookId})
+	.then(successStatus)
+	.catch(internalServerError)
+}
+
 
 export function getPublicShelf(shelfId) {
 	return publicService
@@ -88,7 +97,6 @@ export function movePrivate(info) {
 	.then(successStatus)
 	.catch(internalServerError)
 }
-
 
 export function getPrivateShelf(shelfId) {
 	return privateService

@@ -1,45 +1,56 @@
-import { useState } from "react"
 import BookEbook from "../../components/Book/BookEbook"
-import {getCover} from "../../services/api.services"
-
-/*
-PUBLIC
-router.put("/moveBook", (req, res) => {
-  const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
-  let result;
-
-PRIVATE
-router.put("/moveBook", (req, res) => {
-    const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
-    let result;
-  
-
-*/
-
-
+import { saveToPublic } from "../../services/shelves.services"
+import Default from "../../images/default.jpeg"
 
 export default function SearchResults(props) {
 
     const {results} = props
     console.log("props: ", results)
-/* 
-    function changeShelf(book, shelf) {
-        // check if search results already exist in booklist
-        BooksAPI.update(book, shelf).then(response => {
-            book.shelf = shelf
-            this.setState((state) => ({
-                books: this.state.books.filter((b) => b.id !== book.id).concat([ book ])
-            }))
-        })
-    }
- */
+
+	const {user} = props
+    const shelves = user.publicBookshelf.shelves
+
+	function style(cover) {
+		return {
+		backgroundImage: `url(${cover})`,
+		backgroundRepeat: "no-repeat",
+		backgroundPosition: "center",
+		backgroundSize: "cover"
+		}
+	}
+
+
+    function checkThumbnailExists(book) {
+		if (book.coverUrl) {
+			return (
+				<div className="book-cover" key={book.coverUrl} style={style(book.coverUrl)} alt="book cover"></div>
+			)
+		} else {
+            return ( 
+				<div className="book-cover" style={style(Default)} alt="book cover"></div>
+            )
+        }
+	}
+ 
 
     return(
         <div className="bookshelf">
 	        <div className="bookshelf-books">
 	            <ol className="books-grid">
                     {results.map(eachDoc => 
-                        <BookEbook key={eachDoc.id} book={eachDoc} user={props.user}/>
+                        <div key={eachDoc.id} className="book">
+	                        <div className="book-top">
+	                        { checkThumbnailExists(eachDoc) }
+	                            <div className="book-shelf-changer">
+	                                <select onChange={(event) => saveToPublic(event.target.value, eachDoc)}>
+	                                <option selected disabled>Save to: </option>
+	                            {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
+	                            </select>
+	                            </div>
+	                        </div>
+	                        <div className="book-title" key={eachDoc.title}>{eachDoc.title}</div>
+	                        <div className="book-author" key={eachDoc.author}>{eachDoc.author}</div>
+                        </div>
                     )}
                 </ol>
 	        </div>

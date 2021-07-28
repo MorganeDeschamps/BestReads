@@ -27,3 +27,14 @@ export function createEbook(ebookDetails) {
     .catch(internalServerError)
 }
 
+export function editEbook(id, form) {
+    return service.put(`/${id}/edit`, form)
+    .then(successStatus)
+    .catch(internalServerError)
+}
+
+export function deleteEbook(id) {
+    return service.delete(`/${id}/delete`)
+    .then(successStatus)
+    .catch(internalServerError)
+}

@@ -101,6 +101,19 @@ router.put("/moveBook", (req, res) => {
 })
 
 
+//REMOVE BOOK FROM SHELF
+router.put("/deleteBook", (req, res) => {
+  const {shelfId, bookId} = req.body
+  console.log("form is: ", req.body)
+  PublicShelf.findById(shelfId)
+  .then(shelf => {
+    shelf.books = shelf.books.filter((eachBook) => eachBook._id !== bookId)
+    return shelf.save()
+  }).then(shelf => res.json(shelf))
+  .catch(err => console.log(err))
+
+})
+
 
   
   

@@ -20,11 +20,16 @@ function UserBookShelves(props){
     const [publicBookshelf, setPublicBookshelf] = useState(user.publicBookshelf)
     const [privateBookshelf, setPrivateBookshelf] = useState(user.privateBookshelf)
     const [reviews, setReviews] = useState(user.reviews)
+    const [publicShelves, setPublicBS] = useState()
+    const [privateShelves, setPrivateBS] = useState()
+
 
     useEffect(() => {
         setUsername(user.username)
         setPublicBookshelf(user.publicBookshelf)
         setPrivateBookshelf(user.privateBookshelf)
+        setPublicBS(user.publicBookshelf.shelves)
+        setPrivateBS(user.privateBookshelf.shelves)
         setReviews(user.reviews)
     }, [props])
 
@@ -39,6 +44,8 @@ function UserBookShelves(props){
 				//setUser(res.data.user)
                 setPrivateBookshelf(res.data.user.privateBookshelf)
                 setPublicBookshelf(res.data.user.publicBookshelf)
+                setPublicBS(res.data.user.publicBookshelf.shelves)
+                setPrivateBS(res.data.user.privateBookshelf.shelves)
 			}
 		});
     }
@@ -47,17 +54,14 @@ function UserBookShelves(props){
             <div>
                 <h2>My Bookshelves</h2>
                 <h4>Private Bookshelf</h4>
-                <PrivateBookshelf privateShelf={privateBookshelf}/>
+                <PrivateBookshelf privateShelf={privateBookshelf} user={user} updateUser={updateUser}/>
                 <CreatePrivateShelf appendToShelf={privateBookshelf} updateUser={updateUser} />
-                <PublicBookshelf publicShelf={publicBookshelf}/>
+                <br/>
+                <h4>Public Bookshelf</h4>
+                <PublicBookshelf publicShelf={publicBookshelf} user={user} updateUser={updateUser}/>
                 <CreatePublicShelf appendToPubShelf={publicBookshelf} updateUser={updateUser} />
-
-
-      {/*           create logic for private shelves and logic for public shelves and call in here 
-      pass public and private bookshelves as props*/}
-
-                </div>
-                )
+            </div>
+    )
 };
 
 export default UserBookShelves;

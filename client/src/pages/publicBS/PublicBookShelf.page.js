@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as paths from "../../utils/paths"
+import "../../App.css"
+import BookEbook from '../../components/Book/BookEbook'
+import { movePublic } from '../../services/shelves.services'
 
 function PublicBookShelf(props) {
 
-    //const url = paths.HOMEPAGE
-
     const { publicShelf } = props
+    const {updateUser} = props
     console.log(publicShelf)
 
 
@@ -16,32 +18,28 @@ function PublicBookShelf(props) {
         setState(publicShelf)
     }, [publicShelf])
 
-    console.log("bookshelfState: ", bookshelfState)
-
 
     return (
    	 
          <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
-
-
-
-            {bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
+              {bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
               return(
-                <div key={shelf._id}>
+                <div key={shelf._id} className="bookshelf">
                   <h3>{shelf.name}</h3>
-                  {shelf.books && shelf.books.map(eachBook => {
-                  return(
-                    <div key={eachBook._id}>
-                      <img src={eachBook.coverUrl} alt="BookImg" />
-                      <Link to={`/`}>{eachBook.title}</Link>
-                    </div>
-                )
-            })}
-                </div>
+	                <div className="bookshelf-books">
+	                  <ol className="books-grid">
+                      {shelf.books && shelf.books.map(eachBook => 
+                          <BookEbook book={eachBook} user={props.user} bsType="public" updateUser={updateUser} bookshelf={publicShelf} shelf={shelf._id} />
+                      )}
+                    </ol>
+                  </div>
+                </div>  
               )
             })}
+
+
 
 {/* 
 

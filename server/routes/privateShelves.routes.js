@@ -21,6 +21,7 @@ router.get("/create", (req, res) => {
   
 router.post("/create", (req, res) => {
     const {name, ebooks, privateBookshelf} = req.body
+    console.log(name, ebooks, privateBookshelf)
   
     PrivateShelf.create({
       name,

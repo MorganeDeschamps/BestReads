@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 // CREATE NEW REVIEW
 
 function NewReview(props) {
-	const {bookId} = props // this needs to be linked to the book details page and get the id through props there - ? also pass the userId through here?
+	const {book} = props // this needs to be linked to the book details page and get the id through props there - ? also pass the userId through here?
 
     
 	const initialFormState = {
@@ -20,7 +20,7 @@ function NewReview(props) {
 
 	function handleChange(event) {
         const {name, value} = event.target;
-        setFormState({...formState, [name]: value})
+        setFormState({...formState, [name]: value, bookId: book._id})
 
 	}
 

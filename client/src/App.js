@@ -111,6 +111,7 @@ function App() {
 					path={`/auth/profile/user`}
 					component={UserProfile}
 					user={user}
+					setUser={setUser}
 				/>
 				<ProtectedRoute
 					exact

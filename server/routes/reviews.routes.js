@@ -19,6 +19,7 @@ router.post('/:bookId/new-review', (req, res) => {
 router.get('/:bookId/reviews', (req, res) => {
       
     Review.find({"bookId": req.params.bookId})
+    .populate("owner")
     .then(reviews => res.json(reviews))
     .catch(err => res.json(err))
 })

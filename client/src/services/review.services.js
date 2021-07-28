@@ -29,3 +29,12 @@ export function createReview(userId, bookId) {
     .catch(internalServerError)
 
 }
+
+
+export function allReviews(bookId) {
+
+    service.get(`/${bookId}/reviews`)
+    .then(successStatus)
+    .catch(internalServerError)
+
+}

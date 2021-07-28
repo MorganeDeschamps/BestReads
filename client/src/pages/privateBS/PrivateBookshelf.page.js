@@ -6,14 +6,15 @@ import CreatePrivateShelf from '../../components/PrivateShelves/NewDynamicShelf'
 function PrivateBookShelf(props) {
 
     const { privateShelf } = props
-    console.log(privateShelf)
+    console.log('this is what we get through props', privateShelf)
 
 
-    const [bookshelfState, setState] = useState({})
+    const [bookshelfState, setState] = useState(privateShelf)
 
     useEffect(() => {
         setState(privateShelf)
-    }, [])
+        console.log('this is the current bookshelf state', bookshelfState)
+    }, [privateShelf])
 
 
     return (
@@ -32,6 +33,24 @@ function PrivateBookShelf(props) {
                   <div className="open-search">
                   <Link to="/ebook/create">Add an ebook</Link>
                   </div>
+                </div>
+              )
+            })}
+              {bookshelfState.dynamicShelves && bookshelfState.dynamicShelves.length > 0 && bookshelfState.dynamicShelves.map(shelf => {
+              return(
+                <div key={shelf._id}>
+                  <h3>{shelf.name}</h3>
+                  {shelf.ebooks && shelf.ebooks.map(eachBook => {
+                  return(
+                    <div key={eachBook._id}>
+                      <img src={eachBook.coverUrl} alt="BookImg" />
+                      <Link to={`/`}>{eachBook.title}</Link>
+                      <div className="open-search">
+                      <Link to="/ebook/create">Add an ebook</Link>
+                      </div>
+                    </div>
+                )
+            })}
                 </div>
               )
             })}

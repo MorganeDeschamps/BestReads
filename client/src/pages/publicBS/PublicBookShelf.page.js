@@ -43,7 +43,8 @@ function PublicBookShelf(props) {
               return(
                 <div key={eachBook._id}>
                   <img src={eachBook.coverUrl} alt="BookImg" />
-                  <Link to={`/`}>{eachBook.title}</Link>
+                  <Link to={`/details/${eachBook._id}`}>{eachBook.title}</Link>
+                  <a href={eachBook.olLink} target="_blank" rel="noreferrer">Go to Open Library</a>
                   <div className="open-search">
                   <Link to="/search">Add a book</Link>
                   </div>
@@ -55,8 +56,8 @@ function PublicBookShelf(props) {
               return(
                 <div key={eachBook._id}>
                   <img src={eachBook.coverUrl} alt="BookImg" />
-                  <Link to={`/`}>{eachBook.title}</Link>
-                  {/* option to review, drop down review */}
+                  <Link to={`/details/${eachBook._id}`}>{eachBook.title}</Link>
+                  <a href={eachBook.olLink} target="_blank" rel="noreferrer">Go to Open Library</a>
                   <div className="open-search">
                   <Link to="/search">Add a book</Link>
                   </div>
@@ -72,7 +73,8 @@ function PublicBookShelf(props) {
                   return(
                     <div key={eachBook._id}>
                       <img src={eachBook.coverUrl} alt="BookImg" />
-                      <Link to={`/`}>{eachBook.title}</Link>
+                      <Link to={`/details/${eachBook._id}`}>{eachBook.title}</Link>
+                      <a href={eachBook.olLink} target="_blank" rel="noreferrer">Go to Open Library</a>
                     </div>
                 )
             })}

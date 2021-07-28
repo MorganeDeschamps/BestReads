@@ -10,6 +10,7 @@ import {allReviews} from '../../services/review.services'
 
 function BookDetails(props){
     const {olid} = props; //? is this the user that I am actually getting through props
+    // not getting the correct data 
     
     const [bookState, setBookState] = useState({})
     const [reviewState, setReviewState] = useState([])
@@ -17,7 +18,8 @@ function BookDetails(props){
 
     useEffect(()=>{
         getOneBook(olid)
-        .then ((book)=> setBookState(book.data))
+        .then ((book)=> console.log('This is coming through the use effect', book.data))//setBookState(book.data))
+    
         .then (() => allReviews(olid)
         .then(dbReviews => setReviewState(dbReviews)))
         

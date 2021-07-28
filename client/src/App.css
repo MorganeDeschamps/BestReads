@@ -1,12 +1,26 @@
 html, body, .root {
   height: 100%;
+  font-family:'Roboto',sans-serif;
 }
 body {
   line-height: 1.5;
 }
-body, .app {
-  background: white;
+
+
+body {
+  background-image: url('https://64.media.tumblr.com/54fa018225ab8b09af1bc8ff2781ee1d/tumblr_pcbps1Y4D81we9f2ro1_1280.gifv');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  
 }
+
+/* home page */
+
+
+
+
+
 
 /* main page */
 

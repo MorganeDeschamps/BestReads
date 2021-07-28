@@ -4,6 +4,19 @@ const {PublicBookshelf} = require("../models/PublicBookshelf.model")
 const User = require('../models/User.model')
 
 
+//TEST
+router.post("/test/simple", (req, res) => {
+  const {name} = req.body
+  PublicBookshelf.create({"name": name})
+  .then(result => res.json(result))
+  .catch(err => console.log(err))
+})
+
+
+
+
+
+
 
 
 //BOOKSHELF MAIN
@@ -25,14 +38,14 @@ router.get("/:bookshelfId", (req, res) => {
    
     PublicBookshelf.findById(bookshelfId)
       .populate('owner')
-      .populate("dynamicShelves")
+      .populate("shelves")
       .then(publicShelf => res.json(publicShelf))
       .catch(err => res.json(err));
 });
   
 
   
-  //EDIT PUBLIC BOOKSHELF
+  //EDIT PUBLIC BOOKSHELF NAME
   
   router.get("/:bookshelfId/edit", (req, res) => {
     res.json("this is my editPublicBookshelf page. ")
@@ -41,7 +54,7 @@ router.get("/:bookshelfId", (req, res) => {
   
   router.put("/:bookshelfId/edit", (req, res) => {
     const { bookshelfId } = req.params;
-    const {name, dynamicShelves} = req.body
+    const {name} = req.body
   
   
     if (!mongoose.Types.ObjectId.isValid(bookshelfId)) {
@@ -49,12 +62,9 @@ router.get("/:bookshelfId", (req, res) => {
       return;
     }
    
-    PublicBookshelf.findByIdAndUpdate(bookshelfId, {
-        name,
-        dynamicShelves
-      }, {new: true})
-      .populate("dynamicShelves")
-      .then((editedBookshelf) => res.json(editedBookshelf))
+    PublicBookshelf.findByIdAndUpdate(bookshelfId, {"name": name}, {new: true})
+      .populate("shelves")
+      .then((editedBookshelf) => {console.log(editedBookshelf) ; res.json(editedBookshelf)})
       .catch(error => res.json(error));
   
   })

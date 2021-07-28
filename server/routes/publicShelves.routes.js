@@ -5,17 +5,33 @@ const {PublicShelf} = require("../models/PublicBookshelf.model")
 
 const User = require('../models/User.model')
 
-const {whatShelf} = require("../middleware/movingHelpers")
-const {staticToStatic} = require("../middleware/movingHelpers")
-const {staticToDynamic} = require("../middleware/movingHelpers")
-const {dynamicToStatic} = require("../middleware/movingHelpers")
-const {dynamicToDynamic} = require("../middleware/movingHelpers")
-const {addToDynamic} = require("../middleware/movingHelpers")
-const {addToStatic} = require("../middleware/movingHelpers")
-
-
-
 // PATH /api/public-shelves
+
+
+router.post("/test/simple", (req, res) => {
+  const {bookshelfId} = req.body
+
+
+  const basicShelves = [
+    {name: "Currently reading", publicBookshelf: bookshelfId}, 
+    {name: "Want to read", publicBookshelf: bookshelfId}, 
+    {name: "Read", publicBookshelf: bookshelfId}]
+    
+    
+  PublicShelf.insertMany(basicShelves)
+  .then(createdShelves => {
+    PublicBookshelf.findById(bookshelfId)
+    .then(bookshelf => {
+      bookshelf.shelves = [...bookshelf.shelves, ...createdShelves]
+      return bookshelf.save()
+    })
+    .then(bs => res.json(bs))
+    .catch(err => console.log(err))
+
+  })
+  .catch(err => console.log(err))
+
+})
 
 
 
@@ -35,25 +51,23 @@ router.post("/create", (req, res) => {
       publicBookshelf
     })
     .then(createdShelf => {
-      PublicBookshelf.findByIdAndUpdate(publicBookshelf, {$addToSet: {dynamicShelves: createdShelf._id}}, {new:true})
+      PublicBookshelf.findByIdAndUpdate(publicBookshelf, {$addToSet: {shelves: createdShelf._id}}, {new:true})
       .then(user => res.json(user))
     })
 
 });
 
+
+
+
+
+
+
+
 //ADD EBOOK TO SHELF
 
-router.put("/static/addBook", (req, res) => {
-  const {bookshelfId, shelf, book} = req.body
-  
-  PublicBookshelf.findByIdAndUpdate(bookshelfId, {$addToSet: {[shelf]: book}}, {new:true})
-  .then(bookshelf => res.json(bookshelf))
-  .catch(err => console.log(err))
-
-})
-
-router.put("/dynamic/addBook", (req, res) => {
-  const {bookshelfId, shelf, book} = req.body
+router.put("/addBook", (req, res) => {
+  const {shelf, book} = req.body
 
   PublicShelf.findByIdAndUpdate(shelf, {$addToSet: {books: book}}, {new:true})
   .then(shelf => res.json(shelf))
@@ -66,28 +80,23 @@ router.put("/dynamic/addBook", (req, res) => {
 // MOVE BOOK FROM SHELF TO SHELF
 
 router.put("/moveBook", (req, res) => {
-  const {bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo} = req.body
-  let result;
+  const {shelfFrom, shelfTo, book} = req.body
 
-  switch(whatShelf(shelfFrom) | whatShelf(shelfTo)) {
-    case "static" | "static":
-      result = staticToStatic({bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo})
-      break;
-    case "static" | "dynamic":
-      result = staticToDynamic({bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo}, "public")
-      break;
-    case "dynamic" | "static":
-      result = dynamicToStatic({bookshelfId, shelfFrom, shelfTo, booksFrom, booksTo}, "public")
-      break;
-    case "dynamic" | "dynamic":
-      result = dynamicToDynamic({shelfFrom, shelfTo, booksFrom, booksTo}, "public")
-      break;
-    default: 
-      result = res.status(400).json({ message: 'At least one of the shelves does not exist' });
-
-  }
-
-  return result
+  PublicShelf.findById(shelfFrom).then(shelf => {
+    console.log("shelf: ", shelf)
+    shelf.books = shelf.books.filter((eachBook) => eachBook._id !== book._id)
+    return shelf.save()
+  })
+  .then(changedShelf => {
+    console.log("changedShelf: ", changedShelf)
+    PublicShelf.findById(shelfTo).then(shelf => {
+      shelf.books.push(book)
+      return shelf.save()
+    })
+    .then(shelfToUpdated => res.json(shelfToUpdated))
+    .catch(err => console.log(err))
+  })
+  .catch(err => console.log(err))
 
 })
 
@@ -104,32 +113,19 @@ router.get("/:shelfId/edit", (req, res) => {
 });
   
 
-
+//edit name
 router.put("/:shelf/edit", (req, res) => {
     const { shelf } = req.params;
-    const {bookshelfId, name, books} = req.body
+    const {name} = req.body
 
 
-    if(shelf === "currentlyReading" || shelf === "wantToRead" || shelf === "read") {
-
-      PublicBookshelf.findByIdAndUpdate(bookshelfId, {shelf: books}, {new: true}).populate('dynamicShelves')
-      .then(editedShelf => res.json(editedShelf))
-
-    } else if (!mongoose.Types.ObjectId.isValid(shelf)) {
-
+    if(!mongoose.Types.ObjectId.isValid(shelf)) {
       res.status(400).json({ message: 'Specified shelf does not exist' });
       return;
-
-    } else {
-  
-      PublicShelf.findByIdAndUpdate(shelf, {
-        name,
-        books, 
-      }, {new: true})
-      .populate('books')
-      .then(editedShelf => res.json(editedShelf))
-
     }
+
+    PublicShelf.findByIdAndUpdate(shelf, {"name": name}, {new: true})
+    .then(editedShelf => res.json(editedShelf))
 
 });
   
@@ -155,25 +151,15 @@ router.delete("/:shelfId/delete", (req, res) => {
 
 
 // RETURN SHELF DETAILS
-router.post("/:shelf", (req, res) => {
-    const {shelf} = req.params
-    const {bookshelfId} = req.body
+router.get("/:shelfId", (req, res) => {
+    const {shelfId} = req.params
 
-    if(shelf === "currentlyReading" || shelf === "wantToRead" || shelf === "read") {
-        return PublicBookshelf.findById(bookshelfId)
-        .then(bookshelf => res.json(bookshelf[shelf]))
-        .catch(err => console.log(err))
-    }
+    if (!mongoose.Types.ObjectId.isValid(shelfId)) {return res.status(400).json({ message: 'Specified shelf does not exist' })}
 
-    else if (!mongoose.Types.ObjectId.isValid(shelf)) {return res.status(400).json({ message: 'Specified shelf does not exist' })}
 
-    else {
-        return PublicShelf.findById(shelf)
-        .populate("books")
-        .then(foundShelf => res.json(foundShelf.books))
-        .catch(err => console.log(err))
-    }
-
+    PublicShelf.findById(shelfId)
+      .then(foundShelf => res.json(foundShelf))
+      .catch(err => console.log(err))
 
 });
 

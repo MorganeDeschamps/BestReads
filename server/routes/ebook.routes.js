@@ -1,28 +1,14 @@
 const router = require("express").Router();
 const mongoose = require('mongoose');
-const {PrivateShelf, PrivateBookshelf} = require("../models/PrivateBookshelf.model")
-const {PublicShelf, PublicBookshelf} = require("../models/PublicBookshelf.model")
+const {PrivateShelf} = require("../models/PrivateBookshelf.model")
 const Ebook = require("../models/Ebook.model");
-
-
-
-
-// SHOW ALL EBOOKS
-
-router.get('/', (req, res)=>{
-  Ebook.find()
-  .populate('owner')
-  .then(allEbooks => res.json(allEbooks))
-  .catch(err => res.json)  
-})
 
 
 
 //CREATE EBOOK ALL SHELVES
 router.post("/create", (req, res) => {
   const { title, author, coverUrl, ebookUrl, owner} = req.body
-  const bookshelf = req.body.bookshelf
-  const shelf = req.body.shelf
+  const shelfId = req.body.shelf
 
   Ebook.create({
     title,
@@ -33,17 +19,11 @@ router.post("/create", (req, res) => {
   })
   .then(createdEbook => {
 
-    if(shelf === "staticShelf") {
-     PrivateBookshelf.findByIdAndUpdate(bookshelf._id, {$addToSet: {staticShelf: createdEbook._id}}, {new:true})
-     .then(bookshelf => res.json(bookshelf))
-     .catch(err => console.log(err))
-    }
-
-    else{
-     PrivateShelf.findByIdAndUpdate(shelf._id, {$addToSet: {ebooks: createdEbook._id}}, {new:true})
-     .then(shelf => res.json(shelf))
-     .catch(err => console.log(err))
-    } 
+    if (!mongoose.Types.ObjectId.isValid(shelfId)) {res.status(400).json({ message: 'Specified shelf does not exist' }); return }
+   
+    PrivateShelf.findByIdAndUpdate(shelfId, {$addToSet: {ebooks: createdEbook._id}}, {new:true})
+    .then(shelf => res.json(shelf))
+    .catch(err => console.log(err))
   
   }).catch(err => console.log(err))
 
@@ -57,7 +37,6 @@ router.post("/create", (req, res) => {
 
 
 //GET ONE EBOOK BY ID
-
 router.get("/:ebookId", (req, res) => {
   const {ebookId} = req.params
 
@@ -72,11 +51,6 @@ router.get("/:ebookId", (req, res) => {
 
 
 //EDIT EBOOK
-router.get("/:ebookId/edit", (req, res) => {
-  res.json("this is my editEbook page. ")
-})
-
-
 router.put("/:ebookId/edit", (req, res) => {
   const { ebookId} = req.params;
   const { title, author, coverUrl, ebookUrl, owner } = req.body
@@ -108,13 +82,6 @@ router.delete("/:ebookId/delete", (req, res) => {
 
 })
 
-
-
-//TESTING
-router.get("/test/:ebookId", (req, res) => {
-  res.json(req.params.ebookId
-  );
-});
 
 
 

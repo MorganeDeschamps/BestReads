@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
-import * as CONSTS from '../../utils/consts';
-import * as PATHS from '../../utils/paths';
-
 import {createEbook} from "../../services/ebook.services"
-import {widgetEbooks} from "../../services/widget.services"
-import axios from 'axios';
 
 
 function CreateEbook(props) {
-    //form needs { title, author, coverUrl, ebookUrl, owner, bookshelfId, shelf} 
+	//form needs  { title, author, coverUrl, ebookUrl, owner, shelfId}
 	const user = props.user
+	const shelf = user.privateBookshelf.shelves.find(shelf => shelf.name === "Main shelf")
 
 	const initialState = {
 		title: "",
@@ -21,8 +15,7 @@ function CreateEbook(props) {
 		coverUrl: "",
         ebookUrl: "", 
 		owner: user._id,
-		bookshelf: user.privateBookshelf, 
-		shelf: "staticShelf"
+		shelf: shelf._id
 	};
 
 	const [formData, setFormData] = useState(initialState);
@@ -54,13 +47,15 @@ function CreateEbook(props) {
 	}
 
  	function widgetEbooks(event) {
-
-    window.cloudinary.createUploadWidget({ 
-    cloudName: "best-reads", 
-    uploadPreset: "bestReads-ebooks" 
-    }, (error, result) => {getEbookUrl(result)}).open()
+		window.cloudinary.createUploadWidget({ 
+			 cloudName: "best-reads", 
+			 uploadPreset: "bestReads-ebooks" 
+		}, (error, result) => {getEbookUrl(result)}).open()
 
 	}
+
+
+
 
 	function notify(status, message) {
 		if(status === "success") toast.warning(message, {
@@ -82,6 +77,8 @@ function CreateEbook(props) {
 			progress: undefined,
 		})
 	}
+
+
 
 	function success() {
 		setFormData(initialState)
@@ -137,8 +134,7 @@ function CreateEbook(props) {
 				<br /><br />
 				<label htmlFor="input-bookshelf">Add to: </label>
 				<select onChange={(event) => setFormData({...formData, shelf: event.target.value})}>
-					  <option name="shelf" value="staticShelf">Main shelf</option>
-	                  {user.privateBookshelf.dynamicShelves.map(shelf => <option name="shelf" value={shelf._id}>{shelf.name}</option>)}
+	                  {user.privateBookshelf.shelves.map(shelf => <option name="shelf" value={shelf._id}>{shelf.name}</option>)}
 				</select>
  
 				<br /><br />
@@ -146,9 +142,6 @@ function CreateEbook(props) {
 					Submit
 				</button>
 			</form>
-
-				<button onClick={event => notify("success", "Your Ebook was added to your bookshelf!")}> Click! </button>
-
 		</div>
 	);
 }

@@ -34,68 +34,59 @@ const privateService = axios.create({
 
 //PUBLIC
 
-export function saveToPublic(bookshelfId, shelf, book) {
-	const info = {bookshelfId: bookshelfId, shelf: shelf, book: book}
+export function saveToPublic(shelf, book) {
+	const info = {shelf: shelf, book: book}
 
-	if (shelf === "currentlyReading" || shelf === "wantToRead" || shelf === "read") {
-		publicService.put(`/static/addBook`, info)
-		.then(successStatus)
-		.catch(internalServerError)
-	} else {
-		publicService.put(`/dynamic/addBook`, info)
-		.then(successStatus)
-		.catch(internalServerError)
-	}
-	
+	return publicService.put(`addBook`, info)
+	.then(successStatus)
+	.catch(internalServerError)
+
 }
 
 export function movePublic(info) {
-	publicService.put(`/moveBook`, info)
+	//const {shelfFrom, shelfTo, book} = req.body
+	return publicService.put(`/moveBook`, info)
+	.then(successStatus)
+	.catch(internalServerError)
+
+
+}
+
+export function getPublicShelf(shelfId) {
+	return publicService
+	.get(`/${shelfId}`)
 	.then(successStatus)
 	.catch(internalServerError)
 }
 
 
 export function newPublicShelf(form) {
-	//form needs {name, ebooks}
+	//form needs {name, ebooks, publicBookshelf}
 	return publicService
 		.post(`/create`, form)
 		.then(successStatus)
 		.catch(internalServerError);
 }
 
-export function editPublicShelf(shelfId, form) {
-	//form needs {name, ebooks}
+export function editPublicShelf(shelfId, name) {
 	return publicService
-		.put(`/${shelfId}/edit`, form)
+		.put(`/${shelfId}/edit`, name)
 		.then(successStatus)
 		.catch(internalServerError);
 }
 
 
+
+
+
+
+
 // PRIVATE
-export function getAllPrivateShelves(bookshelfId) {
-	return axios
-	.get(`${process.env.REACT_APP_SERVER_URL}/private-bookshelf/${bookshelfId}`)
+export function movePrivate(info) {
+	//form needs {shelfFrom, shelfTo, book} 
+	return privateService.put(`/moveBook`, info)
 	.then(successStatus)
 	.catch(internalServerError)
-}
-
-export function getListOfShelves(bsId) {
-	let result;
-	getAllPrivateShelves(bsId)
-	.then(result => {
-		console.log("PrivateBookshelf: ", result.data)
-		let dynamicShelves = result.data.dynamicShelves;
-		let staticShelf = result.data.staticShelves;
-
-		if (dynamicShelves.length === 0 ) {result = staticShelf}
-		else { result = [...dynamicShelves, staticShelf]}
-
-	}).catch(err => console.log(err))
-
-	console.log("result: ", result)
-	return result;
 }
 
 
@@ -106,27 +97,19 @@ export function getPrivateShelf(shelfId) {
 	.catch(internalServerError)
 }
 
-
 export function newPrivateShelf(form) {
-	//form needs {name, ebooks}
+	//form needs {name, privateBookshelf}
 	return privateService
-		.post(`/create`, form)
-		.then(successStatus)
-		.catch(internalServerError);
-}
-
-export function editPrivateShelf(shelfId, form) {
-	//form needs {name, ebooks}
-	return privateService
-		.put(`/${shelfId}/edit`, form)
-		.then(successStatus)
-		.catch(internalServerError);
-}
-
-
-export function movePrivate(info) {
-	privateService.put(`/moveBook`, info)
+	.post(`/create`, form)
 	.then(successStatus)
-	.catch(internalServerError)
+	.catch(internalServerError);
+}
+
+export function editPrivateShelf(shelfId, name) {
+	//form needs {name}
+	return privateService
+	.put(`/${shelfId}/edit`, name)
+	.then(successStatus)
+	.catch(internalServerError);
 }
 

@@ -20,7 +20,7 @@ const service = axios.create({
 });
 
 
-//body needs { title, author, coverUrl, ebookUrl, owner, bookshelfId, shelf} 
+//form needs  { title, author, coverUrl, ebookUrl, owner, shelfId}
 export function createEbook(ebookDetails) {
     return service.post("/create", ebookDetails)
     .then(successStatus)

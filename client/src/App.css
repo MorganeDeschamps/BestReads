@@ -174,3 +174,8 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+
+.Toastify__toast--warning {
+  color: black
+}

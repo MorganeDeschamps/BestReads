@@ -62,15 +62,30 @@ function CreateEbook(props) {
 
 	}
 
-	const notify = () =>  {
-		toast.success("Success Notification !", {
-        position: toast.POSITION.TOP_CENTER
-      });
+	function notify(status, message) {
+		if(status === "success") toast.warning(message, {
+			position: "top-right",
+			autoClose: 3000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		})
+		else toast.error(message, {
+			position: "top-right",
+			autoClose: 3000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+		})
 	}
 
 	function success() {
 		setFormData(initialState)
-		notify()
+		notify("success", "Your Ebook was added to your bookshelf!")
 	}
 	
 
@@ -81,7 +96,7 @@ function CreateEbook(props) {
 
 	function handleSubmit(event) {
 		event.preventDefault()
-		createEbook(formData).then(res => res.status === true ? success() : console.log("aaah") )
+		createEbook(formData).then(res => res.status === true ? success() : notify("error", "There was an issue creating your Ebook") )
 	}
 
 
@@ -120,19 +135,11 @@ function CreateEbook(props) {
 				<input type="button" className="cloudinary-button" onClick={widgetEbooks} value="Add an ebook file"/>
 
 				<br /><br />
-				{(user.privateBookshelf.dynamicShelves.length > 0) && 
-				<>
 				<label htmlFor="input-bookshelf">Add to: </label>
-
-				<input list="bookshelves" onChange={handleChange}/>
-				<datalist id="bookshelves">
-					<option name="shelf" disabled>---Shelf---</option>
-					<option name="shelf" value="staticShelf" label="Main shelf"></option>
-    				{user.privateBookshelf.dynamicShelves.map((eachShelf) => <option name="shelf" value={eachShelf} label={eachShelf.name}/>
-					)}
-  				</datalist>
-				</>
-				}
+				<select onChange={(event) => setFormData({...formData, shelf: event.target.value})}>
+					  <option name="shelf" value="staticShelf">Main shelf</option>
+	                  {user.privateBookshelf.dynamicShelves.map(shelf => <option name="shelf" value={shelf._id}>{shelf.name}</option>)}
+				</select>
  
 				<br /><br />
 				<button className='button__submit' type='submit'>
@@ -140,7 +147,7 @@ function CreateEbook(props) {
 				</button>
 			</form>
 
-				<button onClick={notify}> Click! </button>
+				<button onClick={event => notify("success", "Your Ebook was added to your bookshelf!")}> Click! </button>
 
 		</div>
 	);

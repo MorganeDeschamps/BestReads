@@ -1,6 +1,7 @@
 import * as apiSearches from "../../services/api.services"
 import { useEffect, useState } from 'react';
 import SearchResults from "./SearchResults.page";
+import Loading from "../../components/Loading/index"
 
 
 function Search(props) {
@@ -8,6 +9,7 @@ function Search(props) {
     const emptySearch = {q:"", title:"", author:"", subject:"", place:"", person:"", language:"", publisher:""}
     const [searchState, setSearch] = useState(emptySearch)
     const [toggle, setToggle] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [results, setResults] = useState([])
 
@@ -38,8 +40,9 @@ function Search(props) {
     function handleSubmit(event) {
         console.log("test")
         event.preventDefault()
+        setLoading(true)
         apiSearches.mainSearch(searchState)
-        .then(res => setResults(filter(res.data.docs)))
+        .then(res => {setResults(filter(res.data.docs)) ; setLoading(false)})
         .catch(err => console.log(err))
     }
 
@@ -83,9 +86,12 @@ function Search(props) {
         </div> 
       }
 
-      {(results && results.length > 1) && 
+{/*       {(results && results.length > 1) && 
         <SearchResults results={results} user={props.user}/>
       }
+ */}
+
+        {loading ? <Loading /> : <SearchResults results={results} user={props.user}/> }
 
       </div>
   );

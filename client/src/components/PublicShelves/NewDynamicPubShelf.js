@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import * as shelfMethods from '../../services/shelves.services'
+import {newPublicShelf} from '../../services/shelves.services'
 
 
 // CREATE NEW DYNAMIC SHELF
 
-function CreatePrivateShelf(props) {
-	const {appendToShelf} = props
-	console.log('this is the data', appendToShelf)
+function CreatePublicShelf(props) {
+	const {appendToPubShelf, updateUser} = props
+	console.log('this is the data', appendToPubShelf)
     
 	const initialFormState = {
 		name: "",
-		ebooks: [],
+		books: [],
+		publicBookshelf: ""
 	};
 
 	const [formState, setFormState] = useState(initialFormState);
@@ -19,18 +20,17 @@ function CreatePrivateShelf(props) {
 
 	function handleChange(event) {
         const {name, value} = event.target;
-        setFormState({...formState, [name]: value})
+        setFormState({...formState, [name]: value, publicBookshelf: appendToPubShelf._id})
 
 	}
 
-	const newShelf = appendToShelf.dynamicShelves
 
 	function handleSubmit(event) {
         event.preventDefault()
-		setFormState(newShelf)
-		console.log(newShelf)
-	/* 	.then(shelf => setFormState(initialFormState))
-		.catch(err => console.log(err)) */
+		//setFormState(newShelf)
+		return newPublicShelf(formState)
+		.then(shelf => {appendToPubShelf.dynamicShelves = {...appendToPubShelf.dynamicShelves, shelf}; updateUser()})
+		.catch(err => console.log(err))
         
 	}
 
@@ -50,4 +50,4 @@ function CreatePrivateShelf(props) {
 	);
 }
 
-export default CreatePrivateShelf;
+export default CreatePublicShelf;

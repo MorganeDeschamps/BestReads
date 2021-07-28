@@ -8,17 +8,12 @@ function PublicBookShelf(props) {
     console.log(publicShelf)
 
 
-    const [bookshelfState, setState] = useState({})
+    const [bookshelfState, setState] = useState(publicShelf)
 
     useEffect(() => {
         setState(publicShelf)
-    }, [])
+    }, [publicShelf])
 
-    // map through book arrays that are there and show what is inside, give the option to add books and search
-
-/*     function moveBook() {
-        bookshelfMethods()
-    } */
 
     return (
    	 
@@ -65,22 +60,27 @@ function PublicBookShelf(props) {
                 </div>
               )
             })}
+
+            {bookshelfState.dynamicShelves && bookshelfState.dynamicShelves.length > 0 && bookshelfState.dynamicShelves.map(shelf => {
+              return(
+                <div key={shelf._id}>
+                  <h3>{shelf.name}</h3>
+                  {shelf.books && shelf.books.map(eachBook => {
+                  return(
+                    <div key={eachBook._id}>
+                      <img src={eachBook.coverUrl} alt="BookImg" />
+                      <Link to={`/`}>{eachBook.title}</Link>
+                    </div>
+                )
+            })}
+                </div>
+              )
+            })}
+
+
          {/*    <button className = "info-button" onClick = {showForm}>Add a new shelf</button> */}
 
           </div>
-
-{/*         <div className="list-books-content">
-            <div>
-              <CurrentlyReading changeShelf={changeShelf} books={books} />
-            </div>
-            <div>
-              <WantToRead changeShelf={changeShelf} books={books} />
-            </div>
-            <div>
-              <Read changeShelf={changeShelf} books={books} />
-            </div>
-
-          </div> */}
 
         </div>
 

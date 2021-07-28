@@ -6,14 +6,12 @@ import CreatePrivateShelf from '../../components/PrivateShelves/NewDynamicShelf'
 function PrivateBookShelf(props) {
 
     const { privateShelf } = props
-    console.log('this is what we get through props', privateShelf)
 
 
     const [bookshelfState, setState] = useState(privateShelf)
 
     useEffect(() => {
         setState(privateShelf)
-        console.log('this is the current bookshelf state', bookshelfState)
     }, [privateShelf])
 
 
@@ -25,14 +23,14 @@ function PrivateBookShelf(props) {
 
 
             <h4>All Ebooks</h4>
+            <Link to="/ebook/create">Add an ebook</Link>
              {bookshelfState.staticShelf && bookshelfState.staticShelf.map(eachBook => {
+               console.log('this is the current book', eachBook)
               return(
                 <div key={eachBook._id}>
                   <img src={eachBook.coverUrl} alt="BookImg" />
+                  <h2>{eachBook.title}</h2>
                   <Link to={`/`}>{eachBook.title}</Link>
-                  <div className="open-search">
-                  <Link to="/ebook/create">Add an ebook</Link>
-                  </div>
                 </div>
               )
             })}
@@ -45,9 +43,6 @@ function PrivateBookShelf(props) {
                     <div key={eachBook._id}>
                       <img src={eachBook.coverUrl} alt="BookImg" />
                       <Link to={`/`}>{eachBook.title}</Link>
-                      <div className="open-search">
-                      <Link to="/ebook/create">Add an ebook</Link>
-                      </div>
                     </div>
                 )
             })}
@@ -55,22 +50,7 @@ function PrivateBookShelf(props) {
               )
             })}
 
-         {/*    <button className = "info-button" onClick = {showForm}>Add a new shelf</button> */}
-
           </div>
-
-{/*         <div className="list-books-content">
-            <div>
-              <CurrentlyReading changeShelf={changeShelf} books={books} />
-            </div>
-            <div>
-              <WantToRead changeShelf={changeShelf} books={books} />
-            </div>
-            <div>
-              <Read changeShelf={changeShelf} books={books} />
-            </div>
-
-          </div> */}
 
         </div>
 

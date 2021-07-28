@@ -33,6 +33,30 @@ const privateService = axios.create({
 
 //PUBLIC
 
+export function getPublicShelf(shelfId) {
+	return publicService
+	.get(`/${shelfId}`)
+	.then(successStatus)
+	.catch(internalServerError)
+}
+
+
+export function newPublicShelf(form) {
+	//form needs {name, ebooks}
+	return publicService
+		.post(`/create`, form)
+		.then(successStatus)
+		.catch(internalServerError);
+}
+
+export function editPublicShelf(shelfId, form) {
+	//form needs {name, ebooks}
+	return publicService
+		.put(`/${shelfId}/edit`, form)
+		.then(successStatus)
+		.catch(internalServerError);
+}
+
 
 // PRIVATE
 export function getAllPrivateShelves(bookshelfId) {
@@ -83,4 +107,5 @@ export function editPrivateShelf(shelfId, form) {
 		.then(successStatus)
 		.catch(internalServerError);
 }
+
 

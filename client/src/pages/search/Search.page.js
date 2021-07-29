@@ -2,7 +2,6 @@ import * as apiSearches from "../../services/api.services"
 import { useEffect, useState } from 'react';
 import SearchResults from "./SearchResults.page";
 import Loading from "../../components/Loading/index"
-import styles from "../../utils/Forms.module.css"
 
 
 function Search(props) {
@@ -53,74 +52,74 @@ function Search(props) {
 
   return (
 
-    <div className={styles.searchPageMain}>
-      <div className={styles.searchPage}>
+    <div className="searchPageMain">
+      <div className="searchPage">
 
-        <form onSubmit={handleSubmit} className={styles.searchForm}>
+        <form onSubmit={handleSubmit} className="searchForm">
             <label for="searchbar-label"></label>
-            <input className={styles.searchbarInput} type="search" pattern=".*\S.*" required onChange={handleChange}  name="q" value={searchState.q} />
-            <span className={styles.caret}></span>
+            <input className="searchbarInput" type="search" pattern=".*\S.*" required onChange={handleChange}  name="q" value={searchState.q} />
+            <span className="caret"></span>
         </form> 
 
 
 
 
 
-{/*         <form onSubmit={handleSubmit} className={styles.searchForm">
-          <div className={styles.inputsSearch">
+{/*         <form onSubmit={handleSubmit} className="searchForm">
+          <div className="inputsSearch">
             <label htmlFor="main"></label>
             <input type="text" onChange={handleChange} name="q" value=    {searchState.q} placeholder="Search books, authors or themes" />
           </div>
-          <div className={styles.inputsSearch">
+          <div className="inputsSearch">
             <button type="submit">Search</button>
           </div>
         </form> */}
 
 
-        <div className={styles.searchFormContainer}>
+        <div className="searchFormContainer">
           
           <a href="#" onClick={e => setToggle(!toggle)} > Advanced search</a>
           {(toggle) && 
           <div>
             
-            <form onSubmit={e => {handleSubmit(e) ; setToggle(!toggle)}} className={styles.advLoginForm}>
+            <form onSubmit={e => {handleSubmit(e) ; setToggle(!toggle)}} className="advLoginForm">
 
-              <div className={styles.inputsSearch}> 
+              <div className="inputsSearch"> 
                 <label htmlFor="title">Title </label>
                 <input type="text" onChange={handleChange} name="title" value=    {searchState.title} />
               </div>
 
-              <div className={styles.inputsSearch}>
+              <div className="inputsSearch">
                 <label htmlFor="title">Author </label>
                 <input type="text" onChange={handleChange} name="author"  value=  {searchState.author} />
               </div>
 
-              <div className={styles.inputsSearch}>
+              <div className="inputsSearch">
                 <label htmlFor="title">Subject </label>
                 <input type="text" onChange={handleChange} name="subject"   value=  {searchState.subject} />
               </div>
 
-              <div className={styles.inputsSearch}>
+              <div className="inputsSearch">
                 <label htmlFor="title">Place </label>
                 <input type="text" onChange={handleChange} name="place" value=    {searchState.place} />
               </div>
 
-              <div className={styles.inputsSearch}>
+              <div className="inputsSearch">
                 <label htmlFor="title">Person </label>
                 <input type="text" onChange={handleChange} name="person"  value=  {searchState.person} />
               </div>
 
-              <div className={styles.inputsSearch}>
+              <div className="inputsSearch">
                 <label htmlFor="title">Language </label>
                 <input type="text" onChange={handleChange} name="language"  value=  {searchState.language} />
               </div>
 
-              <div className={styles.inputsSearch}>
+              <div className="inputsSearch">
                 <label htmlFor="title">Publisher </label>
                 <input type="text" onChange={handleChange} name="publisher"   value=  {searchState.publisher} />
               </div>
 
-              <div className={styles.inputsSearch}>
+              <div className="inputsSearch">
                 <button type="submit">Search</button>
               </div>
             </form>

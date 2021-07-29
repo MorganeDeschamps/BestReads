@@ -67,7 +67,7 @@ function NewReview(props) {
 			<div class="container p-3">
   				<form onSubmit={handleSubmit} class="row">
  
-      				<div class="stars text-center">
+      				<div class="stars text-reviewCenter">
       					<div class="col-md-12">
           					<div class="form-group">
  

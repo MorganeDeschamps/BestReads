@@ -21,6 +21,7 @@ import NewReview from './components/Reviews/NewReview';
 
 
 
+
 function App() {
  
 /*  	let token = localStorage.getItem(CONSTS.ACCESS_TOKEN) || null
@@ -75,7 +76,7 @@ function App() {
 		setUser(user);
 	};
  
-	console.log("user: ", user)
+	console.log("user from app: ", user)
 
 	return (
 		<div className='App'>

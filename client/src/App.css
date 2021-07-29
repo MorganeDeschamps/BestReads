@@ -69,7 +69,7 @@ html, body, .root {
 
 /* search page */
 
-.search-books-bar {
+ .search-books-bar {
   position: fixed;
   width: 100%;
   top: 0;
@@ -78,6 +78,7 @@ html, body, .root {
   display: flex;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
 }
+
 .search-books-input-wrapper {
   flex: 1;
   background: #e9e;
@@ -112,7 +113,7 @@ html, body, .root {
 
 .books-grid {
   list-style-type: none;
-  padding: 0;
+  padding-top: 20px;
   margin: 0;
 
   display: flex;
@@ -130,6 +131,8 @@ html, body, .root {
 .book-title,
 .book-authors {
   font-size: 0.8em;
+  color: black;
+  width: 8em
 }
 .book-title {
   margin-top: 10px;
@@ -152,7 +155,7 @@ html, body, .root {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #79527f;
   background-image: url('./images/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -164,6 +167,10 @@ html, body, .root {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+  color: #79527f;
+  background-color: white;
+  font: inherit;
+  font-size: 0.8em;
 }
 
 /* book cover */

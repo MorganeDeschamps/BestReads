@@ -10,7 +10,7 @@ export default function SearchResults(props) {
 
 	const {user} = props
     const shelves = user.publicBookshelf.shelves
-	console.log('these are the shelves', user)
+	console.log("user from search results: ", props.user)
 
 	function style(cover) {
 		return {

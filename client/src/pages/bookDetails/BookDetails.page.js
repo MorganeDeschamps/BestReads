@@ -15,8 +15,27 @@ function BookDetails(props){
     const [reviewsState, setReviews] = useState([])
 
 
+
+
+    function filter(book) {
+      let result = {
+          author: book.author_name,
+          title: book.title,
+          _id: book.key.replace("/works/", ""),
+          olLink: `https://openlibrary.org${book.key}`
+      }
+
+      if (book.cover_edition_key) result.coverUrl = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`;
+
+      //console.log("result: ", result)
+      return result 
+
+    }
+
+
+
     useEffect(() => {
-        searchOneWork(bookId).then(res => setBookState(res.data.docs[0]));
+        searchOneWork(bookId).then(res => setBookState(filter(res.data.docs[0])));
         allReviews(bookId).then(res => setReviews(res.data))
     }, [bookId])
 
@@ -24,7 +43,7 @@ function BookDetails(props){
             <div className="page-main">
                 <h1>{bookState.title}</h1>
                 <img src={bookState.coverUrl} alt="" />
-                <a href={bookState.olLink}>Go to Open Library's page</a>
+                <a href={bookState.olLink} target="blank" >Go to Open Library's page</a>
                 <NewReview user={user} bookId={bookId} />
                 
                 {reviewsState.map(eachReview => {

@@ -51,12 +51,38 @@ function NewReview(props) {
 	//console.log("user: ", props.user ? props.user._id : "nope")
 	//{setFormState({...formState, owner: props.user._id})}
 
+	return (
 
+		<div>
+			<h1>Review this book: </h1>
+			<form onSubmit={handleSubmit} className="row">
+				<section id="like" class="rating">
+			
+						  <input onClick={ratingSelect} type="radio" id="heart_5" name="like" value="5" />
+						  <label for="heart_5" title="Five">&#10084;</label>
+			
+						  <input onClick={ratingSelect} type="radio" id="heart_4" name="like" value="4" />
+						  <label for="heart_4" title="Four">&#10084;</label>
+			
+						  <input onClick={ratingSelect} type="radio" id="heart_3" name="like" value="3" />
+						  <label for="heart_3" title="Three">&#10084;</label>
+			
+						  <input onClick={ratingSelect} type="radio" id="heart_2" name="like" value="2" />
+						  <label for="heart_2" title="Two">&#10084;</label>
+			
+						  <input onClick={ratingSelect} type="radio" id="heart_1" name="like" value="1" />
+						  <label for="heart_1" title="One">&#10084;</label>
+				</section>
+ 					<textarea value={formState.comment} name="comment" onChange={handleChange} required className="form-control" id="textarea" rows="4" placeholder="What did you think of this book?"></textarea>
+					<button type="submit" className="btn btn-primary">Review</button>
+			</form>
+		</div>
+	)
 
 
 
 	
-	return (
+/* 	return (
 		<div  class="review-div">
 			<h1>Book review: </h1>
 			<div className="container p-3">
@@ -95,7 +121,7 @@ function NewReview(props) {
   				</form>
 			</div>
 		</div>
-	);
+	); */
 } 
 
 export default NewReview;

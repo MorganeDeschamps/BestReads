@@ -25,7 +25,7 @@ function BookDetails(props){
           olLink: `https://openlibrary.org${book.key}`
       }
 
-      if (book.cover_edition_key) result.coverUrl = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`;
+      if (book.cover_edition_key) result.coverUrl = `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-L.jpg`;
 
       //console.log("result: ", result)
       return result 

@@ -93,11 +93,6 @@ function App() {
 				/>
 				<NormalRoute
 					exact
-					path={'/review/:bookId'}
-					component={NewReview}
-				/>
-				<NormalRoute
-					exact
 					path={'/auth/signup'}
 					user={user}
 					authenticate={authenticate}
@@ -115,6 +110,12 @@ function App() {
 					path={'/details/:bookId'}
 					user={user}
 					component={BookDetails}
+				/>
+				<ProtectedRoute
+					exact
+					path={'/review/:bookId'}
+					user={user}
+					component={NewReview}
 				/>
 				<ProtectedRoute
 					exact

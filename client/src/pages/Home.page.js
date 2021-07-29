@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import "../App.css"
+import '../utils/Forms.css'
+import '../components/Navbar/NavbarTest.css'
 
 function HomePage() {
   return (

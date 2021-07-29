@@ -92,4 +92,24 @@
     font-size: 0.8em;
   }
   
+
+ /*  UPLOAD/ CREATE EBOOK */
+
+ @media only screen and (max-width: 600px) {
+
+  .ebook-create-container{
+    position: absolute;
+    width: 100%;
+    top: 18%;
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .new-book-form{
+    
+  }
+
+ }
   

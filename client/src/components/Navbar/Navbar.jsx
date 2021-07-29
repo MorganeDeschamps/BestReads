@@ -49,8 +49,6 @@ const Navbar = (props) => {
 		<li><Link to='/user/publicBookshelf' activeClassName='authLink' onClick={toggle}>My public bookshelf</Link></li>
 		<li><Link to='/user/privateBookshelf' activeClassName='authLink' onClick={toggle}>My private bookshelf</Link></li>
 		<li><Link to='/ebook/create' activeClassName='authLink' onClick={toggle}>Create an eBook</Link></li>
-		<li><Link to="/auth/profile/user" activeClassName='authLink' onClick={toggle}>User page</Link></li>
-		<li><Link to="/review/test" activeClassName='authLink' onClick={toggle}>Review</Link></li>
 		<li><Link className='nav-logoutbtn' onClick={props.handleLogout}>Logout</Link></li>
 		</>
 	) : (

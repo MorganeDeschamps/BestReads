@@ -18,7 +18,7 @@ const Navbar = (props) => {
 	return (
 		<nav className="navBar">
 			<div className="header">
-				<Link to={'/'} className='homeLogo'>Best Reads</Link>
+				<Link to='/' className='homeLogo'>Best Reads</Link>
 			</div>
 			<button onClick={handleToggle}>			
   				{navbarOpen ? (
@@ -31,13 +31,15 @@ const Navbar = (props) => {
 			{props.user ? (
 				<>
 				<ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
-					<li><Link to={'/'} activeClassName='homebutton' onClick={() => closeMenu()}>Home</Link></li>
+					<li><Link to='/' activeClassName='homebutton' onClick={() => closeMenu()}>Home</Link></li>
 
-					<li><Link to={'/search'} activeClassName="active-link" onClick={() => closeMenu()}>Searchbook</Link></li>
+					<li><Link to='/search' activeClassName="active-link" onClick={() => closeMenu()}>Searchbook</Link></li>
 
-					<li><Link to={'/ebook/create'} activeClassName='authLink' onClick={() => closeMenu()}>Create an eBook</Link></li>
+					<li><Link to='/ebook/create' activeClassName='authLink' onClick={() => closeMenu()}>Create an eBook</Link></li>
 
-					<li><Link to={`/auth/profile/user`} activeClassName='authLink' onClick={() => closeMenu()}>User page</Link></li>
+					<li><Link to="/auth/profile/user" activeClassName='authLink' onClick={() => closeMenu()}>User page</Link></li>
+
+					<li><Link to="/review/test" activeClassName='authLink' onClick={() => closeMenu()}>Review</Link></li>
 
 					<li><Link className='nav-logoutbtn' onClick={props.handleLogout}>Logout</Link></li>
 				</ul>
@@ -45,10 +47,10 @@ const Navbar = (props) => {
 				) : (
 				<>
 				<ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
-					<li><Link to={'/'} 	className='authLink' onClick={() => closeMenu()}>Home</Link></li>
-					<li><Link to={'/auth/signup'} activeClassName='authLink' onClick={() => closeMenu()}>Signup</Link></li>
+					<li><Link to='/' 	className='authLink' onClick={() => closeMenu()}>Home</Link></li>
+					<li><Link to='/auth/signup' activeClassName='authLink' onClick={() => closeMenu()}>Signup</Link></li>
 
-					<li><Link to={'/auth/login'} className='authLink' onClick={() => closeMenu()}>Log In</Link></li>
+					<li><Link to='/auth/login' className='authLink' onClick={() => closeMenu()}>Log In</Link></li>
 
 				</ul>
 				</>

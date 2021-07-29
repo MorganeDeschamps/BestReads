@@ -43,17 +43,17 @@ function BookEbook(props) {
 
 	function eBookReader(book) {
 		if(book.ebookUrl) return (
-		<Link to={`/reader/${book._id}`} target="blank" class="link-tag" style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%"}}></Link>
+		<Link to={`/reader/${book._id}`} target="blank" className="link-tag" style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%"}}></Link>
 		)
 	}
 
 	function coverFlip(book) {
 
 		if(book.ebookUrl) {return (
-			<div class="flip-card">
-  				<div class="flip-card-inner">
+			<div className="flip-card">
+  				<div className="flip-card-inner">
 					<div className="book-cover flip-card-front" key={book.coverUrl} style={book.coverUrl ? style(book.coverUrl) : style(Default)} 		alt="book cover"></div>
-    				<div class="flip-card-back">
+    				<div className="flip-card-back">
 						{eBookReader(book)}
     				</div>
   				</div>

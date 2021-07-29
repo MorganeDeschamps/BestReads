@@ -18,13 +18,14 @@ function successStatus(res) {
 }
 
 const service = axios.create({
-	baseURL: `${process.env.REACT_APP_SERVER_URL}/review`
+	baseURL: `${process.env.REACT_APP_SERVER_URL}/reviews`
 });
 
 
-export function createReview(userId, bookId) {
+export function createReview(form) {
+	const {bookId, owner, comment, rating} = form
 
-    service.post(`/${bookId}/new-review`, {owner: userId, bookId: bookId})
+    return service.post(`/${bookId}/new-review`, {owner, comment, rating})
     .then(successStatus)
     .catch(internalServerError)
 
@@ -33,7 +34,7 @@ export function createReview(userId, bookId) {
 
 export function allReviews(bookId) {
 
-    service.get(`/${bookId}/reviews`)
+    return service.get(`/${bookId}/reviews`)
     .then(successStatus)
     .catch(internalServerError)
 

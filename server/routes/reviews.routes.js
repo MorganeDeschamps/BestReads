@@ -1,15 +1,21 @@
 const router = require("express").Router();
 const mongoose = require('mongoose');
-const Review = require('../models/Review.model')
+const Review = require('../models/Review.model');
+const User = require("../models/User.model");
 
 
 //ADD REVIEW
 router.post('/:bookId/new-review', (req, res) => {
     const {bookId} = req.params
-    const {owner, comment} = req.body
+    const {owner, comment, rating} = req.body
   
-    Review.create({owner, comment, bookId})
-    .then(newReview => res.json(newReview))
+    Review.create({owner, comment, bookId, rating})
+    .then(newReview => {
+        User.findById(owner).then(user => {
+            user.reviews.push(newReview)
+            return user.save()
+        }).then(user => res.json(newReview))
+    })
     .catch(err => res.json(err))
 })
   

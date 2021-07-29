@@ -1,7 +1,5 @@
-import BookEbook from "../../components/Book/BookEbook"
-import { saveToPublic } from "../../services/shelves.services"
 import Default from "../../images/default.jpeg"
-import { useRef } from "react"
+import DropdownButton from "../../components/DropdownButton/DropdownButton"
 
 export default function SearchResults(props) {
 
@@ -43,12 +41,7 @@ export default function SearchResults(props) {
                         <div key={eachDoc.id} className="book">
 	                        <div className="book-top">
 	                        { checkThumbnailExists(eachDoc) }
-	                            <div className="book-shelf-changer">
-	                                <select onChange={(event) => saveToPublic(event.target.value, eachDoc)}>
-	                                <option selected disabled>Save to: </option>
-	                            {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
-	                            </select>
-	                            </div>
+							<DropdownButton book={eachDoc} user={user} search={true} type={"book"} />
 	                        </div>
 	                        <div className="book-title" key={eachDoc.title}>{eachDoc.title}</div>
 	                        <div className="book-author" key={eachDoc.author}>{eachDoc.author}</div>

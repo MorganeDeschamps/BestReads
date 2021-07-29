@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom'
-import ListReviews from '../../components/Reviews/ListReviews';
 import NewReview from '../../components/Reviews/NewReview';
 import {mainSearch, searchOneWork} from '../../services/api.services'
 import {allReviews} from '../../services/review.services'
+import './BookDetails.css'
 const baseURL = `https://openlibrary.org`;
 
 
@@ -32,32 +32,31 @@ function BookDetails(props){
 
     }
 
-
-
     useEffect(() => {
         searchOneWork(bookId).then(res => setBookState(filter(res.data.docs[0])));
         allReviews(bookId).then(res => setReviews(res.data))
     }, [bookId])
 
     return (
-            <div className="page-main">
-                <h1>{bookState.title}</h1>
+        <div className="details-page-container">
+            <div className="details-main">
+                <h2>{bookState.title}</h2>
                 <img src={bookState.coverUrl} alt="" />
-                <a href={bookState.olLink} target="blank" >Go to Open Library's page</a>
+                <a href={bookState.olLink} target="blank" >See Open Library page</a>
                 <NewReview user={user} bookId={bookId} />
-                
+            </div>
+            <div className="details-reviews">
                 {reviewsState.map(eachReview => {
                     return(
-                        <div>
-                        <h1>{eachReview.rating} stars</h1>
-                        <p>{eachReview.comment}</p>
-                        </div>
+                    <div className="review-comments">
+                        <h6>{eachReview.rating} &#10084;</h6>
+                        <p>"{eachReview.comment}"</p>
+                    </div>
                     )
                 })}
-
-                
-                
             </div>
+        </div>
+
         )
 };
 

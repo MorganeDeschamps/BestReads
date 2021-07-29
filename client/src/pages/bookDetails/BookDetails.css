@@ -1,0 +1,62 @@
+
+
+
+@media only screen and (max-width: 600px) {
+    .details-main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-size: 0.8em;
+        font-family:'Roboto',sans-serif;
+        margin: 0 4em;
+    }
+
+    .details-main img {
+        height: 50vh;
+
+    }
+
+    .details-main a{
+        text-decoration: none;
+        margin-top: 1em;
+        color: black;
+        border: 2px solid black;
+        padding: 0.5em;
+    }
+
+    .details-main a:hover{
+        box-shadow: 2px 2px;;
+    }
+
+    .review-comments {
+        display: flex;
+        font-size: 1em;
+        margin: 1em 2em
+    }
+
+    .review-comments p{
+        font-size: 1em;
+        margin: 1em 2em
+    }
+
+    .review-comments h6{
+        font-size: 1em;
+        margin: 1em;
+        color: rgb(233, 54, 40)
+    }
+
+/*     .details-reviews {
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    .details-reviews h6{
+        font-size: 10em;
+
+    } */
+
+    /* new reviews */
+
+}

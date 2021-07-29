@@ -1,24 +1,17 @@
-body {
+  .reviewCenter{
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
 
-  
-  -webkit-font-smoothing: antialiased;
-}
 
 /* - - - - - RATINGS */
 .rating {
-  width: 200px;
-  height: 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: space-evenly;
-  margin: auto;
-  border-radius: 30px;
   background: #FFF;
-
   overflow: hidden;
-  unicode-bidi: bidi-override;
-  direction: rtl;
 }
 .rating:not(:checked) > input {
   display: none;
@@ -52,4 +45,29 @@ body {
 }
 #like > input:checked ~ label {
   color: rgb(233, 54, 40);
+}
+
+.review-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.review-section textarea{
+  text-align: center;
+}
+
+.review-section button{
+  color: black;
+  font-size: 1em;
+  background-color: transparent;
+  border: 2px black solid;
+  padding: 0.4em 1em;
+  margin-top: 0.5em;
+}
+
+
+.review-section button:hover{
+  box-shadow: 2px 2px;;
 }

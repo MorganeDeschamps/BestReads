@@ -15,6 +15,7 @@ import Test from './components/Test';
 import {displayUserPage} from "./services/auth"
 import BookDetails from './components/Book/BookDetails'
 import "./App.css";
+import HomePage from './pages/Home.page'
 
 
 
@@ -79,7 +80,7 @@ function App() {
 			<Navbar handleLogout={handleLogout} 
 			component ={Navbar}
 			user={user} />
-			<HomePage />
+			<HomePage component={HomePage}/>
 
 			<Switch>
 				<NormalRoute

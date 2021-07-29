@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { MdClose } from "react-icons/md"
 import { FiMenu } from "react-icons/fi"
-//import './Navbar.css';
+
 import "./NavbarTest.css"
 
 
@@ -34,8 +34,8 @@ const Navbar = (props) => {
 	return (
 
 		<nav>
-	<p>BestReads</p>
-	
+			<Link to='/' className='homeLogo'>Best Reads</Link>
+
 	<button onClick={toggle} id="burger" className={`burger ${burgerState}`}>
 		<div class="bar"></div>
 		<div class="bar"></div>
@@ -46,6 +46,8 @@ const Navbar = (props) => {
 		<>
 		<li><Link to='/' activeClassName='homebutton' onClick={toggle}>Home</Link></li>
 		<li><Link to='/search' activeClassName="active-link" onClick={toggle}>Searchbook</Link></li>
+		<li><Link to='/user/publicBookshelf' activeClassName='authLink' onClick={toggle}>My public bookshelf</Link></li>
+		<li><Link to='/user/privateBookshelf' activeClassName='authLink' onClick={toggle}>My private bookshelf</Link></li>
 		<li><Link to='/ebook/create' activeClassName='authLink' onClick={toggle}>Create an eBook</Link></li>
 		<li><Link to="/auth/profile/user" activeClassName='authLink' onClick={toggle}>User page</Link></li>
 		<li><Link to="/review/test" activeClassName='authLink' onClick={toggle}>Review</Link></li>

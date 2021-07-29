@@ -15,10 +15,11 @@ import Test from './components/Test';
 import {displayUserPage} from "./services/auth"
 import Reader from './pages/ebooks/Read.page';
 import "./App.css";
-import "./components/Navbar/Navbar.css"
 import HomePage from './pages/Home.page'
 import BookDetails from './pages/bookDetails/BookDetails.page';
 import NewReview from './components/Reviews/NewReview';
+import PrivateBookShelf from './pages/privateBS/PrivateBookshelf.page';
+import PublicBookShelf from './pages/publicBS/PublicBookShelf.page';
 
 
 
@@ -136,6 +137,20 @@ function App() {
 					exact
 					path={`/auth/profile/user`}
 					component={UserProfile}
+					user={user}
+					setUser={setUser}
+				/>
+				<ProtectedRoute
+					exact
+					path={`/user/privateBookshelf`}
+					component={PrivateBookShelf}
+					user={user}
+					setUser={setUser}
+				/>
+				<ProtectedRoute
+					exact
+					path={`/user/privateBookshelf`}
+					component={PublicBookShelf}
 					user={user}
 					setUser={setUser}
 				/>

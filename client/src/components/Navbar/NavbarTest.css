@@ -14,11 +14,12 @@ nav {
 	padding: 10px;
 }
 
-nav p {
+.homeLogo {
 	color: #79527f;
 	font-weight: bold;
 	margin: 5px;
 	letter-spacing: 1px;
+  text-decoration: none;
 }
 
 .burger {
@@ -61,8 +62,15 @@ ul {
 	padding: 0;
 	list-style-type: none;
 }
-
+/* 
 ul li {
+	margin: 0 10px;
+}
+
+
+
+ */
+ ul li {
 	margin: 0 10px;
 }
 
@@ -89,11 +97,14 @@ ul li a:hover::after {
 	transform: translateY(-15px);
 }
 
-@media screen and (max-width: 480px) {
-	header h1 {
-		font-size: 2em;
-	}
-	
+
+ul li a {
+	color: #2C405E;
+	position: relative;
+	text-decoration: none;
+}
+
+
 	.burger {
 		display: block;
 	}
@@ -112,10 +123,11 @@ ul li a:hover::after {
 		flex-direction: column;
 		text-align: center;
 		position: fixed;
-		top: 80px;
-		left: 10%;
+		top: 50px;
+		right: 0;
 		transform: translateX(120%);
 		width: 80%;
+		max-width: 300px;
 		transition: transform 0.3s ease-in;
 		z-index: 100;
 	}
@@ -127,4 +139,3 @@ ul li a:hover::after {
 	ul li {
 		margin: 15px;
 	}
-}

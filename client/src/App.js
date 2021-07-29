@@ -10,7 +10,6 @@ import ProtectedRoute from './routing-components/ProtectedRoute';
 import { getLoggedIn, logout, getUser } from './services/auth';
 import * as CONSTS from './utils/consts';
 import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
-import UserProfile from './pages/UserProfile.page';
 import Test from './components/Test';
 import {displayUserPage} from "./services/auth"
 import Reader from './pages/ebooks/Read.page';
@@ -18,8 +17,9 @@ import "./App.css";
 import HomePage from './pages/Home.page'
 import BookDetails from './pages/bookDetails/BookDetails.page';
 import NewReview from './components/Reviews/NewReview';
-import PrivateBookShelf from './pages/privateBS/PrivateBookshelf.page';
-import PublicBookShelf from './pages/publicBS/PublicBookShelf.page';
+import PrivateBookShelf from './pages/bookshelves/PrivateBookshelf.page';
+import PublicBookShelf from './pages/bookshelves/PublicBookShelf.page';
+
 
 
 
@@ -134,13 +134,6 @@ function App() {
 					path={'/search'}
 					component={Search}
 					user={user}
-				/>
-				<ProtectedRoute
-					exact
-					path={`/auth/profile/user`}
-					component={UserProfile}
-					user={user}
-					setUser={setUser}
 				/>
 				<ProtectedRoute
 					exact

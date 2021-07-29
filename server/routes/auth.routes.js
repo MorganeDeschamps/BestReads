@@ -30,6 +30,9 @@ router.get('/session', (req, res) => {
 		return res.json(null);
 	}
 
+	//publicBookshelf => shelves
+	//privateBookshelf => shelves => ebooks
+
 	// accessToken is being sent on every request in the headers
 	const accessToken = req.headers.authorization;
 	console.log(typeof req.header.authorization);
@@ -37,11 +40,11 @@ router.get('/session', (req, res) => {
 		.populate('user')
 		.populate({
 			path: 'user',
-			populate: { path: 'publicBookshelf' , populate: { path: 'shelves' }}
+			populate: { path: 'publicBookshelf', populate : { path: "shelves" , model: "PublicShelf"}}
 		})
 		.populate({
 			path: 'user',
-			populate: { path:'privateBookshelf', populate: { path: 'shelves' , populate: { path: "ebooks" }}}
+			populate: { path:'privateBookshelf', populate : { path: "shelves" , model: "PrivateShelf" , populate : { path: "ebooks" , model: "Ebook"}}}
 		})
 		.populate({
 			path: 'user',

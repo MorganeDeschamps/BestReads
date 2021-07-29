@@ -25,13 +25,8 @@ function UserBookShelves(props){
 
 
     useEffect(() => {
-        setUsername(user.username)
-        setPublicBookshelf(user.publicBookshelf)
-        setPrivateBookshelf(user.privateBookshelf)
-        setPublicBS(user.publicBookshelf.shelves)
-        setPrivateBS(user.privateBookshelf.shelves)
-        setReviews(user.reviews)
-    }, [props])
+        updateUser()
+    }, [])
 
     function updateUser() {
         const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);

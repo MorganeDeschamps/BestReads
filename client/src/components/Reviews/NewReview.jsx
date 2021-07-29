@@ -10,16 +10,16 @@ import "./Review.css"
 // CREATE NEW REVIEW
 
 function NewReview(props) {
-	const {bookId} = props.match.params
-	const {user} = props
+	const {user, bookId} = props
 
 	const initialFormState = {
-		owner: user._id,
+		owner: user && user._id,
 		comment: "",
 		bookId: bookId,
 		rating: null
 	};
 
+	
 
 	const [formState, setFormState] = useState(initialFormState);
 
@@ -57,7 +57,7 @@ function NewReview(props) {
 
 	
 	return (
-		<div>
+		<div  class="review-div">
 			<h1>Book review: </h1>
 			<div className="container p-3">
   				<form onSubmit={handleSubmit} className="row">

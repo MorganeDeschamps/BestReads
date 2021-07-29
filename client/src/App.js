@@ -13,11 +13,11 @@ import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
 import UserProfile from './pages/UserProfile.page';
 import Test from './components/Test';
 import {displayUserPage} from "./services/auth"
-import BookDetails from './components/Book/BookDetails'
 import Reader from './pages/ebooks/Read.page';
 import "./App.css";
 import "./components/Navbar/Navbar.css"
 import HomePage from './pages/Home.page'
+import BookDetails from './pages/bookDetails/BookDetails.page';
 import NewReview from './components/Reviews/NewReview';
 
 

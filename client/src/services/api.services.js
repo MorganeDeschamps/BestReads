@@ -51,9 +51,16 @@ export function mainSearch(search) {
 
 }
 
+export function searchOneWork(bookID) {
+
+    return axios.get(`https://openlibrary.org/search.json?q=${bookID}&limit=50`)
+    .then(successStatus)
+    .catch(internalServerError)
+
+}
 
 export function getAuthorDetails(key) {
-    const url = `/authors/${key}.json`
+    const url = `${key}.json`
 
     return urlbase.get(url)
     .then(successStatus)
@@ -63,7 +70,7 @@ export function getAuthorDetails(key) {
 
 
 export function getWorks(key) {
-    const url = `/authors/${key}/works.json`
+    const url = `${key}/works.json`
 
     return urlbase.get(url)
     .then(successStatus)
@@ -72,10 +79,10 @@ export function getWorks(key) {
 
 
 export function getOneBook(olid) {
-    const url = `https://openlibrary.org/books/${olid}.json`
+    const url = `https://openlibrary.org/works/${olid}.json`
 
     return axios.get(url)
-    .then(res => {return res.data})
+    .then(successStatus)
     .catch(err => console.log("Error getting a book from: ", url, " ---Error: ", err))
 
 }

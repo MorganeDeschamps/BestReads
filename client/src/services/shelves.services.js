@@ -121,4 +121,3 @@ export function editPrivateShelf(shelfId, name) {
 	.catch(internalServerError);
 }
 
-

@@ -58,7 +58,7 @@ function NewReview(props) {
 	
 	return (
 		<div  class="review-div">
-			<h1>Book review: </h1>
+			<h3>Book review: </h3>
 			<div className="container p-3">
   				<form onSubmit={handleSubmit} className="row">
  

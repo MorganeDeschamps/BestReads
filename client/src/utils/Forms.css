@@ -67,14 +67,8 @@
       }
 
 
-     
-     
-     
-     
+
       /* Search bar */
-
-      
-
       * {
         border: 0;
         box-sizing: border-box;
@@ -260,7 +254,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 0.2em;
+        margin-bottom: 0.1em;
       }
       
       .inputs-search button {
@@ -277,8 +271,8 @@
       
 
       .inputs-search input {
-        padding: 4px;
-        margin: 5px 0;
+        padding: 0.3em;
+        margin: 0.3em 0;
         border: 2px solid white;
         width: 25em;
         font-family:inherit;

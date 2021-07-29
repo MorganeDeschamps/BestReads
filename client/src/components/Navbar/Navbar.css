@@ -28,7 +28,7 @@
     left: 0;
     bottom: 0;
     height: 100vh;
-    width: 0.5vw;
+    width: 1vw;
     overflow: hidden;
     max-width: 290px;
     z-index: 9;
@@ -54,7 +54,6 @@
     color: #2d1830;
   }
   
-  
   .menuNav li:first-child {
     margin-top: 7rem;
   }
@@ -67,12 +66,10 @@
     text-transform: uppercase;
     font-weight: bold;
     font-family: 'Comfortaa', cursive;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0px;
     background-color: white;
     margin: 0.5rem 0;
     text-align: center;
+    z-index: -1;
   }
   
   .img-home {
@@ -106,6 +103,10 @@
     border: 0.1em white solid;
     padding: 0.5em;
     text-decoration: none;
+  }
+
+  .tag:hover {
+    box-shadow: 1px 1px;
   }
   
   
@@ -123,115 +124,6 @@
 @media only screen and (min-width: 600px) {
 
   
-  .navBar {
-    position: relative;
-  }
-  
-  .navBar button {
-    position: fixed;
-    left: 0;
-    top: 40px;
-    z-index: 10;
-    cursor: pointer;
-    background: transparent;;
-    border: none;
-  }
-  
-  .menuNav {
-    overflow-y: scroll;
-    list-style: none;
-    position: fixed;
-    top: 0;
-    background: white;
-    opacity: 0.2;
-    left: 0;
-    bottom: 0;
-    height: 100vh;
-    width: 0.5vw;
-    overflow: hidden;
-    max-width: 290px;
-    z-index: 9;
-  }
-  
-  .menuNav.showMenu {
-    width: 100%;
-    background: white;
-    opacity: 0.8;
-  } 
-  
-  .menuNav a {
-    display: block;
-    margin: 1em 3em;
-    text-decoration: none;
-    color: #79527f;
-    text-transform: uppercase;
-    font-weight: bold;
-    opacity: 0.8;
-  }
-
-  .menuNav a:hover {
-    color: #2d1830;
-  }
-  
-  .menuNav li:first-child {
-    margin-top: 7rem;
-  }
-  
-  .homeLogo {
-    display: block;
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: #79527f;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: 'Comfortaa', cursive;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0px;
-    background-color: white;
-    margin: 0.5rem 0;
-    text-align: center;
-  }
-  
-  .img-home {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90vw;
-    height: 90vh;
-  }
-  
-  .home-img-container {
-    position: relative;
-  
-  }
-  
-  .home-headings{
-    position: absolute;
-    width: 100%;
-    bottom: 0.2%;
-    text-align: center;
-  }
-  
-  
-  .center {
-    left: 0; 
-    width: 100%; 
-    color: white;
-  }
-
-  .tag {
-    border: 0.1em white solid;
-    padding: 0.5em;
-    text-decoration: none;
-  }
-
-
-  .quote{
-    font-size: 0.8em;
-    font-style: italic;
-    margin-top: 18vh;
-  }
 
 }
 
@@ -239,111 +131,6 @@
 /* for LAPTOPS */
 @media only screen and (min-width: 768px) {
 
-  
-  .navBar {
-    position: relative;
-  }
-  
-  .navBar button {
-    position: fixed;
-    left: 0;
-    top: 40px;
-    z-index: 10;
-    cursor: pointer;
-    background: transparent;;
-    border: none;
-  }
-  
-  .menuNav {
-    overflow-y: scroll;
-    list-style: none;
-    position: fixed;
-    top: 0;
-    background: white;
-    opacity: 0.2;
-    left: 0;
-    bottom: 0;
-    height: 100vh;
-    width: 0.5vw;
-    overflow: hidden;
-    max-width: 290px;
-    z-index: 9;
-  }
-  
-  .menuNav.showMenu {
-    width: 100%;
-    background: white;
-    opacity: 0.8;
-  } 
-  
-  .menuNav a {
-    display: block;
-    margin: 1em 3em;
-    text-decoration: none;
-    color: #79527f;
-    text-transform: uppercase;
-    font-weight: bold;
-    opacity: 0.8;
-  }
-  
-  .menuNav li:first-child {
-    margin-top: 7rem;
-  }
-  
-  .homeLogo {
-    display: block;
-    font-size: 1.5rem;
-    text-decoration: none;
-    color: #79527f;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: 'Comfortaa', cursive;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0px;
-    background-color: white;
-    margin: 0.5rem 0;
-    text-align: center;
-  }
-  
-  .img-home {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90vw;
-    height: 90vh;
-  }
-  
-  .home-img-container {
-    position: relative;
-  
-  }
-  
-  .home-headings{
-    position: absolute;
-    width: 100%;
-    bottom: 0.2%;
-    text-align: center;
-  }
-  
-  
-  .center {
-    left: 0; 
-    width: 100%; 
-    color: white;
-  }
 
-  .tag {
-    border: 0.1em white solid;
-    padding: 0.5em;
-    text-decoration: none;
-  }
-
-
-  .quote{
-    font-size: 0.8em;
-    font-style: italic;
-    margin-top: 18vh;
-  }
 
 }

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { login } from '../../services/auth';
 import './Signup';
 import * as CONSTS from '../../utils/consts';
+import HomePage from '../Home.page';
+import '../../utils/Forms.css'
+import { Link } from 'react-router-dom';
 
 
 function LogIn(props) {
@@ -43,36 +46,40 @@ function LogIn(props) {
 	};
 
 	return (
-		<div>
-			<h1>Log In</h1>
-			<form onSubmit={handleSubmit} className='signup__form'>
-				<label htmlFor='input-username'>Username</label>
-				<input
-					id='input-username'
-					type='text'
-					name='username'
-					placeholder='username'
-					value={formData.username}
-					onChange={handleChange}
-					required
-				/>
-
-				<label htmlFor='input-password'>Password</label>
-				<input
-					id='input-password'
-					type='password'
-					name='password'
-					placeholder='Password'
-					value={formData.password}
-					onChange={handleChange}
-					required
-					minLength='8'
-				/>
-
-				<button className='button__submit' type='submit'>
-					Submit
-				</button>
-			</form>
+		<div className="page-container">
+			<HomePage />
+			<div className="login-form-container">
+				<h1>Log In</h1>
+				<p className="account">No account? <Link to="/auth/signup" className="account">Sign Up</Link></p>
+				<form onSubmit={handleSubmit} className="login-form">
+					<div className="inputs">
+						<label htmlFor='login-form-text'>Username</label>
+						<input
+						type='text'
+						name='username'
+						placeholder='Username'
+						value={formData.username}
+						onChange={handleChange}
+						required
+						/>
+					</div>
+					<div className="inputs">
+						<label htmlFor='login-form-text'>Password</label>
+						<input
+							type='password'
+							name='password'
+							placeholder='Password'
+							value={formData.password}
+							onChange={handleChange}
+							required
+							minLength='8'
+						/>
+					</div>
+					<div className="inputs">
+						<button className='login-form-text' type='submit'>Submit</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 }

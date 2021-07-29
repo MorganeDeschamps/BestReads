@@ -84,6 +84,13 @@ function App() {
 			user={user} />
 
 			<Switch>
+				<NormalRoute 
+					exact
+					path={'/'}
+					authenticate={authenticate}
+					component={HomePage}
+				/>
+
 				<NormalRoute
 					exact
 					path={'/'}

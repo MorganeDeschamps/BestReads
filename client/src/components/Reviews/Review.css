@@ -2,79 +2,85 @@
     position: absolute;
     transform: translate(-50%, -50%);
   }
+
+
+/* - - - - - RATINGS */
+.rating {
+  width: 150px;
+  height: 30px;
+  padding: 5px 10px;
+  margin: auto;
+  border-radius: 30px;
+  background: #FFF;
+  display: block;
+  overflow: hidden;
   
-  .reviewCenter .stars{
-    height: 150px;
-    width: 500px;
-    text-align: center;
-  }
+  box-shadow: 0 1px #CCC,
+              0 5px #DDD,
+              0 9px 6px -3px #999;
   
-  .stars input{
-    opacity: 0
-  }
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating:not(:checked) > input {
+  display: none;
+}
+
+/* - - - - - RATE */
+#rate {
+  top: -65px;
+}
+#rate:not(:checked) > label {
+  cursor:pointer;
+  float: right;
+  width: 30px;
+  height: 30px;
+  display: block;
   
-  .stars label{
-    float: right;
-    font-size: 100px;
-    color: lightgrey;
-    margin: 0 5px;
-    text-shadow: 1px 1px #bbb;
-  }
+  color: rgba(0, 135, 211, .4);
+  line-height: 33px;
+  text-align: center;
+}
+#rate:not(:checked) > label:hover,
+#rate:not(:checked) > label:hover ~ label {
+  color: rgba(0, 135, 211, .6);
+}
+#rate > input:checked + label:hover,
+#rate > input:checked + label:hover ~ label,
+#rate > input:checked ~ label:hover,
+#rate > input:checked ~ label:hover ~ label,
+#rate > label:hover ~ input:checked ~ label {
+  color: rgba(0, 135, 211, .8);
+}
+#rate > input:checked ~ label {
+  color: rgb(0, 135, 211);
+}
+/* - - - - - LIKE */
+#like {
+  bottom: -65px;
+}
+#like:not(:checked) > label {
+  cursor:pointer;
+  float: right;
+  width: 30px;
+  height: 30px;
+  display: block;
   
-  .stars label:before{
-    content: '★';
-  }
-  
-  .stars input:checked ~ label{
-    color: gold;
-    text-shadow: 1px 1px #c60;
-  }
-  
-  .stars:not(:checked) > label:hover,
-  .stars:not(:checked) > label:hover ~ label{
-    color: gold;
-  }
-  
-  .stars input:checked > label:hover,
-  .stars input:checked > label:hover ~ label{
-    color: gold;
-    text-shadow: 1px 1px goldenrod;
-  }
-  
-  .stars .result:before{
-    position: absolute;
-    content: "";
-    width: 100%;
-    left: 50%;
-    transform: translateX(-47%);
-    bottom: -30px;
-    font-size: 30px;
-    font-weight: 500;
-    color: gold;
-    font-family: 'Poppins', sans-serif;
-    display: none;
-  }
-  
-  .stars input:checked ~ .result:before{
-    display: block;
-  }
-  
-  .stars #five:checked ~ .result:before{
-    content: "I love it 😍";
-  }
-  
-  .stars #four:checked ~ .result:before{
-    content: "I like it 😀";
-  }
-  
-  .stars #three:checked ~ .result:before{
-    content: "It's ok 😑";
-  }
-  
-  .stars #two:checked ~ .result:before{
-    content: "I don't like it 😦";
-  }
-  
-  .stars #one:checked ~ .result:before{
-    content: "I hate it 😠";
-  }
+  color: rgba(233, 54, 40, .4);
+  line-height: 33px;
+  text-align: center;
+}
+#like:not(:checked) > label:hover,
+#like:not(:checked) > label:hover ~ label {
+  color: rgba(233, 54, 40, .6);
+}
+#like > input:checked + label:hover,
+#like > input:checked + label:hover ~ label,
+#like > input:checked ~ label:hover,
+#like > input:checked ~ label:hover ~ label,
+#like > label:hover ~ input:checked ~ label {
+  color: rgba(233, 54, 40, .8);
+}
+#like > input:checked ~ label {
+  color: rgb(233, 54, 40);
+}

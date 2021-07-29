@@ -1,0 +1,69 @@
+/* login form */
+
+@media only screen and (max-width: 600px) {
+    .login-form-container{
+        position: absolute;
+        width: 100%;
+        bottom: 45%;
+        text-align: center;
+        color: white;
+    }
+
+    .signup-form-container{
+        position: absolute;
+        width: 100%;
+        bottom: 35%;
+        text-align: center;
+        color: white;
+    }
+
+    .signup-form-container h1{
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .account{
+        font-size: 0.9em;
+        color: white;
+        text-decoration: none;
+    }
+
+      .login-form {
+        margin-top: 1.5em;
+        align-content: center;
+      }
+      
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .inputs button {
+        margin-bottom: 50px;
+        color: black;
+        font-size: 1em;
+        background-color: white;
+        border: 1px black;
+        padding: 0.4em 1em;
+      }
+
+        .inputs button:hover {
+            cursor: pointer;
+      }
+      
+      .inputs input {
+        padding: 5px;
+        margin: 10px 0;
+        border: 2px solid white;
+        width: 300px;
+        font-family:inherit;
+        background: transparent;
+        color: white;
+
+      }
+    
+
+    
+
+}

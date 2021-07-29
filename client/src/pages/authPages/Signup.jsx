@@ -3,6 +3,9 @@ import { signup } from '../../services/auth';
 import './auth.css';
 import * as CONSTS from '../../utils/consts';
 import * as PATHS from '../../utils/paths';
+import HomePage from '../Home.page';
+import '../../utils/Forms.css'
+import { Link } from 'react-router-dom';
 
 
 function Signup(props) {
@@ -44,47 +47,51 @@ function Signup(props) {
 	};
 
 	return (
-		<div>
-			<h1>Sign Up</h1>
-			<form onSubmit={handleSubmit} className='auth__form'>
-				<label htmlFor='input-username'>Username</label>
-				<input
-					id='input-username'
-					type='text'
-					name='username'
-					placeholder='Text'
-					value={formData.username}
-					onChange={handleChange}
-					required
-				/>
-
-				<label htmlFor='input-username'>Email</label>
-				<input
-					id='input-email'
-					type='text'
-					name='email'
-					placeholder='Text'
-					value={formData.email}
-					onChange={handleChange}
-					required
-				/>
-
-				<label htmlFor='input-password'>Password</label>
-				<input
-					id='input-password'
-					type='password'
-					name='password'
-					placeholder='Password'
-					value={formData.password}
-					onChange={handleChange}
-					required
-					minLength='8'
-				/>
-
-				<button className='button__submit' type='submit'>
-					Submit
-				</button>
-			</form>
+		<div className="page-container">
+			<HomePage />
+			<div className="signup-form-container">
+				<h1>Sign Up</h1>
+				<p className="account">Account? <Link to="/auth/login" className="account">Log In</Link></p>
+				<form onSubmit={handleSubmit} className="login-form">
+					<div className="inputs">
+						<label htmlFor='login-form-text'>Username</label>
+						<input
+							type='text'
+							name='username'
+							placeholder='Username'
+							value={formData.username}
+							onChange={handleChange}
+							required
+						/>
+					</div>
+					<div className="inputs">
+						<label htmlFor='login-form-text'>Email</label>
+						<input
+							type='text'
+							name='email'
+							placeholder='Email'
+							value={formData.email}
+							onChange={handleChange}
+							required
+						/>
+					</div>
+					<div className="inputs">
+						<label htmlFor='login-form-text'>Password</label>
+						<input
+							type='password'
+							name='password'
+							placeholder='Password'
+							value={formData.password}
+							onChange={handleChange}
+							required
+							minLength='8'
+						/>
+					</div>
+					<div className="inputs">
+						<button className='button__submit' type='submit'>Submit</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 }

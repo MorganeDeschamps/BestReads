@@ -17,7 +17,9 @@ const Navbar = (props) => {
 
 	return (
 		<nav className="navBar">
-			<Link to={'/'} className='homeLogo'>Best Reads</Link>
+			<div className="header">
+				<Link to={'/'} className='homeLogo'>Best Reads</Link>
+			</div>
 			<button onClick={handleToggle}>			
   				{navbarOpen ? (
     			<MdClose style={{ color: "#fff", width: "40px", height: "40px" }} />
@@ -43,11 +45,11 @@ const Navbar = (props) => {
 				) : (
 				<>
 				<ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+					<li><Link to={'/'} 	className='authLink' onClick={() => closeMenu()}>Home</Link></li>
 					<li><Link to={'/auth/signup'} activeClassName='authLink' onClick={() => closeMenu()}>Signup</Link></li>
 
 					<li><Link to={'/auth/login'} className='authLink' onClick={() => closeMenu()}>Log In</Link></li>
 
-					<li><Link to={'/ebook/create'} className='authLink' onClick={() => closeMenu()}>Create Ebook</Link></li>
 				</ul>
 				</>
 				

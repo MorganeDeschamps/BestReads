@@ -81,9 +81,15 @@ function App() {
 			<Navbar handleLogout={handleLogout} 
 			component ={Navbar}
 			user={user} />
-			<HomePage component={HomePage}/>
 
 			<Switch>
+				<NormalRoute 
+					exact
+					path={'/'}
+					authenticate={authenticate}
+					component={HomePage}
+				/>
+
 				<NormalRoute
 					exact
 					path={'/auth/signup'}

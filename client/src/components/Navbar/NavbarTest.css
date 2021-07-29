@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+
+	@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -139,3 +141,56 @@ ul li a {
 	ul li {
 		margin: 15px;
 	}
+
+	@media only screen and (max-width: 600px){
+		.img-home {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 90vw;
+			height: 90vh;
+		  }
+		  
+		.home-img-container {
+			position: relative;
+		  
+		  }
+		  
+		.home-headings{
+			position: absolute;
+			width: 100%;
+			bottom: 0.2%;
+			text-align: center;
+		  }
+		  
+		  
+		.center {
+			left: 0; 
+			width: 100%; 
+			color: white;
+		  }
+		  
+		.tag {
+			border: 0.1em white solid;
+			padding: 0.5em;
+			text-decoration: none;
+		  }
+		
+		.tag:hover {
+			box-shadow: 1px 1px;
+		  }
+		  
+		  
+		.quote{
+			font-size: 0.8em;
+			font-style: italic;
+			margin-top: 18vh;
+		  }
+
+
+
+	}
+
+
+
+	  

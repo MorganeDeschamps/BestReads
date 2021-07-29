@@ -7,7 +7,7 @@ import Search from './pages/search/Search.page';
 import Signup from './pages/authPages/Signup';
 import NormalRoute from './routing-components/NormalRoute';
 import ProtectedRoute from './routing-components/ProtectedRoute';
-import { getLoggedIn, logout } from './services/auth';
+import { getLoggedIn, logout, getUser } from './services/auth';
 import * as CONSTS from './utils/consts';
 import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
 import UserProfile from './pages/UserProfile.page';
@@ -17,12 +17,13 @@ import BookDetails from './components/Book/BookDetails'
 import Reader from './pages/ebooks/Read.page';
 import "./App.css";
 import HomePage from './pages/Home.page'
+import NewReview from './components/Reviews/NewReview';
 
 
 
 function App() {
-/* 
- 	let token = localStorage.getItem(CONSTS.ACCESS_TOKEN) || null
+ 
+/*  	let token = localStorage.getItem(CONSTS.ACCESS_TOKEN) || null
 	let testUser;
 
 	if(token) {
@@ -34,8 +35,8 @@ function App() {
 		} else {
 			testUser = res.data.user;
 		}
-	});} */
-
+	});} 
+  */
 	const [user, setUser] = useState(null);
  
 
@@ -53,7 +54,7 @@ function App() {
 			}
 		});
 	}, []);
-  
+   
 	const handleLogout = () => {
 		const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 		if (!accessToken) {
@@ -81,9 +82,20 @@ function App() {
 			<Navbar handleLogout={handleLogout} 
 			component ={Navbar}
 			user={user} />
-			<HomePage component={HomePage}/>
 
 			<Switch>
+				<NormalRoute
+					exact
+					path={'/'}
+					user={user}
+					authenticate={authenticate}
+					component={HomePage}
+				/>
+				<NormalRoute
+					exact
+					path={'/review/:bookId'}
+					component={NewReview}
+				/>
 				<NormalRoute
 					exact
 					path={'/auth/signup'}
@@ -97,12 +109,6 @@ function App() {
 					user={user}
 					authenticate={authenticate}
 					component={LogIn}
-				/>
-				<NormalRoute
-					exact
-					path={'/test'}
-					user={user}
-					component={Reader}
 				/>
 				<NormalRoute
 					exact

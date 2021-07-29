@@ -4,7 +4,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom'
 import {getOneBook} from '../../services/api.services'
-import NewReview from '../../components/Reviews/Review'
+import NewReview from '../Reviews/NewReview'
 import {allReviews} from '../../services/review.services'
 
 

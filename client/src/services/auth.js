@@ -59,6 +59,25 @@ export function logout() {
 		.catch(internalServerError);
 }
 
+export function getUser() {
+
+	return authService.get(`/session`, {headers: {Authorization: localStorage.getItem(CONSTS.ACCESS_TOKEN)}})
+	.then((result) => {
+		if (!result.data) {
+			console.log('RES IN CASE OF FAILURE', result);
+			return null ;
+		} else {
+			return result.data.user
+		}
+	}).catch((err) => console.log("error with getuser", err))
+}
+
+
+
+
+
+
+
 
 /* ************ BOOKSHELF, need to create new file *********/
 

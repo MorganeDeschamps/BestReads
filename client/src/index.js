@@ -9,7 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Switch>
-        <Route exact path={'/reader/:ebookId'} component={Reader}/>
+        <Route exact path={'/reader'} component={Reader}/>
         <App />
       </Switch>
     </BrowserRouter>

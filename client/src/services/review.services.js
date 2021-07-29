@@ -24,7 +24,7 @@ const service = axios.create({
 
 export function createReview(userId, bookId) {
 
-    service.post(`/${bookId}/new-review`, {name:"", owner: userId, bookId: bookId})
+    service.post(`/${bookId}/new-review`, {owner: userId, bookId: bookId})
     .then(successStatus)
     .catch(internalServerError)
 

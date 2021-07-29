@@ -1,6 +1,7 @@
 import BookEbook from "../../components/Book/BookEbook"
 import { saveToPublic } from "../../services/shelves.services"
 import Default from "../../images/default.jpeg"
+import { useRef } from "react"
 
 export default function SearchResults(props) {
 
@@ -9,6 +10,7 @@ export default function SearchResults(props) {
 
 	const {user} = props
     const shelves = user.publicBookshelf.shelves
+	console.log("user from search results: ", user)
 
 	function style(cover) {
 		return {

@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const reviewSchema = new Schema({
     owner: { type: Schema.Types.ObjectId, ref: 'User' },
+    rating: { type: Number, required: true },
     comment: { type: String, required: true },
     bookId: { type: String, required: true }
 });

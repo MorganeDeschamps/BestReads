@@ -19,7 +19,7 @@ function NewReview(props) {
 		rating: null
 	};
 
-	
+
 
 	const [formState, setFormState] = useState(initialFormState);
 

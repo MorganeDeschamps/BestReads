@@ -1,30 +1,64 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import * as paths from "../../utils/paths"
 import "../../App.css"
 import BookEbook from '../../components/Book/BookEbook'
 import { movePublic } from '../../services/shelves.services'
 
+import { getLoggedIn, logout } from "../../services/auth"
+
+import * as CONSTS from '../../utils/consts';
+
 function PublicBookShelf(props) {
+  const {user, setUser} = props;
+  const { publicShelf } = props
 
-    const { publicShelf } = props
-    const {updateUser} = props
-    console.log(publicShelf)
+  const [bookshelfState, setState] = useState(publicShelf)
+
+  useEffect(() => {
+      setState(publicShelf)
+  }, [publicShelf])
+    
+  const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
+
+  /* const username = user.username
+  const publicBookshelf = user.publicBookshelf
+  const privateBookshelf = user.privateBookshelf
+  const reviews = user.reviews */
+  const [username, setUsername] = useState(user.username)
+  const [publicBookshelf, setPublicBookshelf] = useState(user.publicBookshelf)
+  const [privateBookshelf, setPrivateBookshelf] = useState(user.privateBookshelf)
+  const [reviews, setReviews] = useState(user.reviews)
+  const [publicShelves, setPublicBS] = useState()
+  const [privateShelves, setPrivateBS] = useState()
 
 
-    const [bookshelfState, setState] = useState(publicShelf)
+  useEffect(() => {
+      updateUser()
+  }, [])
 
-    useEffect(() => {
-        setState(publicShelf)
-    }, [publicShelf])
-
+  function updateUser() {
+      const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
+  if (!accessToken) {
+  }
+  getLoggedIn(accessToken).then((res) => {
+    if (!res.data) {
+      console.log('RES IN CASE OF FAILURE', res);
+    } else {
+      //setUser(res.data.user)
+              setPrivateBookshelf(res.data.user.privateBookshelf)
+              setPublicBookshelf(res.data.user.publicBookshelf)
+              setPublicBS(res.data.user.publicBookshelf.shelves)
+              setPrivateBS(res.data.user.privateBookshelf.shelves)
+    }
+  });
+  }
 
     return (
    	 
+
          <div className="list-books">
           <div className="list-books-title">
             <h1>MyReads</h1>
-              {bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
+              {bookshelfState && bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
               return(
                 <div key={shelf._id} className="bookshelf">
                   <h3>{shelf.name}</h3>

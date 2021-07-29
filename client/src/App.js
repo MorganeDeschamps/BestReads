@@ -80,6 +80,8 @@ function App() {
  
 	console.log("user from app: ", user)
 
+
+
 	return (
 		<div className='App'>
 			<Navbar handleLogout={handleLogout} 
@@ -149,7 +151,7 @@ function App() {
 				/>
 				<ProtectedRoute
 					exact
-					path={`/user/privateBookshelf`}
+					path={`/user/publicBookshelf`}
 					component={PublicBookShelf}
 					user={user}
 					setUser={setUser}

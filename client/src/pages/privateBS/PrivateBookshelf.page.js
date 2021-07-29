@@ -6,15 +6,20 @@ import { movePrivate } from '../../services/shelves.services'
 
 function PrivateBookShelf(props) {
 
-    const { privateShelf } = props
-    const {updateUser} = props
+  const { privateShelf } = props
+
+  console.log(privateShelf)
 
 
-    const [bookshelfState, setState] = useState(privateShelf)
+  const [bookshelfState, setState] = useState(privateShelf)
 
-    useEffect(() => {
-        setState(privateShelf)
-    }, [privateShelf])
+  useEffect(() => {
+      setState(privateShelf)
+  }, [privateShelf])
+
+  function updateUser() {
+    
+  }
 
 
     return (
@@ -23,7 +28,7 @@ function PrivateBookShelf(props) {
           <div className="list-books-title">
             <h1>MyEbooks</h1>
             <Link to="/ebook/create">Add an ebook</Link>
-              {bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
+              {bookshelfState && bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
               return(
                 <div key={shelf._id} className="bookshelf">
                   <h3>{shelf.name}</h3>

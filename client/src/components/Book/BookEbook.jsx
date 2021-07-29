@@ -43,7 +43,7 @@ function BookEbook(props) {
 
 	function eBookReader(book) {
 		if(book.ebookUrl) return (
-		<Link to={`/reader/${book._id}`} class="link-tag" style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%"}}></Link>
+		<Link to={`/reader/${book._id}`} target="blank" class="link-tag" style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0, width: "100%", height: "100%"}}></Link>
 		)
 	}
 

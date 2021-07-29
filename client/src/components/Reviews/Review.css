@@ -6,55 +6,18 @@
 
 /* - - - - - RATINGS */
 .rating {
-  width: 150px;
-  height: 30px;
-  padding: 5px 10px;
-  margin: auto;
-  border-radius: 30px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-evenly;
   background: #FFF;
-  display: block;
   overflow: hidden;
-  
-  box-shadow: 0 1px #CCC,
-              0 5px #DDD,
-              0 9px 6px -3px #999;
-  
-  unicode-bidi: bidi-override;
-  direction: rtl;
 }
 .rating:not(:checked) > input {
   display: none;
 }
 
-/* - - - - - RATE */
-#rate {
-  top: -65px;
-}
-#rate:not(:checked) > label {
-  cursor:pointer;
-  float: right;
-  width: 30px;
-  height: 30px;
-  display: block;
-  
-  color: rgba(0, 135, 211, .4);
-  line-height: 33px;
-  text-align: center;
-}
-#rate:not(:checked) > label:hover,
-#rate:not(:checked) > label:hover ~ label {
-  color: rgba(0, 135, 211, .6);
-}
-#rate > input:checked + label:hover,
-#rate > input:checked + label:hover ~ label,
-#rate > input:checked ~ label:hover,
-#rate > input:checked ~ label:hover ~ label,
-#rate > label:hover ~ input:checked ~ label {
-  color: rgba(0, 135, 211, .8);
-}
-#rate > input:checked ~ label {
-  color: rgb(0, 135, 211);
-}
+
 /* - - - - - LIKE */
 #like {
   bottom: -65px;
@@ -83,4 +46,29 @@
 }
 #like > input:checked ~ label {
   color: rgb(233, 54, 40);
+}
+
+.review-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.review-section textarea{
+  text-align: center;
+}
+
+.review-section button{
+  color: black;
+  font-size: 1em;
+  background-color: transparent;
+  border: 2px black solid;
+  padding: 0.4em 1em;
+  margin-top: 0.5em;
+}
+
+
+.review-section button:hover{
+  box-shadow: 2px 2px;;
 }

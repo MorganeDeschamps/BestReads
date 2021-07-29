@@ -7,7 +7,7 @@
     .login-form-container{
         position: absolute;
         width: 100%;
-        bottom: 45%;
+        bottom: 35%;
         text-align: center;
         color: white;
     }
@@ -15,7 +15,7 @@
     .signup-form-container{
         position: absolute;
         width: 100%;
-        bottom: 35%;
+        bottom: 25%;
         text-align: center;
         color: white;
     }

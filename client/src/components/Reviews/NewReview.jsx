@@ -54,7 +54,6 @@ function NewReview(props) {
 	return (
 
 		<div>
-			<h1>Review this book: </h1>
 			<form onSubmit={handleSubmit} className="row">
 				<section id="like" class="rating">
 			
@@ -73,8 +72,11 @@ function NewReview(props) {
 						  <input onClick={ratingSelect} type="radio" id="heart_1" name="like" value="1" />
 						  <label for="heart_1" title="One">&#10084;</label>
 				</section>
- 					<textarea value={formState.comment} name="comment" onChange={handleChange} required className="form-control" id="textarea" rows="4" placeholder="What did you think of this book?"></textarea>
-					<button type="submit" className="btn btn-primary">Review</button>
+				<div className="review-section">
+					<h3>Review this book </h3>
+ 					<textarea value={formState.comment} name="comment" onChange={handleChange} required className="form-control" cols="32" rows="6" placeholder="What did you think?"></textarea>
+					<button type="submit">Review</button>
+				</div>
 			</form>
 		</div>
 	)

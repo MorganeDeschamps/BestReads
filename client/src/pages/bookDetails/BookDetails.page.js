@@ -32,8 +32,6 @@ function BookDetails(props){
 
     }
 
-
-
     useEffect(() => {
         searchOneWork(bookId).then(res => setBookState(filter(res.data.docs[0])));
         allReviews(bookId).then(res => setReviews(res.data))
@@ -45,21 +43,18 @@ function BookDetails(props){
                 <h2>{bookState.title}</h2>
                 <img src={bookState.coverUrl} alt="" />
                 <a href={bookState.olLink} target="blank" >See Open Library page</a>
+                <NewReview user={user} bookId={bookId} />
             </div>
             <div className="details-reviews">
-                <NewReview user={user} bookId={bookId} />
                 {reviewsState.map(eachReview => {
                     return(
-                        <div>
-                            <h6>{eachReview.rating} stars</h6>
-                            <p>{eachReview.comment}</p>
-                        </div>
+                    <div className="review-comments">
+                        <h6>{eachReview.rating} &#10084;</h6>
+                        <p>"{eachReview.comment}"</p>
+                    </div>
                     )
                 })}
-
             </div>
-
-
         </div>
 
         )

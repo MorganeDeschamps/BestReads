@@ -9,7 +9,7 @@
         text-align: center;
         font-size: 0.8em;
         font-family:'Roboto',sans-serif;
-        margin: 1em 4em;
+        margin: 0 4em;
     }
 
     .details-main img {
@@ -27,6 +27,23 @@
 
     .details-main a:hover{
         box-shadow: 2px 2px;;
+    }
+
+    .review-comments {
+        display: flex;
+        font-size: 1em;
+        margin: 1em 2em
+    }
+
+    .review-comments p{
+        font-size: 1em;
+        margin: 1em 2em
+    }
+
+    .review-comments h6{
+        font-size: 1em;
+        margin: 1em;
+        color: rgb(233, 54, 40)
     }
 
 /*     .details-reviews {

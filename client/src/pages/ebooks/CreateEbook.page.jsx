@@ -98,7 +98,7 @@ function CreateEbook(props) {
 
 
 	return (
-		<div>
+		<div className="page-main">
 			<ToastContainer/>
 			<h1>Create book: </h1>
 			<form onSubmit={handleSubmit} className='new-book-form'>

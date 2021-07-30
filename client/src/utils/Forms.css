@@ -69,37 +69,34 @@
 
 
       /* Search bar */
-      * {
+      .searchPageMain {
         border: 0;
         box-sizing: border-box;
-      }
 
-
-      :root {
         --dur: 1s;
         font-size: calc(16px + (24 - 16)*(100vw - 320px)/(1280 - 320));
       }
 
-      .searchbar-input, body {
+      .searchbarInput, body {
         font: 1em/1.5 Hind, sans-serif;
       }
 
-      .searchbar-input, .search-form, .caret {
+      .searchbarInput, .searchForm, .caret {
         margin: auto;
       }
 
-      .search-form {
+      .searchForm {
         position: relative;
         width: 100%;
         max-width: 17em;
       }
 
-      .searchbar-input, .caret {
+      .searchbarInput, .caret {
         display: block;
         transition: all calc(var(--dur) * 0.5) linear;
       }
 
-      .searchbar-input {
+      .searchbarInput {
         background: transparent;
         border-radius: 50%;
         box-shadow: 0 0 0 0.25em inset;
@@ -111,7 +108,7 @@
         appearance: none;
       }
 
-      .searchbar-input:focus, .searchbar-input:valid {
+      .searchbarInput:focus, .searchbarInput:valid {
         background: var(--input);
         border-radius: 0.25em;
         box-shadow: none;
@@ -122,12 +119,12 @@
         height: 3em;
       }
 
-      .searchbar-input:focus {
+      .searchbarInput:focus {
         animation: showCaret var(--dur) steps(1);
         outline: transparent;
       }
 
-      .searchbar-input:focus + .caret, .searchbar-input:valid + .caret {
+      .searchbarInput:focus + .caret, .searchbarInput:valid + .caret {
         animation: handleToCaret var(--dur) linear;
         background: transparent;
         width: 1px;
@@ -135,7 +132,7 @@
         transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
       }
 
-      .searchbar-input::-webkit-search-decoration {
+      .searchbarInput::-webkit-search-decoration {
         -webkit-appearance: none;
       }
 
@@ -218,7 +215,7 @@
 
       /* Search form */
 
-      .search-form-container{
+      .searchFormContainer{
         position: absolute;
         width: 100%;
         top: 18%;
@@ -228,14 +225,14 @@
         padding-bottom: 0;
       }
 
-      .search-form-container a{
+      .searchFormContainer a{
         text-decoration: none;
         color: black;
         border: 0.1em solid black;
         padding: 0.5em;
       }
 
-      .adv-login-form {
+      .advLoginForm {
         margin-top: 1.2em;
         align-content: center;
         display: block;
@@ -250,14 +247,14 @@
         
       }
 
-      .inputs-search {
+      .inputsSearch {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-bottom: 0.1em;
       }
       
-      .inputs-search button {
+      .inputsSearch button {
         color: white;
         font-size: 1em;
         background-color: transparent;
@@ -265,12 +262,12 @@
         padding: 0.4em 1em;
       }
 
-        .inputs-search button:hover {
+        .inputsSearch button:hover {
             cursor: pointer;
       }
       
 
-      .inputs-search input {
+      .inputsSearch input {
         padding: 0.3em;
         margin: 0.3em 0;
         border: 2px solid white;
@@ -306,3 +303,5 @@
 
 
 }
+
+

@@ -21,6 +21,7 @@ import NewReview from './components/Reviews/NewReview';
 import PrivateBookShelf from './pages/privateBS/PrivateBookshelf.page';
 import PublicBookShelf from './pages/publicBS/PublicBookShelf.page';
 import './utils/Forms.css'
+import './components/Book/BookEbook.css'
 
 
 

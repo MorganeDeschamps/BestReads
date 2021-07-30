@@ -15,7 +15,7 @@
     .signup-form-container{
         position: absolute;
         width: 100%;
-        bottom: 25%;
+        bottom: 30%;
         text-align: center;
         color: white;
     }
@@ -281,6 +281,25 @@
       }
       
       
+
+      .ebook-create-container{
+        position: absolute;
+        width: 100%;
+        top: 18%;
+        text-align: center;
+        color: white;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      } */
+    
+       .new-ebook-form {
+
+         background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,50,.5)), url('https://64.media.tumblr.com/c6f70187569e2c2d97c5fe85399a65cb/tumblr_pyhdzyXOIp1we9f2ro1_540.gifv' );
+          background-repeat: no repeat;
+
+      }
+    
+     
 
 
 

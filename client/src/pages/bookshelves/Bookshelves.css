@@ -1,5 +1,75 @@
 
+@import url('https://fonts.googleapis.com/css?family=Coiny');
+
+.bookshelf-main-page{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+}
+.bookshelf-name {
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(121, 82, 127,0.25), 0 10px 10px rgba(121, 82, 127,0.22);
+    width: 90%;
+    align-self: center;
+    margin: 20px;
+
+}
+
+.cloud-text {
+	font-family: 'Coiny', cursive;
+	-webkit-background-clip: text;
+  	-webkit-text-fill-color: rgba(121, 82, 127,0.25);	
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
+	background-size: auto;
+	background-attachment: unset;
+	background-position: 0%;
+	width: 80%;
+    margin: auto;
+	font-size: 30px;
+	animation: clouds-moving infinite 220s;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+	animation-timing-function: linear;
+	text-align: center;
+}
+@keyframes clouds-moving {
+	0% {
+		background-position: 0%;	
+	}
+	50% {
+		background-position: 100%;	
+	}
+	100% {
+		background-position: 0%;
+	}
+}
+
+
+.cloud-title {
+    padding-top: 40px;
+    color: #79527f;
+	width: 80%;
+    margin: auto;
+	font-size: 20px;
+	text-align: center;
+    border-bottom: 1px solid #dedede;
+}
+
+
+
+
 /* main page */
+
+.bookshelf-main-page {
+}
+
+.list-books-shelf{
+    text-align: center;
+}
+
+
+
 
 .list-books-title {
     padding: 10px 0;
@@ -45,7 +115,7 @@
     height: 50px;
     border-radius: 50%;
     background: #2e7d32;
-    background-image: url('./images/add.svg');
+    background-image: url('../../images/add.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 28px;
@@ -84,7 +154,7 @@
     width: 50px;
     height: 53px;
     background: white;
-    background-image: url('./images/arrow-back.svg');
+    background-image: url('../../images/arrow-back.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 28px;
@@ -142,7 +212,7 @@
     height: 40px;
     border-radius: 50%;
     background: #79527f;
-    background-image: url('./images/arrow-drop-down.svg');
+    background-image: url('../../images/arrow-drop-down.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 20px;
@@ -213,7 +283,7 @@
   
   /* Style the back side */
   .flip-card-back {
-    background-image: url("./images/book-back.jpeg");
+    background-image: url("../../images/book-back.jpeg");
     background-repeat: "no-repeat";
     background-position: "center";
     background-size: "contain";

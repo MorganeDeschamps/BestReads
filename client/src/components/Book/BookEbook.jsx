@@ -93,7 +93,6 @@ function BookEbook(props) {
 	            </div>
 	        </div>
 	        <div className="book-title" key={book.title}>{book.title}</div>
-	        <div className="book-author" key={book.author}>{book.author}</div>
         </div>
 	); 
 };

@@ -106,7 +106,7 @@ function CreateEbook(props) {
 			<form onSubmit={handleSubmit} className="advLoginForm createEbookForm">
 				<div className="inputsSearch create-ebook-form"> 
 					<label htmlFor='input-title'>Title </label>
-					<input type="text" name="title" placeholder='Your Ebook Title' onChange={handleChange} value={formData.author} required/>
+					<input type="text" name="title" placeholder='Your Ebook Title' onChange={handleChange} value={formData.title} required/>
 				</div>
 
 				<div className="inputsSearch create-ebook-form">

@@ -3,7 +3,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {createEbook} from "../../services/ebook.services"
 import '../../components/Book/BookEbook'
-import '../../utils/Forms.css'
 
 
 function CreateEbook(props) {
@@ -103,55 +102,41 @@ function CreateEbook(props) {
 		<div className="ebook-create-container">
 			<ToastContainer/>
 			<h1>Create Your Ebook </h1>
-			
-			<form onSubmit={handleSubmit} className='new-book-form'>
-				<div className="inputs-search">
-					<label htmlFor='input-title'>Title</label>
-					<input
-					id='input-title'
-					type='text'
-					name='title'
-					placeholder='Name Your Ebook'
-					value={formData.title}
-					onChange={handleChange}
-					required
-					/>
+			<div>
 
-				</div>
-				<div className="inputs-search">
-					<label htmlFor='input-author'>Author</label>
-					<input
-					id='input-author'
-					type='text'
-					name='author'
-					placeholder='Name'
-					value={formData.author}
-					onChange={handleChange}
-					required
-					/>
-				</div>
+				<form onSubmit={handleSubmit} 	className='new-ebook-form'>
 
-				<div className="inputs-search">
-					<label htmlFor='input-cover'>Cover</label>
-					<input type="button" className="cloudinary-button" onClick={widgetCover} value="Add a cover"/>
-				</div>
+					<div className="inputs-EB-search">
+						<label htmlFor='input-title'>Title</label>
+						<input type='text' name='Author' placeholder='Name Your Ebook' value={formData.title} onChange={handleChange} required/>
+					</div>
+					<div className="inputs-EB-search">
+						<label htmlFor='input-author'>Author</label>
+						<input type='text' name='author' placeholder='Name' value={formData.author} onChange={handleChange} required/>
+					</div>
+					<div className="inputs-EB-search">
+						<label htmlFor='input-cover'>Cover</label>
+						<input type="button" className="cloudinary-button" onClick=	{widgetCover} value="Add a cover"/>
+					</div>
 
 
-				<div className="inputs-search">
-					<label htmlFor='input-ebook'>Ebook file</label>
-					<input type="button" className="cloudinary-button" onClick={widgetEbooks} value="Add an ebook file"/>
-				</div>
+					<div className="inputs-EB-search">
+						<label htmlFor='input-ebook'>Ebook file</label>
+						<input type="button" className="cloudinary-button" onClick=	{widgetEbooks} value="Add an ebook 	file"/>
+					</div>
 
-				<div className="inputs-search">
-				<label htmlFor="input-bookshelf">Add to </label>
-				<select onChange={(event) => setFormData({...formData, shelf: event.target.value})}>
-	                  {user.privateBookshelf.shelves.map(shelf => <option name="shelf" value={shelf._id}>{shelf.name}</option>)}
-				</select>
-				</div>
-				<div className="inputs-search">
-					<button className='button__submit' type='submit'>Submit</button>
-				</div>
-			</form>
+					<div className="inputs-EB-search">
+					<label htmlFor="input-bookshelf">Add to </label>
+					<select onChange={(event) => setFormData({...formData, shelf: event.target.value})}>
+	        	          {user.privateBookshelf.shelves.map (shelf => <option name="shelf" value=	{shelf._id}>{shelf.name}</option>)}
+					</select>
+					</div>
+					<div className="inputs-EB-search">
+						<button className='button__submit' type='submit'>Submit</button>
+					</div>
+				</form>
+			</div>
+
 		</div>
 	);
 }

@@ -17,8 +17,8 @@ import "./App.css";
 import HomePage from './pages/Home.page'
 import BookDetails from './pages/bookDetails/BookDetails.page';
 import NewReview from './components/Reviews/NewReview';
-import PrivateBookShelf from './pages/privateBS/PrivateBookshelf.page';
-import PublicBookShelf from './pages/publicBS/PublicBookShelf.page';
+import PrivateBookShelf from './pages/bookshelves/PrivateBookshelf.page';
+import PublicBookShelf from './pages/bookshelves/PublicBookShelf.page';
 import './utils/Forms.css'
 import './components/Book/BookEbook.css'
 

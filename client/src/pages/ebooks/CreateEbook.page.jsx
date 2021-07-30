@@ -80,7 +80,6 @@ function CreateEbook(props) {
 	}
 
 
-
 	function success() {
 		setFormData(initialState)
 		notify("success", "Your Ebook was added to your bookshelf!")
@@ -99,45 +98,42 @@ function CreateEbook(props) {
 
 
 	return (
-		<div className="ebook-create-container">
+	<div className="searchPageMain">
+		<div className="searchPage">
 			<ToastContainer/>
-			<h1>Create Your Ebook </h1>
-			<div>
+			<h1 className="ebook-create-title">Create Your Ebook </h1>
+			<div className="searchFormContainer">
+			<form onSubmit={handleSubmit} className="advLoginForm createEbookForm">
+				<div className="inputsSearch create-ebook-form"> 
+					<label htmlFor='input-title'>Title </label>
+					<input type="text" name="title" placeholder='Your Ebook Title' onChange={handleChange} value={formData.author} required/>
+				</div>
 
-				<form onSubmit={handleSubmit} 	className='new-ebook-form'>
-
-					<div className="inputs-EB-search">
-						<label htmlFor='input-title'>Title</label>
-						<input type='text' name='Author' placeholder='Name Your Ebook' value={formData.title} onChange={handleChange} required/>
-					</div>
-					<div className="inputs-EB-search">
-						<label htmlFor='input-author'>Author</label>
-						<input type='text' name='author' placeholder='Name' value={formData.author} onChange={handleChange} required/>
-					</div>
-					<div className="inputs-EB-search">
-						<label htmlFor='input-cover'>Cover</label>
-						<input type="button" className="cloudinary-button" onClick=	{widgetCover} value="Add a cover"/>
-					</div>
-
-
-					<div className="inputs-EB-search">
-						<label htmlFor='input-ebook'>Ebook file</label>
-						<input type="button" className="cloudinary-button" onClick=	{widgetEbooks} value="Add an ebook 	file"/>
-					</div>
-
-					<div className="inputs-EB-search">
+				<div className="inputsSearch create-ebook-form">
+					<label htmlFor="input-author">Author </label>
+					<input type="text" onChange={handleChange} name="author" placeholder='Name' value={formData.author} />
+				</div>
+				<div className="inputsSearch create-ebook-form">
+					<label htmlFor='input-cover'>Cover</label>
+					<input type="button" className="cloudinary-button" onClick=	{widgetCover} value="Add a cover"/>
+				</div>
+				<div className="inputsSearch create-ebook-form">
+					<label htmlFor='input-ebook'>Ebook file</label>
+					<input type="button" className="cloudinary-button" onClick={widgetEbooks} value="Add an ebook file"/>
+				</div>
+				<div className="inputsSearch create-ebook-form">
 					<label htmlFor="input-bookshelf">Add to </label>
 					<select onChange={(event) => setFormData({...formData, shelf: event.target.value})}>
-	        	          {user.privateBookshelf.shelves.map (shelf => <option name="shelf" value=	{shelf._id}>{shelf.name}</option>)}
+	                {user.privateBookshelf.shelves.map (shelf => <option name="shelf" value=	{shelf._id}>{shelf.name}</option>)}
 					</select>
-					</div>
-					<div className="inputs-EB-search">
-						<button className='button__submit' type='submit'>Submit</button>
-					</div>
-				</form>
+				</div>
+				<div className="inputsSearch create-ebook-form">
+					<button type='submit'>Submit</button>
+				</div>
+			</form>
 			</div>
-
 		</div>
+	</div>
 	);
 }
 

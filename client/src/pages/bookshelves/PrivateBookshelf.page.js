@@ -48,12 +48,14 @@ function PrivateBookShelf(props){
 
 
     return (
-            <div>
-                <h4>Private Bookshelf</h4>
-                <div className="list-books">
-          <div className="list-books-title">
-            <h1>MyEbooks</h1>
-            <Link to="/ebook/create">Add an ebook</Link>
+      <div className="bookshelf-main-page">
+        <div className="bookshelf-name">
+          <h1 class="cloud-text">{user.username}'s public bookshelf</h1>
+        </div>
+        <div className="list-books-title">
+          <h1>MyEbooks</h1>
+            
+          <Link to="/ebook/create">Add an ebook</Link>
               {bookshelfState && bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
               return(
                 <div key={shelf._id} className="bookshelf">
@@ -72,7 +74,7 @@ function PrivateBookShelf(props){
           </div>
 
         </div>
-            </div>
+           
     )
 };
 

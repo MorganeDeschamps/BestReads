@@ -83,8 +83,8 @@ function BookEbook(props) {
 	        <div className="book-top">
 	              { coverFlip(book) }
 	            <div className="book-shelf-changer">
-	                <select onChange={(event) => action(props.bsType, event.target.value, {shelfFrom: props.shelf, shelfTo: event.target.value, bookId: book._id}).then(res => res.status === true ? updateUser() : console.log(res))}>
-					<optgroup label="Move to:"></optgroup>
+	                <select className="book-shelf-changer-select" onChange={(event) => action(props.bsType, event.target.value, {shelfFrom: props.shelf, shelfTo: event.target.value, bookId: book._id}).then(res => res.status === true ? updateUser() : console.log(res))}>
+					<optgroup selected label="Move to:"></optgroup>
 	                  {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
 					<optgroup label="--------"></optgroup>
 	                  <option value="delete" >Delete</option>

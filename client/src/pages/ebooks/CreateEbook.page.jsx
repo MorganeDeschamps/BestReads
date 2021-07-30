@@ -110,7 +110,7 @@ function CreateEbook(props) {
 					<input
 					id='input-title'
 					type='text'
-					name='Author'
+					name='title'
 					placeholder='Name Your Ebook'
 					value={formData.title}
 					onChange={handleChange}
@@ -121,7 +121,7 @@ function CreateEbook(props) {
 				<div className="inputs-search">
 					<label htmlFor='input-author'>Author</label>
 					<input
-					id='input-authot'
+					id='input-author'
 					type='text'
 					name='author'
 					placeholder='Name'

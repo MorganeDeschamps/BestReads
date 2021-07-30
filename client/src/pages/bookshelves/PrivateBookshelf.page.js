@@ -7,7 +7,6 @@ import BookEbook from '../../components/Book/BookEbook'
 import { movePrivate } from '../../services/shelves.services'
 
 
-
 function PrivateBookShelf(props){
     const {user, setUser} = props;
     
@@ -50,16 +49,34 @@ function PrivateBookShelf(props){
     return (
       <div className="bookshelf-main-page">
         <div className="bookshelf-name">
-          <h1 class="cloud-text">{user.username}'s public bookshelf</h1>
+          <h1 class="cloud-text">{user.username}'s private bookshelf</h1>
         </div>
         <div className="list-books-title">
-          <h1>MyEbooks</h1>
+          <div className="link-to-create-card">	
+              <div className="library-gif">
+              </div>
+              <div class="product-details">
+                <h1>Your own library, always with you.</h1>
+                <p>Add your own ebooks, organize your collection in personalized shelves, and read online.</p>
+
+                <div className="buttons-div-bs">
+                  <Link className="create-ebook-button">Add an ebook</Link>
+                  <Link className="create-shelf-button">Create a new shelf</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
             
-          <Link to="/ebook/create">Add an ebook</Link>
+          <div className="link-to-ebook">
+
+            <Link className="link link--arrowed" to="/ebook/create">Add an ebook</Link>
+          </div>
               {bookshelfState && bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
               return(
                 <div key={shelf._id} className="bookshelf">
-                  <h3>{shelf.name}</h3>
+                <h3 className="cloud-title">{shelf.name}</h3>
 	                <div className="bookshelf-books">
 	                  <ol className="books-grid">
                       {shelf.ebooks && shelf.ebooks.map(eachBook => 
@@ -73,7 +90,7 @@ function PrivateBookShelf(props){
 
           </div>
 
-        </div>
+
            
     )
 };

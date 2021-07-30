@@ -57,13 +57,6 @@
 }
 
 
-
-
-/* main page */
-
-.bookshelf-main-page {
-}
-
 .list-books-shelf{
     text-align: center;
 }
@@ -226,3 +219,165 @@
     color: white;
     transform: rotateY(180deg);
   }
+
+
+
+.link-to-create-card{
+	box-shadow: 0 15px 30px 1px #F4F0F5;
+	background: rgba(244, 240, 245, 0.10);
+	text-align: center;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 2em auto;
+	width: 85%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+}
+
+/* 940px */
+
+.product-details {
+	position: relative;
+	text-align: left;
+	overflow: hidden;
+	padding: 30px;
+	float: left;
+}
+
+.link-to-create-card .product-details h1{
+	font-family: 'Bebas Neue';
+	display: inline-block;
+	position: relative;
+	font-size: 5vh;
+	color: #344055;
+	margin: 0;
+}
+.library-gif {
+  height: 400px;
+  background-image: url("https://64.media.tumblr.com/48ceb365d79461b2d16c58e7f753ce72/tumblr_pybbp3JmPx1we9f2ro1_r1_1280.gifv");
+  background-repeat: no-repeat;
+}
+
+#container .product-details > p {
+  font-family: 'Bebas Neue';
+	text-align: center;
+	font-size: 18px;
+	color: #7d7d7d;
+	
+}
+.control{
+	position: absolute;
+	bottom: 20%;
+	left: 22.8%;
+	
+}
+
+
+.buttons-div-bs{
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+@media (max-width: 600px) {
+  .buttons-div-bs{
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-content: center;
+  }
+  
+
+}
+
+.create-ebook-button {
+  margin: 20px;
+  max-width: 200px;
+}
+
+.create-shelf-button {
+  margin: 20px;
+  max-width: 200px;
+}
+
+
+.create-ebook-button:link, .create-ebook-button:visited {
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
+  background-color: white;
+  color: black;
+  border-radius: 3%;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  animation: clouds-moving infinite 220s;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+	animation-timing-function: linear;
+	text-align: center;
+}
+@keyframes clouds-moving {
+	0% {
+		background-position: 0%;	
+	}
+	50% {
+		background-position: 100%;	
+	}
+	100% {
+		background-position: 0%;
+	}
+}
+
+
+.create-ebook-button:hover, .create-ebook-button:active {
+  border: 0.5px solid black;
+}
+
+.create-shelf-button:link, .create-shelf-button:visited {
+	background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/769286/clouds.jpg);
+  background-color: white;
+  color: black;
+  border-radius: 3%;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  animation: clouds-moving infinite 220s;
+	animation-fill-mode: forwards;
+	animation-play-state: running;
+	animation-timing-function: linear;
+	text-align: center;
+}
+@keyframes clouds-moving {
+	0% {
+		background-position: 0%;	
+	}
+	50% {
+		background-position: 100%;	
+	}
+	100% {
+		background-position: 0%;
+	}
+}
+
+.create-shelf-button:hover, .create-shelf-button:active {
+  border: 0.5px solid black;
+}
+
+
+.bn47:hover {
+  padding: 0.75rem 2.25rem;
+}
+
+.bn47:hover:before {
+  top: 0;
+  left: 0;
+}

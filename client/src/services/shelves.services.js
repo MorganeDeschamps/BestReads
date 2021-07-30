@@ -46,7 +46,6 @@ export function saveToPublic(shelf, book) {
 }
 
 export function movePublic(info) {
-	//const {shelfFrom, shelfTo, book} = req.body
 	return publicService.put(`/moveBook`, info)
 	.then(successStatus)
 	.catch(internalServerError)
@@ -92,7 +91,8 @@ export function editPublicShelf(shelfId, name) {
 
 // PRIVATE
 export function movePrivate(info) {
-	//form needs {shelfFrom, shelfTo, book} 
+	
+	console.log("service: ", info)
 	return privateService.put(`/moveBook`, info)
 	.then(successStatus)
 	.catch(internalServerError)

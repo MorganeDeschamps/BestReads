@@ -52,7 +52,7 @@ function BookEbook(props) {
 		if(book.ebookUrl) {return (
 			<div className="flip-card">
   				<div className="flip-card-inner">
-					<div className="book-cover flip-card-front" key={book.coverUrl} style={book.coverUrl ? style(book.coverUrl) : style(Default)} 		alt="book cover"></div>
+					<div className="book-cover flip-card-front" key={book.coverUrl} style={book.coverUrl ? style(book.coverUrl) : style(Default)} alt="book cover"></div>
     				<div className="flip-card-back">
 						{eBookReader(book)}
     				</div>
@@ -83,8 +83,8 @@ function BookEbook(props) {
 	        <div className="book-top">
 	              { coverFlip(book) }
 	            <div className="book-shelf-changer">
-	                <select className="book-shelf-changer-select" onChange={(event) => action(props.bsType, event.target.value, {shelfFrom: props.shelf, shelfTo: event.target.value, bookId: book._id}).then(res => res.status === true ? updateUser() : console.log(res))}>
-					<optgroup selected label="Move to:"></optgroup>
+	                <select className="book-shelf-changer-select" onChange={(event) => action(props.bsType, event.target.value, {shelfFrom: props.shelf, shelfTo: event.target.value, bookId: book._id}).then(res => res.status === true ? updateUser() : console.log("the mover says: ", res))}>
+					<option selected disabled label="Move to:"></option>
 	                  {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
 					<optgroup label="--------"></optgroup>
 	                  <option value="delete" >Delete</option>

@@ -24,19 +24,19 @@ router.post("/create", (req, res) => {
 // MOVE BOOK FROM SHELF TO SHELF
 
 router.put("/moveBook", (req, res) => {
-  const {shelfFrom, shelfTo, book} = req.body
+  const {shelfFrom, shelfTo, bookId} = req.body
 
   PrivateShelf.findById(shelfFrom)
   .then(shelf => {
     console.log("shelf: ", shelf)
-    shelf.ebooks = shelf.ebooks.filter((eachBook) => eachBook._id !== book._id)
+    shelf.ebooks.pull(bookId)
     return shelf.save()
   })
   .then(changedShelf => {
     console.log("changedShelf: ", changedShelf)
     PrivateShelf.findById(shelfTo)
     .then(shelf => {
-      shelf.ebooks.push(book)
+      shelf.ebooks.push(bookId)
       return shelf.save()
     })
     .then(shelfToUpdated => res.json(shelfToUpdated))

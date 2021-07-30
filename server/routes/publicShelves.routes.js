@@ -80,17 +80,17 @@ router.put("/addBook", (req, res) => {
 // MOVE BOOK FROM SHELF TO SHELF
 
 router.put("/moveBook", (req, res) => {
-  const {shelfFrom, shelfTo, book} = req.body
+  const {shelfFrom, shelfTo, bookId} = req.body
 
   PublicShelf.findById(shelfFrom).then(shelf => {
     console.log("shelf: ", shelf)
-    shelf.books = shelf.books.filter((eachBook) => eachBook._id !== book._id)
+    shelf.books = shelf.books.filter((eachBook) => eachBook._id !== bookId)
     return shelf.save()
   })
   .then(changedShelf => {
     console.log("changedShelf: ", changedShelf)
     PublicShelf.findById(shelfTo).then(shelf => {
-      shelf.books.push(book)
+      shelf.books.push(bookId)
       return shelf.save()
     })
     .then(shelfToUpdated => res.json(shelfToUpdated))

@@ -118,8 +118,8 @@ function CreateEbook(props) {
 					<input type="button" className="cloudinary-button" onClick=	{widgetCover} value="Add a cover"/>
 				</div>
 				<div className="inputsSearch create-ebook-form">
-					<label htmlFor='input-ebook'>Ebook file</label>
-					<input type="button" className="cloudinary-button" onClick={widgetEbooks} value="Add an ebook file"/>
+					<label htmlFor='input-ebook'>Epub file</label>
+					<input type="button" className="cloudinary-button" onClick={widgetEbooks} value="Add an epub file"/>
 				</div>
 				<div className="inputsSearch create-ebook-form">
 					<label htmlFor="input-bookshelf">Add to </label>

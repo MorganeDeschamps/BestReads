@@ -60,19 +60,13 @@ function PrivateBookShelf(props){
                 <p>Add your own ebooks, organize your collection in personalized shelves, and read online.</p>
 
                 <div className="buttons-div-bs">
-                  <Link className="create-ebook-button">Add an ebook</Link>
+                  <Link className="create-ebook-button" to="/ebook/create">Add an ebook</Link>
                   <Link className="create-shelf-button">Create a new shelf</Link>
                 </div>
               </div>
             </div>
           </div>
-
-
-            
-          <div className="link-to-ebook">
-
-            <Link className="link link--arrowed" to="/ebook/create">Add an ebook</Link>
-          </div>
+          
               {bookshelfState && bookshelfState.shelves && bookshelfState.shelves.length > 0 && bookshelfState.shelves.map(shelf => {
               return(
                 <div key={shelf._id} className="bookshelf">

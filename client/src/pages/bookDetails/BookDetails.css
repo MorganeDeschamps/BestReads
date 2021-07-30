@@ -1,7 +1,7 @@
 
 
 
-@media only screen and (max-width: 600px) {
+
     .details-main{
         display: flex;
         flex-direction: column;
@@ -10,6 +10,13 @@
         font-size: 0.8em;
         font-family:'Roboto',sans-serif;
         margin: 0 4em;
+    }
+
+    @media only screen and (min-width: 600px) {
+        .details-main img {
+            height: 70vh;
+    
+        }
     }
 
     .details-main img {
@@ -59,4 +66,4 @@
 
     /* new reviews */
 
-}
+

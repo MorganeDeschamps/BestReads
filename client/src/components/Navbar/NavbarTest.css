@@ -155,6 +155,7 @@ ul li a {
 			position: relative;
 		  
 		  }
+		
 		  
 		.home-headings{
 			position: absolute;
@@ -189,7 +190,160 @@ ul li a {
 
 
 
-	}
+}
+
+
+@media only screen and (min-width: 600px){
+	.img-home {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 70vw;
+		height: 90vh;
+	  }
+	  
+	.home-img-container {
+		position: relative;
+	  
+	  }
+	
+	  
+	.home-headings{
+		position: absolute;
+		width: 100%;
+		bottom: 0.2%;
+		text-align: center;
+	  }
+	  
+	  
+	.center {
+		left: 0; 
+		width: 100%; 
+		color: white;
+	  }
+	  
+	.tag {
+		border: 0.1em white solid;
+		padding: 0.5em;
+		text-decoration: none;
+	  }
+	
+	.tag:hover {
+		box-shadow: 1px 1px;
+	  }
+	  
+	  
+	.quote{
+		font-size: 0.8em;
+		font-style: italic;
+		margin-top: 18vh;
+	  }
+
+
+
+}
+
+
+@media only screen and (min-width: 800px){
+	.img-home {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 50vw;
+		height: 90vh;
+	  }
+	  
+	.home-img-container {
+		position: relative;
+	  
+	  }
+	
+	  
+	.home-headings{
+		position: absolute;
+		width: 100%;
+		bottom: 0.2%;
+		text-align: center;
+	  }
+	  
+	  
+	.center {
+		left: 0; 
+		width: 100%; 
+		color: white;
+	  }
+	  
+	.tag {
+		border: 0.1em white solid;
+		padding: 0.5em;
+		text-decoration: none;
+	  }
+	
+	.tag:hover {
+		box-shadow: 1px 1px;
+	  }
+	  
+	  
+	.quote{
+		font-size: 0.8em;
+		font-style: italic;
+		margin-top: 18vh;
+	  }
+
+
+
+}
+
+@media only screen and (min-width: 1200px){
+	.img-home {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 30vw;
+		height: 90vh;
+	  }
+	  
+	.home-img-container {
+		position: relative;
+	  
+	  }
+	
+	  
+	.home-headings{
+		position: absolute;
+		width: 100%;
+		bottom: 0.2%;
+		text-align: center;
+	  }
+	  
+	  
+	.center {
+		left: 0; 
+		width: 100%; 
+		color: white;
+	  }
+	  
+	.tag {
+		border: 0.1em white solid;
+		padding: 0.5em;
+		text-decoration: none;
+	  }
+	
+	.tag:hover {
+		box-shadow: 1px 1px;
+	  }
+	  
+	  
+	.quote{
+		font-size: 0.8em;
+		font-style: italic;
+		margin-top: 18vh;
+	  }
+
+
+
+}
+
 
 
 

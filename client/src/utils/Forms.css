@@ -1,6 +1,6 @@
 
 
-@media only screen and (max-width: 600px) {
+
 
   /* AUTH forms */
   
@@ -241,11 +241,30 @@
         background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,50,.5)), url('https://64.media.tumblr.com/c6f70187569e2c2d97c5fe85399a65cb/tumblr_pyhdzyXOIp1we9f2ro1_540.gifv' );
         background-repeat: no repeat;
         width: 90vw;
-        height: 72vh;
+        height: 74vh;
         margin-bottom: 0;
         padding-bottom: 0;
         
       }
+
+      @media only screen and (min-width: 600px) {
+        .advLoginForm {
+        margin-top: 1.2em;
+        align-content: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,50,.5)), url('https://64.media.tumblr.com/c6f70187569e2c2d97c5fe85399a65cb/tumblr_pyhdzyXOIp1we9f2ro1_540.gifv' );
+        background-repeat: no repeat;
+        width: 90vw;
+        height: 85vh;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        
+      }
+      }
+
+
 
       .inputsSearch {
         display: flex;
@@ -262,8 +281,8 @@
         padding: 0.4em 1em;
       }
 
-        .inputsSearch button:hover {
-            cursor: pointer;
+      .inputsSearch button:hover {
+        cursor: pointer;
       }
       
 
@@ -277,8 +296,7 @@
         color: white;
       }
       
-      
-
+    
       .ebook-create-container{
         position: absolute;
         width: 100%;
@@ -296,12 +314,6 @@
 
       }
     
-     
-
-
-
-
-
-}
+  
 
 

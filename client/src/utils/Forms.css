@@ -221,8 +221,9 @@
         top: 18%;
         text-align: center;
         color: white;
+        margin-top: 30px;
         margin-bottom: 0;
-        padding-bottom: 0;
+        padding-bottom: 20px;
       }
 
       .searchFormContainer a{
@@ -238,12 +239,13 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,50,.5)), url('https://64.media.tumblr.com/c6f70187569e2c2d97c5fe85399a65cb/tumblr_pyhdzyXOIp1we9f2ro1_540.gifv' );
-        background-repeat: no repeat;
+        background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,50,.2)), url("https://64.media.tumblr.com/97756d4778fc560213565a7a2c932381/tumblr_pqz7elpczN1we9f2ro1_500.gifv");
+        background-repeat: no-repeat;
+        background-size: cover;
         width: 90vw;
         height: 74vh;
         margin-bottom: 0;
-        padding-bottom: 0;
+        padding-bottom: 40px;
         
       }
 
@@ -254,9 +256,10 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,50,.5)), url('https://64.media.tumblr.com/c6f70187569e2c2d97c5fe85399a65cb/tumblr_pyhdzyXOIp1we9f2ro1_540.gifv' );
-        background-repeat: no repeat;
-        width: 90vw;
+        background: linear-gradient(rgba(0,0,0,.3), rgba(0,0,50,.2)), url("https://64.media.tumblr.com/97756d4778fc560213565a7a2c932381/tumblr_pqz7elpczN1we9f2ro1_500.gifv");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 50vw;
         height: 85vh;
         margin-bottom: 0;
         padding-bottom: 0;
@@ -273,15 +276,20 @@
         margin-bottom: 0.1em;
       }
       
-      .inputsSearch button {
+      .inputsSearch-button {
+        margin-top: 20px;
+        margin-bottom: 30px;
+      }
+
+      .inputsSearch-button button {
         color: white;
         font-size: 1em;
         background-color: transparent;
-        border: 2px white solid;
+        border: 1px white solid;
         padding: 0.4em 1em;
       }
 
-      .inputsSearch button:hover {
+      .inputsSearch-button button:hover {
         cursor: pointer;
       }
       
@@ -289,8 +297,8 @@
       .inputsSearch input {
         padding: 0.3em;
         margin: 0.3em 0;
-        border: 2px solid white;
-        width: 25em;
+        border: 1px solid white;
+        width: 20em;
         font-family:inherit;
         background: transparent;
         color: white;

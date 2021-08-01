@@ -119,7 +119,7 @@ function Search(props) {
                 <input type="text" onChange={handleChange} name="publisher"   value=  {searchState.publisher} />
               </div>
 
-              <div className="inputsSearch">
+              <div className="inputsSearch-button">
                 <button type="submit">Search</button>
               </div>
             </form>

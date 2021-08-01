@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom'
 import NewReview from '../../components/Reviews/NewReview';
-import {mainSearch, searchOneWork} from '../../services/api.services'
+import {searchOneWork} from '../../services/api.services'
 import {allReviews} from '../../services/review.services'
 import './BookDetails.css'
 const baseURL = `https://openlibrary.org`;

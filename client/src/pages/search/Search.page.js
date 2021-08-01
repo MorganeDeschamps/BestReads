@@ -1,5 +1,5 @@
 import * as apiSearches from "../../services/api.services"
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import SearchResults from "./SearchResults.page";
 import Loading from "../../components/Loading/index"
 
@@ -12,7 +12,8 @@ function Search(props) {
     const [loading, setLoading] = useState(false)
 
     const [results, setResults] = useState([])
-    console.log("user from main search: ", props.user)
+
+
 
     function handleChange(event) {
         const {name, value} = event.target
@@ -39,7 +40,6 @@ function Search(props) {
 
 
     function handleSubmit(event) {
-        console.log("test")
         event.preventDefault()
         setLoading(true)
         apiSearches.mainSearch(searchState)
@@ -56,7 +56,7 @@ function Search(props) {
       <div className="searchPage">
 
         <form onSubmit={handleSubmit} className="searchForm">
-            <label for="searchbar-label"></label>
+            <label htmlFor="searchbar-label"></label>
             <input className="searchbarInput" type="search" pattern=".*\S.*" required onChange={handleChange}  name="q" value={searchState.q} />
             <span className="caret"></span>
         </form> 
@@ -78,7 +78,7 @@ function Search(props) {
 
         <div className="searchFormContainer">
           
-          <a href="#" onClick={e => setToggle(!toggle)} > Advanced search</a>
+          <a nohref="true" onClick={e => setToggle(!toggle)} > Advanced search</a>
           {(toggle) && 
           <div>
             

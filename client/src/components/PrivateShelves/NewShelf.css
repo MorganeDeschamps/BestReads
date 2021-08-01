@@ -1,0 +1,101 @@
+
+  .modal-body {
+    display: flex;
+    font-family: 'PT Sans', sans-serif;
+    position: relative;
+  }
+  
+
+  .modal-content h1, .modal-content h2, .modal-content h3 {
+      text-align: center;
+  }
+
+.modal-close {
+    color: #aaa;
+    line-height: 50px;
+    font-size: 80%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 70px;
+    text-decoration: none;
+  }
+
+  .modal-close:hover {
+    color: black;
+    cursor: pointer;
+  }
+  .create-shelf-title {
+    font-size: 1.3em;
+    color: #79527f;
+    text-transform: uppercase;
+  }
+
+  .column {
+    flex: 50%;
+    padding: 10px;
+  }
+  
+  .column#main {
+    flex: 75%;
+    padding: 40px;
+    margin-top: 15px;
+  }
+  
+  
+  #main .form-control {
+    border-radius: 0;
+    font-size: .9em;
+  }
+  
+
+  .new-shelf-input {
+    padding: 0.3em;
+    margin: 0.3em 0;
+    border: 1px solid rgba(121, 82, 127, 0.5);
+    width: 200px;
+    font-family:inherit;
+    background: transparent;
+    color: white;
+  }
+
+
+
+
+
+
+  .new-shelf-button {
+    text-transform: uppercase;
+    background-color:rgba(121, 82, 127, 0.7);
+    border-radius: .15rem;
+    width: 200px;
+    padding: .150rem .75rem;
+    margin: 30px auto;
+    font-family: 'PT Sans', sans-serif;
+    letter-spacing: 2px;
+  }
+
+  .new-shelf-button {
+    color: white;
+    font-size: 1em;
+    border: 2px white solid;
+    padding: 0.4em 1em;
+  }
+
+  .new-shelf-button:hover {
+    cursor: pointer;
+    background-color:rgba(121, 82, 127, 1);
+  }
+
+  
+  
+  #main .btn-primary {
+    width: 100%;
+  }
+  
+  .modal-body label {
+    margin-bottom: 0;
+  }
+  
+  

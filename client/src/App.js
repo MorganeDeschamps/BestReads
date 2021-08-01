@@ -7,12 +7,8 @@ import Search from './pages/search/Search.page';
 import Signup from './pages/authPages/Signup';
 import NormalRoute from './routing-components/NormalRoute';
 import ProtectedRoute from './routing-components/ProtectedRoute';
-import { getLoggedIn, logout, getUser } from './services/auth';
+import { getLoggedIn, logout } from './services/auth';
 import * as CONSTS from './utils/consts';
-import NewDynamicShelf from './components/PrivateShelves/NewDynamicShelf'
-import Test from './components/Test';
-import {displayUserPage} from "./services/auth"
-import Reader from './pages/ebooks/Read.page';
 import "./App.css";
 import HomePage from './pages/Home.page'
 import BookDetails from './pages/bookDetails/BookDetails.page';

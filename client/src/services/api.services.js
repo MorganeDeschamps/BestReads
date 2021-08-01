@@ -1,5 +1,4 @@
 import axios from 'axios';
-let URI = require('urijs');
 let URITemplate = require('urijs/src/URITemplate');
 
 

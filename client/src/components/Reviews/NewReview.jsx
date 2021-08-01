@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getUser } from '../../services/auth'
+import React, { useState } from 'react'
 import {createReview} from '../../services/review.services'
 import "./Review.css"
 
@@ -55,22 +53,22 @@ function NewReview(props) {
 
 		<div>
 			<form onSubmit={handleSubmit} className="row">
-				<div id="like" class="rating">
+				<div id="like" className="rating">
 			
 						  <input onClick={ratingSelect} type="radio" id="heart_5" name="like" value="5" />
-						  <label for="heart_5" title="Five">&#10084;</label>
+						  <label htmlFor="heart_5" title="Five">&#10084;</label>
 			
 						  <input onClick={ratingSelect} type="radio" id="heart_4" name="like" value="4" />
-						  <label for="heart_4" title="Four">&#10084;</label>
+						  <label htmlFor="heart_4" title="Four">&#10084;</label>
 			
 						  <input onClick={ratingSelect} type="radio" id="heart_3" name="like" value="3" />
-						  <label for="heart_3" title="Three">&#10084;</label>
+						  <label htmlFor="heart_3" title="Three">&#10084;</label>
 			
 						  <input onClick={ratingSelect} type="radio" id="heart_2" name="like" value="2" />
-						  <label for="heart_2" title="Two">&#10084;</label>
+						  <label htmlFor="heart_2" title="Two">&#10084;</label>
 			
 						  <input onClick={ratingSelect} type="radio" id="heart_1" name="like" value="1" />
-						  <label for="heart_1" title="One">&#10084;</label>
+						  <label htmlFor="heart_1" title="One">&#10084;</label>
 				</div>
 				<div className="review-section">
 					<h3>Review this book </h3>
@@ -85,7 +83,7 @@ function NewReview(props) {
 
 	
 /* 	return (
-		<div  class="review-div">
+		<div  className="review-div">
 			<h3>Book review: </h3>
 			<div className="container p-3">
   				<form onSubmit={handleSubmit} className="row">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {createEbook} from "../../services/ebook.services"
@@ -124,7 +124,7 @@ function CreateEbook(props) {
 				<div className="inputsSearch create-ebook-form">
 					<label htmlFor="input-bookshelf">Add to </label>
 					<select onChange={(event) => setFormData({...formData, shelf: event.target.value})}>
-	                {user.privateBookshelf.shelves.map (shelf => <option name="shelf" value=	{shelf._id}>{shelf.name}</option>)}
+	                {user.privateBookshelf.shelves.map (shelf => <option name="shelf" key={shelf._id} value={shelf._id}>{shelf.name}</option>)}
 					</select>
 				</div>
 				<div className="inputsSearch create-ebook-form">

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Default from "../../images/default.jpeg"
 import "../../App.css"
 import { movePrivate, movePublic } from '../../services/shelves.services';
-import { editEbook } from '../../services/ebook.services';
 import { deleteEbook } from '../../services/ebook.services';
 import { deleteBook } from '../../services/shelves.services';
 import { Link } from 'react-router-dom';

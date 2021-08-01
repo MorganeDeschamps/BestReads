@@ -5,12 +5,7 @@ import DropdownButton from "../../components/DropdownButton/DropdownButton"
 export default function SearchResults(props) {
 
     const {results} = props
-    console.log("props: ", results)
-
 	const {user} = props
-    const shelves = user.publicBookshelf.shelves
-	console.log('these are the results', results)
-	console.log("user from search results: ", props.user)
 
 	function style(cover) {
 		return {
@@ -23,7 +18,7 @@ export default function SearchResults(props) {
 
 
 
-	function flippityFlop(book) {
+	function bookFlip(book) {
 		return(
 			<div className="flip-card">
 				<div className="flip-card-inner">
@@ -35,18 +30,6 @@ export default function SearchResults(props) {
 			</div>
 	)}
 
-
-    function checkThumbnailExists(book) {
-		if (book.coverUrl) {
-			return (
-				<div className="book-cover" key={book.coverUrl} style={style(book.coverUrl)} alt="book cover"></div>
-			)
-		} else {
-            return ( 
-				<div className="book-cover" style={style(Default)} alt="book cover"></div>
-            )
-        }
-	}
  
 
     return(
@@ -56,11 +39,11 @@ export default function SearchResults(props) {
                     {results.map(eachDoc => 
                         <div key={eachDoc._id} className="book">
 	                        <div className="book-top">
-	                        { flippityFlop(eachDoc) }
+	                        { bookFlip(eachDoc) }
 							<DropdownButton book={eachDoc} user={user} search={true} type={"book"} />
 	                        </div>
-	                        <div className="book-title" key={eachDoc.title}>{eachDoc.title}</div>
-	                        <div className="book-author" key={eachDoc.author}>{eachDoc.author}</div>
+	                        <div className="book-title">{eachDoc.title}</div>
+	                        <div className="book-author">{eachDoc.author}</div>
                         </div>
                     )}
                 </ol>

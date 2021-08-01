@@ -1,25 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import * as CONSTS from '../../utils/consts';
-import { getLoggedIn, logout } from '../../services/auth';
+import { getLoggedIn} from '../../services/auth';
 import { Link } from 'react-router-dom'
 import CreatePrivateShelf from '../../components/PrivateShelves/NewDynamicShelf'
 import BookEbook from '../../components/Book/BookEbook'
-import { movePrivate } from '../../services/shelves.services'
+import Modal from 'react-modal';
+
+
+const customStyles = {
+  content: {
+    top: '30%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+Modal.setAppElement('#root');
+
 
 
 function PrivateBookShelf(props){
-    const {user, setUser} = props;
+    const {user} = props;
     
-    const initalState = {username: '', publicBookshelf: {}, privateBookshelf: {}, reviews: []}
-
     /* const username = user.username
     const publicBookshelf = user.publicBookshelf
     const privateBookshelf = user.privateBookshelf
     const reviews = user.reviews */
-    const [username, setUsername] = useState(user.username)
     const [privateBookshelf, setPrivateBookshelf] = useState(user.privateBookshelf)
-    const [privateShelves, setPrivateBS] = useState()
 
+
+    //Create shelf: 
+    const [newShelfToggle, setNewShelf] = useState(false)
+
+    function openModal() {
+      setNewShelf(true);
+    }
+  
+  
+    function closeModal() {
+      setNewShelf(false);
+    }
+  
+
+
+
+    
     function updateUser() {
         const accessToken = localStorage.getItem(CONSTS.ACCESS_TOKEN);
 		if (!accessToken) {
@@ -30,7 +59,6 @@ function PrivateBookShelf(props){
 			} else {
 				//setUser(res.data.user)
         setPrivateBookshelf(res.data.user.privateBookshelf)
-        setPrivateBS(res.data.user.privateBookshelf.shelves)
 			}
 		});
     }
@@ -42,26 +70,36 @@ function PrivateBookShelf(props){
 
     useEffect(() => {
       updateUser()
-  }, [])
+    }, [])
 
 
 
     return (
-      <div className="bookshelf-main-page">
+      <div className="bookshelf-main-page" >
         <div className="bookshelf-name">
-          <h1 class="cloud-text">{user.username}'s private bookshelf</h1>
+          <h1 className="cloud-text">{user.username}'s private bookshelf</h1>
         </div>
         <div className="list-books-title">
           <div className="link-to-create-card">	
               <div className="library-gif">
               </div>
-              <div class="product-details">
+              <div className="product-details">
                 <h1>Your own library, always with you.</h1>
                 <p>Add your own ebooks, organize your collection in personalized shelves, and read online.</p>
 
                 <div className="buttons-div-bs">
                   <Link className="create-ebook-button" to="/ebook/create">Add an ebook</Link>
-                  <Link className="create-shelf-button">Create a new shelf</Link>
+
+                  <Link onClick={openModal} className="create-shelf-button">Create a new shelf</Link>
+                  <Modal
+                    isOpen={newShelfToggle}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                  >
+                    <CreatePrivateShelf bookshelfId={privateBookshelf} toggleHandler={closeModal} updateUser={updateUser} />
+
+                  </Modal>
                 </div>
               </div>
             </div>
@@ -74,7 +112,7 @@ function PrivateBookShelf(props){
 	                <div className="bookshelf-books">
 	                  <ol className="books-grid">
                       {shelf.ebooks && shelf.ebooks.map(eachBook => 
-                          <BookEbook book={eachBook} user={props.user} bsType="private" bookshelf={privateBookshelf} shelf={shelf._id} updateUser={updateUser} />
+                          <BookEbook key={eachBook._id} book={eachBook} user={props.user} bsType="private" bookshelf={privateBookshelf} shelf={shelf._id} updateUser={updateUser} />
                       )}
                     </ol>
                   </div>

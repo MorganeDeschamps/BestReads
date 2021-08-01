@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { saveToPublic } from "../../services/shelves.services"
 
 export default function DropdownButton (props) {
     const {user} = props
     const {book} = props
-    const {search} = props
-    const {type} = props
+    //const {search} = props
+    //const {type} = props
 
     const shelves = user.publicBookshelf.shelves
 
@@ -34,7 +34,7 @@ export default function DropdownButton (props) {
         return(
             <select onChange={(event) => saveToPublic(event.target.value, book)}>
             <option selected disabled>Save to: </option>
-            {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
+            {shelves.map(shelf => <option key={shelf._id} value={shelf._id}>{shelf.name}</option>)}
             </select>
         )
 
@@ -46,7 +46,7 @@ export default function DropdownButton (props) {
         <div className="book-shelf-changer">
 	        <select onChange={(event) => saveToPublic(event.target.value, book)}>
 	            <option selected disabled>Save to: </option>
-	            {shelves.map(shelf => <option value={shelf._id}>{shelf.name}</option>)}
+	            {shelves.map(shelf => <option key={shelf._id} value={shelf._id}>{shelf.name}</option>)}
 	            </select>
 	    </div>
     )

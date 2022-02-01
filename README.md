@@ -1,43 +1,61 @@
-# Project-3-boilerplage
+<h1 align="center">Best Reads</h1>
 
-## Structure
+This project is created with [Create React App](https://github.com/facebook/create-react-app). It is based on the Amazon Good Reads application in style, using The Open Library API to create a Full Stack Application with features for logged-in users to search and review books; store books on shelves: want to read, reading and read; and finally create and read e-books using a built-in e-reader.
 
-This repository contains 2 folders, a client folder with a react app developed with functional components and functional auth (signup, login, logut), as well as the views for these forms and a protected page with user specific data.
-The server folder contains a NodeJS and Express App to run the application. It contains the Auth Routes, database configurations, middleware setup and cors already prepared
 
-## Steps to install and Deploy this repository
+## Links
 
-- 1 - Create your app in Heroku and copy the URL
+- Repo: [Best Reads](https://github.com/Miki-Geoghegan/BestReads)
+- Heroku: [Best Reads](https://mm-best-reads.herokuapp.com/)
+- API: [Open Library API](https://openlibrary.org/developers/api)
 
-- 2 - Fork & Clone this repo
 
-- 3 - Go to client subfolder and run npm install
+## Screenshots
 
-- 4 - Go to server subfolder and run npm install
+**Mobile view: Home Page, Bookshelves, Ebook upload options**
+<p float="left">
 
-- 5 - In **server subfolder**, run the command git heroku add:remote -a <your app name> (you can also find this command in the heroku dashboard)
+  <img src="https://user-images.githubusercontent.com/83708369/137088524-5ffd656f-97eb-4bbc-b12e-1eea0c3dd2af.png" width="267" height="498">
+  <img src="https://user-images.githubusercontent.com/83708369/137095470-8c38dc69-d7eb-4d3b-996a-016b74b946d9.png" width= "267" height="498">
+  <img src="https://user-images.githubusercontent.com/83708369/137096242-16d45086-0b6c-4982-9804-4d344609bd58.png" width="267" height="498">
+</p>
 
-- 6 - Go to .env file in the server folder and change MONGODB_URI, SESSION_SECRET and HEROKU_URL to your own custom strings
 
-- 7 - Go to the heroku dashboard and add **these 3 config vars** in the settings: 
-  - **MONGODB_URI** = like in .env
-  - **ORIGIN**:  << this has to be the heroku app name, not localhost >>
-  - **SESSION_SECRET** = like in .env
+## Available Commands
 
-- 8 - Go to your server terminal, and git push heroku master
+In the project directory, you can run:
 
-- 9 - Your application should be running in Heroku correctly. If it doesn't, run on the terminal heroku logs --tail to see details of the error
+### `npm start`
 
-- 10 - Whenever you want to redeploy changes to your frontend, follow this steps:
+Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
--- Delete the build folder in client
 
--- Create a new one with `npm run build` with the terminal **in the client subfolder**
+## Built With
 
--- Delete everything inside the public folder **in the server subfolder**
+- React, JavaScript ES6
+- Node.JS
+- Express
+- HTML
+- CSS
 
--- Copy the content from the build folder inside of Client and paste it inside of public in Server. Don't copy the folder, just the content!
+## Testing
 
--- git add . and git commit your changes on the server folder
+Testing was done on all API calls with Postman
 
--- rerun git push heroku master
+
+## Future Updates
+
+<p>Updates we are continuing to develop include:</p>
+<ul>
+<li>Adding a social aspect, ability to share books and profiles</li>
+<li>Adding an option to create an Ebook from an API result</li>
+<li>Updating styling</li>
+</ul>
+
+## Authors
+
+- [Miki Geoghegan](https://github.com/Miki-Geoghegan)
+
+- [Morgane Deschamps](https://github.com/MorganeDeschamps)
+
+Thank you for your time, questions and comments are always welcome :heart:!
